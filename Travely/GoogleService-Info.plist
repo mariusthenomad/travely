@@ -21,11 +21,11 @@
 	-->
 	
 	<key>CLIENT_ID</key>
-	<string>YOUR_GOOGLE_CLIENT_ID_HERE</string>
+	<string>1033990407187-mffia1va0it83u51clbvmi40ol0adi3l.apps.googleusercontent.com</string>
 	<key>BUNDLE_ID</key>
 	<string>com.mariusthenomad.travely</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.YOUR_CLIENT_ID</string>
+	<string>com.googleusercontent.apps.1033990407187-mffia1va0it83u51clbvmi40ol0adi3l</string>
 	<key>API_KEY</key>
 	<string>YOUR_API_KEY_HERE</string>
 	<key>GCM_SENDER_ID</key>
