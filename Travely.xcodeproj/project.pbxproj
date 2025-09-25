@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1234567890ABCDEF /* TravelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE0 /* TravelyApp.swift */; };
+		29C31C062E85E40900C6106C /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C052E85E40900C6106C /* Auth */; };
+		29C31C082E85E40900C6106C /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C072E85E40900C6106C /* Functions */; };
+		29C31C0A2E85E40900C6106C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C092E85E40900C6106C /* PostgREST */; };
+		29C31C0C2E85E40900C6106C /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C0B2E85E40900C6106C /* Realtime */; };
+		29C31C0E2E85E40900C6106C /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C0D2E85E40900C6106C /* Storage */; };
 		A1234567890ABCDE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE2 /* ContentView.swift */; };
 		A1234567890ABCDE3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE4 /* HomeView.swift */; };
 		A1234567890ABCDE5 /* FlightSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE6 /* FlightSearchView.swift */; };
@@ -15,6 +19,7 @@
 		A1234567890ABCDE9 /* DestinationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEA /* DestinationSelectionView.swift */; };
 		A1234567890ABCDEB /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEC /* ProfileSettingsView.swift */; };
 		A1234567890ABCDED /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEE /* AppSettingsView.swift */; };
+		A1234567890ABCDEF /* TravelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE0 /* TravelyApp.swift */; };
 		A1234567890ABCDEF0 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0A /* ThemeManager.swift */; };
 		A1234567890ABCDEF0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0C /* Extensions.swift */; };
 		A1234567890ABCDEF0D /* TravelRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0E /* TravelRouteView.swift */; };
@@ -28,7 +33,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A1234567890ABCDEF4 /* Travely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Travely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1234567890ABCDE0 /* TravelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelyApp.swift; sourceTree = "<group>"; };
 		A1234567890ABCDE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A1234567890ABCDE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -47,8 +51,8 @@
 		A1234567890ABCDEF0O /* FlightBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightBookingView.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1234567890ABCDEF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1234567890ABCDEF4 /* Travely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Travely.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1234567890ABCDEF5 /* Travely.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Travely.entitlements; sourceTree = "<group>"; };
-		1234567890ABCDEF12345678 /* profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "profile.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C31C0A2E85E40900C6106C /* PostgREST in Frameworks */,
+				29C31C082E85E40900C6106C /* Functions in Frameworks */,
+				29C31C062E85E40900C6106C /* Auth in Frameworks */,
+				29C31C0E2E85E40900C6106C /* Storage in Frameworks */,
+				29C31C0C2E85E40900C6106C /* Realtime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,14 +77,6 @@
 				A1234567890ABCDEF8 /* Travely */,
 				A1234567890ABCDEF9 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		A1234567890ABCDEF9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A1234567890ABCDEF4 /* Travely.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		A1234567890ABCDEF8 /* Travely */ = {
@@ -102,6 +103,14 @@
 				A1234567890ABCDEFA /* Preview Content */,
 			);
 			path = Travely;
+			sourceTree = "<group>";
+		};
+		A1234567890ABCDEF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1234567890ABCDEF4 /* Travely.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		A1234567890ABCDEFA /* Preview Content */ = {
@@ -156,6 +165,9 @@
 				Base,
 			);
 			mainGroup = A1234567890ABCDEF7;
+			packageReferences = (
+				29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			productRefGroup = A1234567890ABCDEF9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -384,15 +396,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A1234567890ABCDEFF0 /* Build configuration list for PBXProject "Travely" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A1234567890ABCDEFF1 /* Debug */,
-				A1234567890ABCDEFF2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		A1234567890ABCDEFC /* Build configuration list for PBXNativeTarget "Travely" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -402,7 +405,55 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		A1234567890ABCDEFF0 /* Build configuration list for PBXProject "Travely" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1234567890ABCDEFF1 /* Debug */,
+				A1234567890ABCDEFF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29C31C052E85E40900C6106C /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		29C31C072E85E40900C6106C /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		29C31C092E85E40900C6106C /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		29C31C0B2E85E40900C6106C /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		29C31C0D2E85E40900C6106C /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A1234567890ABCDEFF /* Project object */;
 }

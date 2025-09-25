@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ProfileSettingsView: View {
+    @EnvironmentObject var supabaseManager: SupabaseManager
     @EnvironmentObject var themeManager: ThemeManager
     @State private var userName = "Marius Bartl"
     @State private var userEmail = "mariusthenomad@gmail.com"
