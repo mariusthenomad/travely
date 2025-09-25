@@ -211,11 +211,21 @@ struct ProfileSettingsView: View {
             }
             .alert("Logout", isPresented: $showingLogoutAlert) {
                 Button("Logout", role: .destructive) {
-                    // Handle logout
+                    handleLogout()
                 }
                 Button("Cancel", role: .cancel) { }
             } message: {
                 Text("Are you sure you want to logout?")
+            }
+        }
+    }
+    
+    private func handleLogout() {
+        Task {
+            do {
+                try await supabaseManager.signOut()
+            } catch {
+                print("Logout error: \(error.localizedDescription)")
             }
         }
     }

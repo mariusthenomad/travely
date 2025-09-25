@@ -2,12 +2,11 @@ import SwiftUI
 import Supabase
 
 struct AuthenticationView: View {
-    @StateObject private var supabaseManager = SupabaseManager.shared
+    @EnvironmentObject var supabaseManager: SupabaseManager
     @State private var email = ""
     @State private var password = ""
     @State private var confirmPassword = ""
     @State private var isSignUp = false
-    @State private var isLoading = false
     @State private var errorMessage = ""
     @State private var showError = false
     
@@ -81,16 +80,50 @@ struct AuthenticationView: View {
                                 .padding(.horizontal)
                         }
                         
-                        // Action Button
-                        Button(action: handleAuthentication) {
+                        // Google Sign In Button
+                        Button(action: handleGoogleSignIn) {
                             HStack {
-                                if isLoading {
+                                Image(systemName: "globe")
+                                    .font(.title2)
+                                
+                                Text("Continue with Google")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                            }
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color.red)
+                            .cornerRadius(12)
+                        }
+                        .disabled(supabaseManager.isLoading)
+                        
+                        // Divider
+                        HStack {
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(themeManager.secondaryTextColor.opacity(0.3))
+                            
+                            Text("or")
+                                .font(.caption)
+                                .foregroundColor(themeManager.secondaryTextColor)
+                                .padding(.horizontal, 16)
+                            
+                            Rectangle()
+                                .frame(height: 1)
+                                .foregroundColor(themeManager.secondaryTextColor.opacity(0.3))
+                        }
+                        .padding(.vertical, 8)
+                        
+                        // Email/Password Action Button
+                        Button(action: handleEmailAuthentication) {
+                            HStack {
+                                if supabaseManager.isLoading {
                                     ProgressView()
                                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                                         .scaleEffect(0.8)
                                 }
                                 
-                                Text(isSignUp ? "Sign Up" : "Sign In")
+                                Text(isSignUp ? "Sign Up with Email" : "Sign In with Email")
                                     .font(.headline)
                                     .foregroundColor(.white)
                             }
@@ -99,7 +132,7 @@ struct AuthenticationView: View {
                             .background(themeManager.primaryColor)
                             .cornerRadius(12)
                         }
-                        .disabled(isLoading || !isFormValid)
+                        .disabled(supabaseManager.isLoading || !isFormValid)
                         
                         // Toggle Sign Up/Sign In
                         Button(action: { 
@@ -134,10 +167,25 @@ struct AuthenticationView: View {
         }
     }
     
-    private func handleAuthentication() {
+    private func handleGoogleSignIn() {
+        errorMessage = ""
+        showError = false
+        
+        Task {
+            do {
+                try await supabaseManager.signInWithGoogle()
+            } catch {
+                await MainActor.run {
+                    errorMessage = error.localizedDescription
+                    showError = true
+                }
+            }
+        }
+    }
+    
+    private func handleEmailAuthentication() {
         guard isFormValid else { return }
         
-        isLoading = true
         errorMessage = ""
         showError = false
         
@@ -148,13 +196,8 @@ struct AuthenticationView: View {
                 } else {
                     try await supabaseManager.signIn(email: email, password: password)
                 }
-                
-                await MainActor.run {
-                    isLoading = false
-                }
             } catch {
                 await MainActor.run {
-                    isLoading = false
                     errorMessage = error.localizedDescription
                     showError = true
                 }

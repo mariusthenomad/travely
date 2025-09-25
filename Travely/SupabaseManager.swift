@@ -1,5 +1,6 @@
 import Foundation
 import Supabase
+import GoogleSignIn
 
 class SupabaseManager: ObservableObject {
     static let shared = SupabaseManager()
@@ -19,6 +20,7 @@ class SupabaseManager: ObservableObject {
     // MARK: - Authentication
     @Published var isAuthenticated = false
     @Published var currentUser: User?
+    @Published var isLoading = false
     
     func signUp(email: String, password: String) async throws {
         let response = try await supabase.auth.signUp(
@@ -44,10 +46,47 @@ class SupabaseManager: ObservableObject {
     
     func signOut() async throws {
         try await supabase.auth.signOut()
+        GIDSignIn.sharedInstance.signOut()
         await MainActor.run {
             self.currentUser = nil
             self.isAuthenticated = false
         }
+    }
+    
+    // MARK: - Google Sign In
+    func signInWithGoogle() async throws {
+        await MainActor.run {
+            self.isLoading = true
+        }
+        
+        guard let presentingViewController = await getRootViewController() else {
+            throw AuthError.noViewController
+        }
+        
+        let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController)
+        
+        guard let idToken = result.user.idToken?.tokenString else {
+            throw AuthError.noIdToken
+        }
+        
+        let response = try await supabase.auth.signInWithIdToken(
+            credentials: .init(provider: .google, idToken: idToken)
+        )
+        
+        await MainActor.run {
+            self.currentUser = response.user
+            self.isAuthenticated = response.user != nil
+            self.isLoading = false
+        }
+    }
+    
+    @MainActor
+    private func getRootViewController() -> UIViewController? {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return nil
+        }
+        return window.rootViewController
     }
     
     // MARK: - Travel Routes
@@ -179,4 +218,19 @@ struct UserProfile {
     let email: String
     let profileImageURL: String?
     let preferences: [String: Any]
+}
+
+// MARK: - Auth Errors
+enum AuthError: LocalizedError {
+    case noViewController
+    case noIdToken
+    
+    var errorDescription: String? {
+        switch self {
+        case .noViewController:
+            return "Could not find root view controller"
+        case .noIdToken:
+            return "No ID token received from Google"
+        }
+    }
 }
