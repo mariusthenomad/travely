@@ -1,0 +1,1169 @@
+import SwiftUI
+
+struct TravelRouteView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    @State private var selectedRoute: TravelRoute? = nil
+    @State private var showingStays = false
+    @State private var showingAddLocation = false
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                // Background gradient like flights
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.white,
+                        Color(red: 1.0, green: 0.95, blue: 0.9)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    // Header with trip info
+                    VStack(spacing: 16) {
+                        // Title and dates - centered with better formatting
+                        VStack(spacing: 8) {
+                            Text("ASIA 2026")
+                                .font(.system(size: 28, weight: .bold, design: .default))
+                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                .tracking(2)
+                            
+                            Text("07 Mar 2024 - 28 Mar 2024")
+                                .font(.custom("Inter", size: 14))
+                                .fontWeight(.medium)
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                                .opacity(0.8)
+                        }
+                        .padding(.top, 20)
+                    }
+                    .padding(.bottom, 20)
+                
+                // Main content area - Route view only
+                GeometryReader { geometry in
+                    ScrollView {
+                        VStack(spacing: 0) {
+                            // Equal spacing between header and cards
+                            Spacer()
+                                .frame(height: 20)
+                            
+                            // Cards with equal spacing
+                            ForEach(Array(featuredRoute.stops.enumerated()), id: \.offset) { index, stop in
+                                RouteStopRow(
+                                    stop: stop,
+                                    stopNumber: index + 1,
+                                    isLast: index == featuredRoute.stops.count - 1
+                                )
+                                .frame(height: 80) // Fixed height for all cards
+                                
+                                // Equal spacing between cards
+                                if index < featuredRoute.stops.count - 1 {
+                                    Spacer()
+                                        .frame(height: 12)
+                                }
+                            }
+                            
+                            // Equal spacing between cards and bottom navigation
+                            Spacer()
+                                .frame(height: 20)
+                        }
+                        .padding(.horizontal, 20)
+                    }
+                }
+                .background(themeManager.oledBackgroundColor)
+                
+                // Bottom navigation - two full-width buttons like Get Cash Advance
+                VStack(spacing: 16) {
+                    // Add Destination button - full width like Get Cash Advance
+                    Button(action: { showingAddLocation.toggle() }) {
+                        HStack {
+                            Image(systemName: "plus")
+                                .font(.system(size: 18))
+                            
+                            Text("Add Destination")
+                                .font(.custom("Inter", size: 18))
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange like Get Cash Advance
+                        .cornerRadius(25)
+                    }
+                    
+                    // Stays button - full width like Get Cash Advance
+                    Button(action: { showingStays.toggle() }) {
+                        HStack {
+                            Image(systemName: "bed.double.fill")
+                                .font(.system(size: 18))
+                            
+                            Text("Stays")
+                                .font(.custom("Inter", size: 18))
+                                .fontWeight(.semibold)
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange like Get Cash Advance
+                        .cornerRadius(25)
+                    }
+                }
+                .padding(.horizontal, 30)
+                .padding(.vertical, 16)
+                .background(Color.white)
+            }
+            .navigationBarHidden(true)
+        }
+        .sheet(item: $selectedRoute) { route in
+            RouteDetailView(route: route)
+        }
+        .sheet(isPresented: $showingStays) {
+            StaysView(stays: sampleStays)
+        }
+        .sheet(isPresented: $showingAddLocation) {
+            AddLocationView()
+        }
+    }
+}
+
+struct RouteStopRow: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let stop: RouteStop
+    let stopNumber: Int
+    let isLast: Bool
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            // Stop number circle
+            ZStack {
+                Circle()
+                    .fill(Color(red: 1.0, green: 0.4, blue: 0.2))
+                    .frame(width: 36, height: 36)
+                
+                Text("\(stopNumber)")
+                    .font(.custom("Inter", size: 16))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            
+            // Stop details
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    HStack(spacing: 6) {
+                        Text(stop.countryEmoji)
+                            .font(.system(size: 16))
+                        
+                        Text(stop.destination)
+                            .font(.custom("Inter", size: 16))
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
+                    }
+                    
+                    Spacer()
+                    
+                    Text(stop.dates)
+                        .font(.custom("Inter", size: 12))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+                
+                HStack {
+                    Text(stop.country)
+                        .font(.custom("Inter", size: 12))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                    
+                    Spacer()
+                    
+                    Text(stop.duration)
+                        .font(.custom("Inter", size: 14))
+                        .fontWeight(.medium)
+                        .foregroundColor(.white)
+                }
+            }
+            
+            // Transport icon
+            if stop.hasFlight || stop.hasTrain || stop.isStart {
+                Image(systemName: stop.isStart ? "play.circle.fill" : (stop.hasTrain ? "tram.fill" : "airplane.departure"))
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 20)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+    }
+}
+
+struct BookingRow: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let item: PriceItem
+    
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.item)
+                    .font(.custom("Inter", size: 16))
+                    .foregroundColor(themeManager.textColor)
+                
+                Text("Booking details")
+                    .font(.custom("Inter", size: 12))
+                    .foregroundColor(themeManager.secondaryTextColor)
+            }
+            
+            Spacer()
+            
+            Text("€\(item.price)")
+                .font(.custom("Inter", size: 16))
+                .fontWeight(.semibold)
+                .foregroundColor(.white)
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 16)
+        .background(themeManager.oledCardBackgroundColor)
+        .cornerRadius(12)
+    }
+}
+
+struct StayCard: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let stay: Stay
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(stay.name)
+                        .font(.custom("Inter", size: 18))
+                        .fontWeight(.semibold)
+                        .foregroundColor(themeManager.textColor)
+                    
+                    HStack(spacing: 6) {
+                        Text(stay.countryEmoji)
+                            .font(.system(size: 16))
+                        
+                        Text(stay.location)
+                            .font(.custom("Inter", size: 14))
+                            .foregroundColor(themeManager.secondaryTextColor)
+                    }
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text("€\(stay.pricePerNight)")
+                        .font(.custom("Inter", size: 16))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text("per night")
+                        .font(.custom("Inter", size: 12))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+            }
+            
+            HStack {
+                Text(stay.dates)
+                    .font(.custom("Inter", size: 14))
+                    .foregroundColor(themeManager.secondaryTextColor)
+                
+                Spacer()
+                
+                Text("\(stay.nights) nights")
+                    .font(.custom("Inter", size: 14))
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
+            }
+            
+            HStack {
+                ForEach(stay.amenities, id: \.self) { amenity in
+                    Text(amenity)
+                        .font(.custom("Inter", size: 12))
+                        .foregroundColor(themeManager.primaryColor)
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(themeManager.primaryColor.opacity(0.1))
+                        .cornerRadius(8)
+                }
+                
+                Spacer()
+            }
+        }
+        .padding(16)
+        .background(themeManager.oledCardBackgroundColor)
+        .cornerRadius(12)
+        .shadow(color: themeManager.shadowColor, radius: 4, x: 0, y: 2)
+    }
+}
+
+struct Stay: Identifiable {
+    let id: Int
+    let name: String
+    let location: String
+    let countryEmoji: String
+    let dates: String
+    let nights: Int
+    let pricePerNight: Int
+    let amenities: [String]
+}
+
+struct RouteCard: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let route: TravelRoute
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 20) {
+            // Route Header
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(route.title)
+                        .font(.custom("Inter", size: 22))
+                        .fontWeight(.bold)
+                        .foregroundColor(themeManager.textColor)
+                    
+                    Text(route.duration)
+                        .font(.custom("Inter", size: 16))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text("€\(route.totalPrice)")
+                        .font(.custom("Inter", size: 24))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text("per person")
+                        .font(.custom("Inter", size: 12))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+            }
+            
+            // Route Timeline
+            VStack(spacing: 16) {
+                ForEach(Array(route.stops.enumerated()), id: \.offset) { index, stop in
+                    RouteStopView(
+                        stop: stop,
+                        isFirst: index == 0,
+                        isLast: index == route.stops.count - 1,
+                        isEven: index % 2 == 0
+                    )
+                }
+            }
+            
+            // Action Buttons
+            HStack(spacing: 12) {
+                Button(action: {}) {
+                    Text("Customize")
+                        .font(.custom("Inter", size: 16))
+                        .fontWeight(.semibold)
+                        .foregroundColor(themeManager.primaryColor)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(themeManager.primaryColor.opacity(0.1))
+                        .cornerRadius(22)
+                }
+                
+                Button(action: {}) {
+                    Text("Book Route")
+                        .font(.custom("Inter", size: 16))
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 44)
+                        .background(themeManager.primaryColor)
+                        .cornerRadius(22)
+                }
+            }
+        }
+        .padding(24)
+        .background(themeManager.oledCardBackgroundColor)
+        .cornerRadius(20)
+        .shadow(color: themeManager.shadowColor, radius: 12, x: 0, y: 6)
+    }
+}
+
+struct RouteStopView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let stop: RouteStop
+    let isFirst: Bool
+    let isLast: Bool
+    let isEven: Bool
+    
+    var body: some View {
+        HStack(spacing: 16) {
+            // Timeline indicator
+            VStack(spacing: 0) {
+                if !isFirst {
+                    Rectangle()
+                        .fill(themeManager.primaryColor.opacity(0.3))
+                        .frame(width: 2, height: 20)
+                }
+                
+                ZStack {
+                    Circle()
+                        .fill(themeManager.primaryColor)
+                        .frame(width: 12, height: 12)
+                    
+                    if stop.hasFlight {
+                        Image(systemName: "airplane")
+                            .font(.system(size: 6))
+                            .foregroundColor(.white)
+                    }
+                }
+                
+                if !isLast {
+                    Rectangle()
+                        .fill(themeManager.primaryColor.opacity(0.3))
+                        .frame(width: 2, height: 20)
+                }
+            }
+            
+            // Stop content
+            VStack(alignment: .leading, spacing: 8) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(stop.destination)
+                            .font(.custom("Inter", size: 16))
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
+                        
+                        Text(stop.country)
+                            .font(.custom("Inter", size: 12))
+                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                    }
+                    
+                    Spacer()
+                    
+                    VStack(alignment: .trailing, spacing: 4) {
+                        Text(stop.duration)
+                            .font(.custom("Inter", size: 16))
+                            .fontWeight(.semibold)
+                            .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                        
+                        Text(stop.dates)
+                            .font(.custom("Inter", size: 12))
+                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                    }
+                }
+                
+                if stop.hasFlight {
+                    HStack {
+                        Image(systemName: "airplane")
+                            .font(.system(size: 12))
+                            .foregroundColor(themeManager.primaryColor)
+                        
+                        Text(stop.flightInfo)
+                            .font(.custom("Inter", size: 14))
+                            .foregroundColor(themeManager.secondaryTextColor)
+                        
+                        Spacer()
+                        
+                        Text(stop.flightPrice)
+                            .font(.custom("Inter", size: 14))
+                            .fontWeight(.medium)
+                            .foregroundColor(themeManager.primaryColor)
+                    }
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background(themeManager.primaryColor.opacity(0.1))
+                    .cornerRadius(8)
+                }
+            }
+        }
+    }
+}
+
+struct QuickRouteCard: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let route: TravelRoute
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            AsyncImage(url: URL(string: route.imageURL)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Rectangle()
+                    .fill(Color.gray.opacity(0.3))
+            }
+            .frame(width: 200, height: 120)
+            .cornerRadius(12)
+            
+            VStack(alignment: .leading, spacing: 6) {
+                Text(route.title)
+                    .font(.custom("Inter", size: 16))
+                    .fontWeight(.semibold)
+                    .foregroundColor(themeManager.textColor)
+                    .lineLimit(2)
+                
+                Text(route.duration)
+                    .font(.custom("Inter", size: 14))
+                    .foregroundColor(themeManager.secondaryTextColor)
+                
+                Text("€\(route.totalPrice)")
+                    .font(.custom("Inter", size: 16))
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+            }
+            .padding(.horizontal, 12)
+            .padding(.bottom, 12)
+        }
+        .frame(width: 200)
+        .background(themeManager.oledCardBackgroundColor)
+        .cornerRadius(16)
+        .shadow(color: themeManager.shadowColor, radius: 8, x: 0, y: 4)
+    }
+}
+
+struct RouteDetailView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let route: TravelRoute
+    @Environment(\.presentationMode) var presentationMode
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Route Header
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text(route.title)
+                            .font(.custom("Inter", size: 28))
+                            .fontWeight(.bold)
+                            .foregroundColor(themeManager.textColor)
+                        
+                        Text(route.description)
+                            .font(.custom("Inter", size: 16))
+                            .foregroundColor(themeManager.secondaryTextColor)
+                            .lineLimit(nil)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
+                    // Detailed Timeline
+                    VStack(spacing: 20) {
+                        ForEach(Array(route.stops.enumerated()), id: \.offset) { index, stop in
+                            DetailedRouteStopView(
+                                stop: stop,
+                                isFirst: index == 0,
+                                isLast: index == route.stops.count - 1
+                            )
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // Price Breakdown
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Price Breakdown")
+                            .font(.custom("Inter", size: 20))
+                            .fontWeight(.semibold)
+                            .foregroundColor(themeManager.textColor)
+                            .padding(.horizontal, 20)
+                        
+                        VStack(spacing: 12) {
+                            ForEach(route.priceBreakdown, id: \.item) { item in
+                                HStack {
+                                    Text(item.item)
+                                        .font(.custom("Inter", size: 16))
+                                        .foregroundColor(themeManager.textColor)
+                                    
+                                    Spacer()
+                                    
+                                    Text("€\(item.price)")
+                                        .font(.custom("Inter", size: 16))
+                                        .fontWeight(.medium)
+                                        .foregroundColor(themeManager.primaryColor)
+                                }
+                                .padding(.horizontal, 20)
+                                .padding(.vertical, 12)
+                                .background(themeManager.oledCardBackgroundColor)
+                                .cornerRadius(12)
+                            }
+                        }
+                        .padding(.horizontal, 20)
+                    }
+                    
+                    // Book Button
+                    Button(action: {}) {
+                        Text("Book This Route")
+                            .font(.custom("Inter", size: 18))
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(themeManager.primaryColor)
+                            .cornerRadius(25)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                }
+            }
+            .background(themeManager.oledBackgroundColor)
+            .navigationTitle("Route Details")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Done") {
+                presentationMode.wrappedValue.dismiss()
+            })
+        }
+    }
+}
+
+struct DetailedRouteStopView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let stop: RouteStop
+    let isFirst: Bool
+    let isLast: Bool
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack(spacing: 8) {
+                        Text(stop.countryEmoji)
+                            .font(.system(size: 20))
+                        
+                        Text(stop.destination)
+                            .font(.custom("Inter", size: 20))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
+                    }
+                    
+                    Text(stop.country)
+                        .font(.custom("Inter", size: 16))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(stop.duration)
+                        .font(.custom("Inter", size: 18))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    
+                    Text(stop.dates)
+                        .font(.custom("Inter", size: 14))
+                        .foregroundColor(themeManager.secondaryTextColor)
+                }
+            }
+            
+            if stop.hasFlight || stop.hasTrain {
+                HStack {
+                    Image(systemName: stop.hasTrain ? "tram.fill" : "airplane.departure")
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundColor(themeManager.primaryColor)
+                    
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(stop.flightInfo)
+                            .font(.custom("Inter", size: 16))
+                            .foregroundColor(themeManager.textColor)
+                        
+                        Text("Duration: \(stop.flightDuration)")
+                            .font(.custom("Inter", size: 14))
+                            .foregroundColor(themeManager.secondaryTextColor)
+                    }
+                    
+                    Spacer()
+                    
+                    Text(stop.flightPrice)
+                        .font(.custom("Inter", size: 16))
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                }
+                .padding(16)
+                .background(themeManager.primaryColor.opacity(0.1))
+                .cornerRadius(12)
+            }
+        }
+        .padding(20)
+        .background(themeManager.oledCardBackgroundColor)
+        .cornerRadius(16)
+        .shadow(color: themeManager.shadowColor, radius: 8, x: 0, y: 4)
+    }
+}
+
+// Data Models
+struct TravelRoute: Identifiable {
+    let id: Int
+    let title: String
+    let description: String
+    let duration: String
+    let totalPrice: Int
+    let imageURL: String
+    let stops: [RouteStop]
+    let priceBreakdown: [PriceItem]
+}
+
+struct RouteStop: Identifiable {
+    let id: Int
+    let destination: String
+    let country: String
+    let countryEmoji: String
+    let duration: String
+    let dates: String
+    let hasFlight: Bool
+    let hasTrain: Bool
+    let isStart: Bool
+    let flightInfo: String
+    let flightDuration: String
+    let flightPrice: String
+}
+
+struct PriceItem: Identifiable {
+    let id: Int
+    let item: String
+    let price: Int
+}
+
+// Sample Data - Your Test Route
+let featuredRoute = TravelRoute(
+    id: 1,
+    title: "Asia Adventure",
+    description: "Experience the best of Taiwan and Southeast Asia with this amazing 21-day journey through Taichung, Taipei, Bali, and Bangkok.",
+    duration: "21 Days",
+    totalPrice: 3488,
+    imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400",
+    stops: [
+        RouteStop(
+            id: 1,
+            destination: "Munich",
+            country: "Germany",
+            countryEmoji: "🇩🇪",
+            duration: "Start",
+            dates: "Thu 07 Mar - Stopover",
+            hasFlight: false,
+            hasTrain: false,
+            isStart: true,
+            flightInfo: "",
+            flightDuration: "",
+            flightPrice: ""
+        ),
+        RouteStop(
+            id: 2,
+            destination: "Taichung",
+            country: "Taiwan",
+            countryEmoji: "🇹🇼",
+            duration: "5 Days",
+            dates: "Thu 07 Mar - Tue 12 Mar",
+            hasFlight: true,
+            hasTrain: false,
+            isStart: false,
+            flightInfo: "Munich → Taichung",
+            flightDuration: "11h 30m",
+            flightPrice: "€589"
+        ),
+        RouteStop(
+            id: 3,
+            destination: "Taipei",
+            country: "Taiwan",
+            countryEmoji: "🇹🇼",
+            duration: "2 Days",
+            dates: "Tue 12 Mar - Thu 14 Mar",
+            hasFlight: false,
+            hasTrain: true,
+            isStart: false,
+            flightInfo: "Taichung → Taipei",
+            flightDuration: "1h 15m",
+            flightPrice: "€89"
+        ),
+        RouteStop(
+            id: 4,
+            destination: "Bali",
+            country: "Indonesia",
+            countryEmoji: "🇮🇩",
+            duration: "10 Days",
+            dates: "Thu 14 Mar - Sun 24 Mar",
+            hasFlight: true,
+            hasTrain: false,
+            isStart: false,
+            flightInfo: "Taipei → Denpasar",
+            flightDuration: "5h 30m",
+            flightPrice: "€445"
+        ),
+        RouteStop(
+            id: 5,
+            destination: "Bangkok",
+            country: "Thailand",
+            countryEmoji: "🇹🇭",
+            duration: "4 Days",
+            dates: "Sun 24 Mar - Thu 28 Mar",
+            hasFlight: true,
+            hasTrain: false,
+            isStart: false,
+            flightInfo: "Denpasar → Bangkok",
+            flightDuration: "3h 45m",
+            flightPrice: "€298"
+        )
+    ],
+    priceBreakdown: [
+        PriceItem(id: 1, item: "Taichung Accommodation (5 nights)", price: 450),
+        PriceItem(id: 2, item: "Taipei Accommodation (2 nights)", price: 180),
+        PriceItem(id: 3, item: "Bali Accommodation (10 nights)", price: 650),
+        PriceItem(id: 4, item: "Bangkok Accommodation (4 nights)", price: 320),
+        PriceItem(id: 5, item: "Munich → Taichung Flight", price: 589),
+        PriceItem(id: 6, item: "Taichung → Taipei Train", price: 89),
+        PriceItem(id: 7, item: "Taipei → Bali Flight", price: 445),
+        PriceItem(id: 8, item: "Bali → Bangkok Flight", price: 298),
+        PriceItem(id: 9, item: "Travel Insurance", price: 95),
+        PriceItem(id: 10, item: "Visa & Documents", price: 120),
+        PriceItem(id: 11, item: "Service Fee", price: 252)
+    ]
+)
+
+// Sample stays data
+let sampleStays = [
+    Stay(
+        id: 1,
+        name: "Grand Hotel Taichung",
+        location: "Taichung, Taiwan",
+        countryEmoji: "🇹🇼",
+        dates: "Thu 07 Mar - Tue 12 Mar",
+        nights: 5,
+        pricePerNight: 90,
+        amenities: ["Wi-Fi", "Pool", "Spa", "Restaurant"]
+    ),
+    Stay(
+        id: 2,
+        name: "Taipei Central Hotel",
+        location: "Taipei, Taiwan",
+        countryEmoji: "🇹🇼",
+        dates: "Tue 12 Mar - Thu 14 Mar",
+        nights: 2,
+        pricePerNight: 90,
+        amenities: ["Wi-Fi", "Gym", "Restaurant"]
+    ),
+    Stay(
+        id: 3,
+        name: "Bali Beach Resort",
+        location: "Denpasar, Indonesia",
+        countryEmoji: "🇮🇩",
+        dates: "Thu 14 Mar - Sun 24 Mar",
+        nights: 10,
+        pricePerNight: 65,
+        amenities: ["Wi-Fi", "Beach", "Pool", "Spa", "Restaurant"]
+    ),
+    Stay(
+        id: 4,
+        name: "Bangkok City Hotel",
+        location: "Bangkok, Thailand",
+        countryEmoji: "🇹🇭",
+        dates: "Sun 24 Mar - Thu 28 Mar",
+        nights: 4,
+        pricePerNight: 80,
+        amenities: ["Wi-Fi", "Pool", "Restaurant", "Bar"]
+    )
+]
+
+let quickRoutes = [
+    TravelRoute(
+        id: 2,
+        title: "European Grand Tour",
+        description: "Explore the best of Europe",
+        duration: "14 Days",
+        totalPrice: 1899,
+        imageURL: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400",
+        stops: [],
+        priceBreakdown: []
+    ),
+    TravelRoute(
+        id: 3,
+        title: "Japan Discovery",
+        description: "From Tokyo to Kyoto",
+        duration: "10 Days",
+        totalPrice: 1599,
+        imageURL: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400",
+        stops: [],
+        priceBreakdown: []
+    ),
+    TravelRoute(
+        id: 4,
+        title: "Australia Adventure",
+        description: "Sydney to Melbourne",
+        duration: "12 Days",
+        totalPrice: 2199,
+        imageURL: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+        stops: [],
+        priceBreakdown: []
+    )
+]
+
+struct StaysView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    @Environment(\.presentationMode) var presentationMode
+    let stays: [Stay]
+    
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 20) {
+                    // Header
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Your Stays")
+                            .font(.custom("Inter", size: 28))
+                            .fontWeight(.bold)
+                            .foregroundColor(themeManager.textColor)
+                        
+                        Text("Accommodation for your Asia Adventure")
+                            .font(.custom("Inter", size: 16))
+                            .foregroundColor(themeManager.secondaryTextColor)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 20)
+                    
+                    // Stays list
+                    LazyVStack(spacing: 16) {
+                        ForEach(stays) { stay in
+                            StayCard(stay: stay)
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 100)
+                }
+            }
+            .background(themeManager.oledBackgroundColor)
+            .navigationTitle("Stays")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Done") {
+                presentationMode.wrappedValue.dismiss()
+            })
+        }
+    }
+}
+
+struct AddLocationView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    @Environment(\.presentationMode) var presentationMode
+    
+    @State private var destination = ""
+    @State private var country = ""
+    @State private var countryEmoji = ""
+    @State private var startDate = Date()
+    @State private var endDate = Date()
+    @State private var transportType = "flight" // "flight", "train", "bus"
+    @State private var transportPrice = ""
+    @State private var transportDuration = ""
+    
+    let transportOptions = ["flight", "train", "bus"]
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                // Background gradient like flights
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.white,
+                        Color(red: 1.0, green: 0.95, blue: 0.9) // Light peach/pink
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                ScrollView {
+                    VStack(spacing: 24) {
+                    // Header
+                    VStack(spacing: 8) {
+                        Text("Add New Location")
+                            .font(.custom("Inter", size: 28))
+                            .fontWeight(.bold)
+                            .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2)) // Dark gray
+                        
+                        Text("Add a new destination to your Asia 26 trip")
+                            .font(.custom("Inter", size: 16))
+                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5)) // Medium gray
+                    }
+                    .padding(.top, 20)
+                    
+                    // Form
+                    VStack(spacing: 20) {
+                        // Destination
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Destination")
+                                .font(.custom("Inter", size: 14))
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            
+                            TextField("e.g., Tokyo", text: $destination)
+                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
+                        }
+                        
+                        // Country
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Country")
+                                .font(.custom("Inter", size: 14))
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            
+                            TextField("e.g., Japan", text: $country)
+                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
+                        }
+                        
+                        // Country Emoji
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Country Emoji")
+                                .font(.custom("Inter", size: 14))
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            
+                            TextField("e.g., 🇯🇵", text: $countryEmoji)
+                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
+                        }
+                        
+                        // Dates
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Travel Dates")
+                                .font(.custom("Inter", size: 14))
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            
+                            HStack(spacing: 16) {
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("Start Date")
+                                        .font(.custom("Inter", size: 14))
+                                        .foregroundColor(themeManager.secondaryTextColor)
+                                    
+                                    DatePicker("", selection: $startDate, displayedComponents: .date)
+                                        .datePickerStyle(CompactDatePickerStyle())
+                                        .colorScheme(themeManager.isDarkMode ? .dark : .light)
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text("End Date")
+                                        .font(.custom("Inter", size: 14))
+                                        .foregroundColor(themeManager.secondaryTextColor)
+                                    
+                                    DatePicker("", selection: $endDate, displayedComponents: .date)
+                                        .datePickerStyle(CompactDatePickerStyle())
+                                        .colorScheme(themeManager.isDarkMode ? .dark : .light)
+                                }
+                            }
+                        }
+                        
+                        // Transport
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Transport to this location")
+                                .font(.custom("Inter", size: 14))
+                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            
+                            HStack(spacing: 12) {
+                                ForEach(transportOptions, id: \.self) { option in
+                                    Button(action: { transportType = option }) {
+                                        HStack(spacing: 6) {
+                                            if option == "flight" {
+                                                Image(systemName: "airplane.departure")
+                                                    .font(.system(size: 14))
+                                            } else if option == "train" {
+                                                Image(systemName: "tram.fill")
+                                                    .font(.system(size: 14))
+                                            } else { // bus
+                                                Image(systemName: "bus.fill")
+                                                    .font(.system(size: 14))
+                                            }
+                                            
+                                            Text(option.capitalized)
+                                                .font(.custom("Inter", size: 14))
+                                                .fontWeight(.medium)
+                                        }
+                                        .foregroundColor(transportType == option ? .white : Color(red: 0.3, green: 0.3, blue: 0.3))
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 8)
+                                        .background(transportType == option ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.white)
+                                        .cornerRadius(16)
+                                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+                                    }
+                                }
+                            }
+                        }
+                        
+                        // Transport Details
+                        HStack(spacing: 16) {
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Duration")
+                                    .font(.custom("Inter", size: 14))
+                                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                                
+                                TextField("e.g., 2h 30m", text: $transportDuration)
+                                    .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Price")
+                                    .font(.custom("Inter", size: 14))
+                                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                                
+                                TextField("e.g., €299", text: $transportPrice)
+                                    .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
+                            }
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    
+                    // Action Buttons
+                    VStack(spacing: 16) {
+                        Button(action: addLocation) {
+                            HStack {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 18))
+                                
+                                Text("Add Location")
+                                    .font(.custom("Inter", size: 18))
+                                    .fontWeight(.semibold)
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange like Get Cash Advance
+                            .cornerRadius(25)
+                        }
+                        
+                        Button(action: { presentationMode.wrappedValue.dismiss() }) {
+                            Text("Cancel")
+                                .font(.custom("Inter", size: 16))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .background(Color.white)
+                                .cornerRadius(25)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color(red: 0.2, green: 0.2, blue: 0.2), lineWidth: 1)
+                                )
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 100)
+                }
+            }
+            .navigationTitle("Add Location")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems(trailing: Button("Done") {
+                presentationMode.wrappedValue.dismiss()
+            })
+        }
+    }
+    
+    private func addLocation() {
+        // Here you would add the location to your route data
+        // For now, we'll just dismiss the view
+        presentationMode.wrappedValue.dismiss()
+    }
+}
+}
+
+struct CustomTextFieldStyle: TextFieldStyle {
+    let themeManager: ThemeManager
+    
+    func _body(configuration: TextField<Self._Label>) -> some View {
+        configuration
+            .padding(16)
+            .frame(height: 50) // Fixed height like FlightBookingView
+            .background(Color.white) // White background
+            .cornerRadius(12)
+            .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2)) // Dark gray text
+            .font(.custom("Inter", size: 16))
+            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1) // Light shadow
+    }
+}

@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1234567890ABCDEF /* TravelyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE0 /* TravelyApp.swift */; };
+		A1234567890ABCDE1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE2 /* ContentView.swift */; };
+		A1234567890ABCDE3 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE4 /* HomeView.swift */; };
+		A1234567890ABCDE5 /* FlightSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE6 /* FlightSearchView.swift */; };
+		A1234567890ABCDE7 /* HotelDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDE8 /* HotelDetailView.swift */; };
+		A1234567890ABCDE9 /* DestinationSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEA /* DestinationSelectionView.swift */; };
+		A1234567890ABCDEB /* ProfileSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEC /* ProfileSettingsView.swift */; };
+		A1234567890ABCDED /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEE /* AppSettingsView.swift */; };
+		A1234567890ABCDEF0 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0A /* ThemeManager.swift */; };
+		A1234567890ABCDEF0B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0C /* Extensions.swift */; };
+		A1234567890ABCDEF0D /* TravelRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0E /* TravelRouteView.swift */; };
+		A1234567890ABCDEF0F /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0G /* LaunchScreenView.swift */; };
+		A1234567890ABCDEF0H /* AppIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0I /* AppIconView.swift */; };
+		A1234567890ABCDEF0J /* IconGeneratorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0K /* IconGeneratorView.swift */; };
+		A1234567890ABCDEF0L /* AppIconSizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0M /* AppIconSizes.swift */; };
+		A1234567890ABCDEF0N /* FlightBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0O /* FlightBookingView.swift */; };
+		A1234567890ABCDEF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF1A /* Assets.xcassets */; };
+		A1234567890ABCDEF2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF3 /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A1234567890ABCDEF4 /* Travely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Travely.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1234567890ABCDE0 /* TravelyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelyApp.swift; sourceTree = "<group>"; };
+		A1234567890ABCDE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDE6 /* FlightSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightSearchView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDE8 /* HotelDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelDetailView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEA /* DestinationSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationSelectionView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEC /* ProfileSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingsView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEE /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0A /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0C /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0E /* TravelRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelRouteView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0G /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0I /* AppIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0K /* IconGeneratorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconGeneratorView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0M /* AppIconSizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconSizes.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0O /* FlightBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightBookingView.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A1234567890ABCDEF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A1234567890ABCDEF5 /* Travely.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Travely.entitlements; sourceTree = "<group>"; };
+		1234567890ABCDEF12345678 /* profile.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "profile.jpg"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A1234567890ABCDEF6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A1234567890ABCDEF7 = {
+			isa = PBXGroup;
+			children = (
+				A1234567890ABCDEF8 /* Travely */,
+				A1234567890ABCDEF9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A1234567890ABCDEF9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A1234567890ABCDEF4 /* Travely.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A1234567890ABCDEF8 /* Travely */ = {
+			isa = PBXGroup;
+			children = (
+				A1234567890ABCDE0 /* TravelyApp.swift */,
+				A1234567890ABCDE2 /* ContentView.swift */,
+				A1234567890ABCDE4 /* HomeView.swift */,
+				A1234567890ABCDE6 /* FlightSearchView.swift */,
+				A1234567890ABCDE8 /* HotelDetailView.swift */,
+				A1234567890ABCDEA /* DestinationSelectionView.swift */,
+				A1234567890ABCDEC /* ProfileSettingsView.swift */,
+				A1234567890ABCDEE /* AppSettingsView.swift */,
+				A1234567890ABCDEF0A /* ThemeManager.swift */,
+				A1234567890ABCDEF0C /* Extensions.swift */,
+				A1234567890ABCDEF0E /* TravelRouteView.swift */,
+				A1234567890ABCDEF0G /* LaunchScreenView.swift */,
+				A1234567890ABCDEF0I /* AppIconView.swift */,
+				A1234567890ABCDEF0K /* IconGeneratorView.swift */,
+				A1234567890ABCDEF0M /* AppIconSizes.swift */,
+				A1234567890ABCDEF0O /* FlightBookingView.swift */,
+				A1234567890ABCDEF1A /* Assets.xcassets */,
+				A1234567890ABCDEF5 /* Travely.entitlements */,
+				A1234567890ABCDEFA /* Preview Content */,
+			);
+			path = Travely;
+			sourceTree = "<group>";
+		};
+		A1234567890ABCDEFA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A1234567890ABCDEF3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A1234567890ABCDEFB /* Travely */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A1234567890ABCDEFC /* Build configuration list for PBXNativeTarget "Travely" */;
+			buildPhases = (
+				A1234567890ABCDEFD /* Sources */,
+				A1234567890ABCDEF6 /* Frameworks */,
+				A1234567890ABCDEFE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Travely;
+			productName = Travely;
+			productReference = A1234567890ABCDEF4 /* Travely.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1234567890ABCDEFF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A1234567890ABCDEFB = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A1234567890ABCDEFF0 /* Build configuration list for PBXProject "Travely" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A1234567890ABCDEF7;
+			productRefGroup = A1234567890ABCDEF9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1234567890ABCDEFB /* Travely */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A1234567890ABCDEFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1234567890ABCDEF2 /* Preview Assets.xcassets in Resources */,
+				A1234567890ABCDEF1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A1234567890ABCDEFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1234567890ABCDE1 /* ContentView.swift in Sources */,
+				A1234567890ABCDE3 /* HomeView.swift in Sources */,
+				A1234567890ABCDE5 /* FlightSearchView.swift in Sources */,
+				A1234567890ABCDE7 /* HotelDetailView.swift in Sources */,
+				A1234567890ABCDE9 /* DestinationSelectionView.swift in Sources */,
+				A1234567890ABCDEB /* ProfileSettingsView.swift in Sources */,
+				A1234567890ABCDED /* AppSettingsView.swift in Sources */,
+				A1234567890ABCDEF0 /* ThemeManager.swift in Sources */,
+				A1234567890ABCDEF0B /* Extensions.swift in Sources */,
+				A1234567890ABCDEF0D /* TravelRouteView.swift in Sources */,
+				A1234567890ABCDEF0F /* LaunchScreenView.swift in Sources */,
+				A1234567890ABCDEF0H /* AppIconView.swift in Sources */,
+				A1234567890ABCDEF0J /* IconGeneratorView.swift in Sources */,
+				A1234567890ABCDEF0L /* AppIconSizes.swift in Sources */,
+				A1234567890ABCDEF0N /* FlightBookingView.swift in Sources */,
+				A1234567890ABCDEF /* TravelyApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1234567890ABCDEFF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A1234567890ABCDEFF2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A1234567890ABCDEFF3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Travely/Travely.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Travely/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.travely.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A1234567890ABCDEFF4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Travely/Travely.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Travely/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.travely.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A1234567890ABCDEFF0 /* Build configuration list for PBXProject "Travely" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1234567890ABCDEFF1 /* Debug */,
+				A1234567890ABCDEFF2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A1234567890ABCDEFC /* Build configuration list for PBXNativeTarget "Travely" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A1234567890ABCDEFF3 /* Debug */,
+				A1234567890ABCDEFF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1234567890ABCDEFF /* Project object */;
+}
