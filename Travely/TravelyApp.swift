@@ -288,6 +288,8 @@ struct AuthenticationView: View {
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .textContentType(.none)
                         .autocorrectionDisabled()
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
                     
                     // Confirm Password Field (only for sign up)
                     if isSignUp {
@@ -295,6 +297,8 @@ struct AuthenticationView: View {
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .textContentType(.none)
                             .autocorrectionDisabled()
+                            .disableAutocorrection(true)
+                            .autocapitalization(.none)
                     }
                 }
                 .padding(.horizontal)
