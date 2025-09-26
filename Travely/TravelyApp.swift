@@ -513,7 +513,12 @@ struct TravelyApp: App {
         // Enable automatic sign-in restoration (this is important for Safari flow)
         GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
             if let error = error {
-                print("⚠️ Error restoring previous sign-in: \(error)")
+                // Code -4 is normal - means no previous sign-in to restore
+                if (error as NSError).code == -4 {
+                    print("ℹ️ No previous sign-in to restore (normal)")
+                } else {
+                    print("⚠️ Error restoring previous sign-in: \(error)")
+                }
             } else if let user = user {
                 print("✅ Previous sign-in restored: \(user.profile?.email ?? "No email")")
             } else {
