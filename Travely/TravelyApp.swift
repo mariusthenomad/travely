@@ -44,6 +44,16 @@ class SupabaseManager: ObservableObject {
         do {
             print("🚀 Starting REAL Supabase sign up for: \(email)")
             
+            // Validate email format
+            guard email.contains("@") && email.contains(".") else {
+                throw AuthError.invalidEmail
+            }
+            
+            // Validate password length
+            guard password.count >= 6 else {
+                throw AuthError.passwordTooShort
+            }
+            
             let response = try await auth.signUp(
                 email: email,
                 password: password
@@ -73,6 +83,16 @@ class SupabaseManager: ObservableObject {
         
         do {
             print("🚀 Starting REAL Supabase sign in for: \(email)")
+            
+            // Validate email format
+            guard email.contains("@") && email.contains(".") else {
+                throw AuthError.invalidEmail
+            }
+            
+            // Validate password is not empty
+            guard !password.isEmpty else {
+                throw AuthError.passwordRequired
+            }
             
             let response = try await auth.signIn(
                 email: email,
@@ -105,31 +125,47 @@ class SupabaseManager: ObservableObject {
         }
     }
     
-    // MARK: - Google Sign In (Temporarily Disabled)
+    // MARK: - Google Sign In (Fixed Implementation)
     func signInWithGoogle() async throws {
         await MainActor.run {
             self.isLoading = true
         }
         
         do {
-            print("🚫 Google Sign-In temporarily disabled due to URL scheme issues")
-            print("📧 Please use Email/Password login instead")
+            print("🚀 Starting REAL Google Sign-In...")
             
-            // Simulate a delay to show loading state
-            try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+            guard let presentingViewController = await getRootViewController() else {
+                throw AuthError.noViewController
+            }
+            
+            // Perform Google Sign-In
+            let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController)
+            let user = result.user
+            
+            guard let idToken = user.idToken?.tokenString else {
+                throw AuthError.noIdToken
+            }
+            
+            print("✅ Google Sign-In successful! User: \(user.profile?.email ?? "No email")")
+            
+            // Sign in to Supabase with Google ID token
+            let response = try await auth.signInWithIdToken(
+                credentials: .init(provider: .google, idToken: idToken)
+            )
             
             await MainActor.run {
+                self.currentUser = response.user
+                self.isAuthenticated = true
                 self.isLoading = false
             }
             
-            // Show an alert or throw an error to inform user
-            throw AuthError.googleSignInDisabled
+            print("✅ Supabase Google Sign-In successful! User: \(response.user.email ?? "No email")")
             
         } catch {
             await MainActor.run {
                 self.isLoading = false
             }
-            print("Google Sign-In error: \(error)")
+            print("❌ Google Sign-In error: \(error)")
             throw error
         }
     }
@@ -188,6 +224,11 @@ enum AuthError: LocalizedError {
     case noViewController
     case noIdToken
     case googleSignInDisabled
+    case invalidEmail
+    case passwordTooShort
+    case passwordRequired
+    case networkError
+    case unknownError
     
     var errorDescription: String? {
         switch self {
@@ -197,6 +238,16 @@ enum AuthError: LocalizedError {
             return "No ID token received from Google"
         case .googleSignInDisabled:
             return "Google Sign-In is temporarily disabled. Please use Email/Password login instead."
+        case .invalidEmail:
+            return "Please enter a valid email address"
+        case .passwordTooShort:
+            return "Password must be at least 6 characters long"
+        case .passwordRequired:
+            return "Password is required"
+        case .networkError:
+            return "Network error. Please check your internet connection."
+        case .unknownError:
+            return "An unknown error occurred. Please try again."
         }
     }
 }
@@ -251,8 +302,14 @@ struct AuthenticationView: View {
                 // Google Sign In Button
                 Button(action: handleGoogleSignIn) {
                     HStack {
-                        Image(systemName: "globe")
-                            .font(.title2)
+                        if supabaseManager.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .scaleEffect(0.8)
+                        } else {
+                            Image(systemName: "globe")
+                                .font(.title2)
+                        }
                         
                         Text("Continue with Google")
                             .font(.headline)
@@ -284,13 +341,21 @@ struct AuthenticationView: View {
                 
                 // Email/Password Action Button
                 Button(action: handleEmailAuthentication) {
-                    Text(isSignUp ? "Sign Up" : "Sign In")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(isFormValid ? Color.blue : Color.gray)
-                        .cornerRadius(12)
+                    HStack {
+                        if supabaseManager.isLoading {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .scaleEffect(0.8)
+                        }
+                        
+                        Text(isSignUp ? "Sign Up" : "Sign In")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                    }
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(isFormValid ? Color.blue : Color.gray)
+                    .cornerRadius(12)
                 }
                 .disabled(!isFormValid || supabaseManager.isLoading)
                 .padding(.horizontal)
@@ -360,7 +425,12 @@ struct AuthenticationView: View {
                 try await supabaseManager.signInWithGoogle()
             } catch {
                 await MainActor.run {
-                    errorMessage = error.localizedDescription
+                    // Handle different types of errors
+                    if let authError = error as? AuthError {
+                        errorMessage = authError.errorDescription ?? "Google Sign-In failed"
+                    } else {
+                        errorMessage = error.localizedDescription
+                    }
                     showError = true
                 }
             }
@@ -380,7 +450,12 @@ struct AuthenticationView: View {
                 }
             } catch {
                 await MainActor.run {
-                    errorMessage = error.localizedDescription
+                    // Handle different types of errors
+                    if let authError = error as? AuthError {
+                        errorMessage = authError.errorDescription ?? "Authentication failed"
+                    } else {
+                        errorMessage = error.localizedDescription
+                    }
                     showError = true
                 }
             }
