@@ -155,3 +155,4 @@ INSERT INTO travel_routes (title, description, duration, total_price, image_url,
     '[{"id": 1, "item": "Flight to Tokyo", "price": 800}, {"id": 2, "item": "Hotel Tokyo", "price": 600}]',
     null
 );
+

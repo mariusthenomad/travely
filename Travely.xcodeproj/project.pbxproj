@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2953A9FE2E85F21100B86C9A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 2953A9FD2E85F21100B86C9A /* Auth */; };
+		2953AA002E85F21100B86C9A /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 2953A9FF2E85F21100B86C9A /* Functions */; };
+		2953AA022E85F21100B86C9A /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 2953AA012E85F21100B86C9A /* PostgREST */; };
+		2953AA042E85F21100B86C9A /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = 2953AA032E85F21100B86C9A /* Realtime */; };
+		2953AA062E85F21100B86C9A /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = 2953AA052E85F21100B86C9A /* Storage */; };
 		29C31C062E85E40900C6106C /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C052E85E40900C6106C /* Auth */; };
 		29C31C082E85E40900C6106C /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C072E85E40900C6106C /* Functions */; };
 		29C31C0A2E85E40900C6106C /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = 29C31C092E85E40900C6106C /* PostgREST */; };
@@ -62,13 +67,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2953AA062E85F21100B86C9A /* Storage in Frameworks */,
 				29C31C0A2E85E40900C6106C /* PostgREST in Frameworks */,
 				29C31C082E85E40900C6106C /* Functions in Frameworks */,
 				29C31C132E85E99600C6106C /* GoogleSignInSwift in Frameworks */,
+				2953AA002E85F21100B86C9A /* Functions in Frameworks */,
+				2953AA022E85F21100B86C9A /* PostgREST in Frameworks */,
 				29C31C062E85E40900C6106C /* Auth in Frameworks */,
 				29C31C0E2E85E40900C6106C /* Storage in Frameworks */,
 				29C31C0C2E85E40900C6106C /* Realtime in Frameworks */,
+				2953A9FE2E85F21100B86C9A /* Auth in Frameworks */,
 				29C31C112E85E99600C6106C /* GoogleSignIn in Frameworks */,
+				2953AA042E85F21100B86C9A /* Realtime in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +451,31 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2953A9FD2E85F21100B86C9A /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		2953A9FF2E85F21100B86C9A /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		2953AA012E85F21100B86C9A /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+		2953AA032E85F21100B86C9A /* Realtime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Realtime;
+		};
+		2953AA052E85F21100B86C9A /* Storage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Storage;
+		};
 		29C31C052E85E40900C6106C /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 29C31C042E85E40900C6106C /* XCRemoteSwiftPackageReference "supabase-swift" */;

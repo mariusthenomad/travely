@@ -135,3 +135,4 @@ Deine Travely App hat jetzt:
 - ✅ Supabase Authentication
 - ✅ Funktionsfähiges Login/Logout
 - ✅ Schöne UI mit Google Sign-In Button
+
