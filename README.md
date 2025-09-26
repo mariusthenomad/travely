@@ -56,7 +56,7 @@ Eine moderne iOS Travel App mit **Supabase Backend** und **Google Sign-In** Inte
 
 ### Typography
 - **Font Family**: Inter
-- **Primary Text Color**: #1D4ED8 (Blue)
+- **Primary Text Color**: #FF9500 (Orange)
 - **Secondary Text Color**: Gray
 - **Background**: White
 
@@ -64,7 +64,7 @@ Eine moderne iOS Travel App mit **Supabase Backend** und **Google Sign-In** Inte
 - **Corner Radius**: 20px for cards and buttons
 - **Shadows**: Light shadows for depth and elevation
 - **Icons**: SF Symbols throughout the app
-- **Color Scheme**: Blue (#1D4ED8) as primary, white background
+- **Color Scheme**: Orange (#FF9500) as primary, white background
 
 ### Navigation
 - **Tab Bar**: Bottom navigation with 4 main sections

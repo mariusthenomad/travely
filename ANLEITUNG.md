@@ -131,13 +131,13 @@ Travely/
 
 ## 🎨 **Design System**
 - **Font Family**: Inter
-- **Primary Color**: #1D4ED8 (Blue)
+- **Primary Color**: #FF9500 (Orange)
 - **Secondary Text Color**: Gray
 - **Background**: White
 - **Corner Radius**: 20px for cards and buttons
 - **Shadows**: Light shadows for depth and elevation
 - **Icons**: SF Symbols throughout the app
-- **Color Scheme**: Blue (#1D4ED8) as primary, white background
+- **Color Scheme**: Orange (#FF9500) as primary, white background
 
 ### 🧭 **Navigation System**
 - **Tab Bar**: Bottom navigation with 4 main sections
