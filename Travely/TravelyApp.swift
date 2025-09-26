@@ -6,6 +6,36 @@ import Realtime
 import Storage
 import Functions
 
+// MARK: - SupabaseCountry Model
+struct SupabaseCountry: Codable, Identifiable {
+    let id: UUID
+    let name: String
+    let code: String
+    let emoji: String
+    let continent: String?
+    let capital: String?
+    let population: Int?
+    let areaKm2: Int?
+    let currency: String?
+    let language: String?
+    let timezone: String?
+    let description: String?
+    let imageUrl: String?
+    let isPopular: Bool
+    let createdAt: String
+    let updatedAt: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id, name, code, emoji, continent, capital, population
+        case areaKm2 = "area_km2"
+        case currency, language, timezone, description
+        case imageUrl = "image_url"
+        case isPopular = "is_popular"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
+    }
+}
+
 // MARK: - SupabaseManager
 class SupabaseManager: ObservableObject {
     static let shared = SupabaseManager()
@@ -35,6 +65,10 @@ class SupabaseManager: ObservableObject {
     @Published var isAuthenticated = false
     @Published var currentUser: User?
     @Published var isLoading = false
+    
+    // MARK: - Countries
+    @Published var countries: [SupabaseCountry] = []
+    @Published var isLoadingCountries = false
     
     func signUp(email: String, password: String) async throws {
         await MainActor.run {
@@ -196,6 +230,115 @@ class SupabaseManager: ObservableObject {
             print("Available buckets: \(buckets)")
         } catch {
             print("❌ Supabase Storage Connection failed: \(error)")
+        }
+    }
+    
+    // MARK: - Countries Functions
+    func fetchCountries() async throws {
+        await MainActor.run {
+            self.isLoadingCountries = true
+        }
+        
+        do {
+            print("🌍 Fetching countries from Supabase...")
+            
+            let response: [SupabaseCountry] = try await database
+                .from("countries")
+                .select()
+                .order("name")
+                .execute()
+                .value
+            
+            await MainActor.run {
+                self.countries = response
+                self.isLoadingCountries = false
+            }
+            
+            print("✅ Successfully fetched \(response.count) countries from Supabase!")
+            for country in response.prefix(5) {
+                print("  - \(country.emoji) \(country.name) (\(country.code))")
+            }
+            
+        } catch {
+            await MainActor.run {
+                self.isLoadingCountries = false
+            }
+            print("❌ Failed to fetch countries: \(error)")
+            throw error
+        }
+    }
+    
+    func fetchPopularCountries() async throws {
+        await MainActor.run {
+            self.isLoadingCountries = true
+        }
+        
+        do {
+            print("⭐ Fetching popular countries from Supabase...")
+            
+            let response: [SupabaseCountry] = try await database
+                .from("countries")
+                .select()
+                .eq("is_popular", value: true)
+                .order("name")
+                .execute()
+                .value
+            
+            await MainActor.run {
+                self.countries = response
+                self.isLoadingCountries = false
+            }
+            
+            print("✅ Successfully fetched \(response.count) popular countries from Supabase!")
+            for country in response {
+                print("  - \(country.emoji) \(country.name) (\(country.code))")
+            }
+            
+        } catch {
+            await MainActor.run {
+                self.isLoadingCountries = false
+            }
+            print("❌ Failed to fetch popular countries: \(error)")
+            throw error
+        }
+    }
+    
+    func addCountry(_ country: SupabaseCountry) async throws {
+        do {
+            print("➕ Adding country to Supabase: \(country.name)")
+            
+            let _ = try await database
+                .from("countries")
+                .insert(country)
+                .execute()
+            
+            print("✅ Successfully added country: \(country.name)")
+            
+            // Refresh the countries list
+            try await fetchCountries()
+            
+        } catch {
+            print("❌ Failed to add country: \(error)")
+            throw error
+        }
+    }
+    
+    func testCountriesDatabase() async throws {
+        print("🧪 Testing Countries Database...")
+        
+        do {
+            // First, try to fetch countries
+            try await fetchCountries()
+            
+            if countries.isEmpty {
+                print("ℹ️ No countries found. This might be expected if the table is empty.")
+            } else {
+                print("✅ Countries database test successful! Found \(countries.count) countries.")
+            }
+            
+        } catch {
+            print("❌ Countries database test failed: \(error)")
+            throw error
         }
     }
     
@@ -399,6 +542,29 @@ struct AuthenticationView: View {
                         .foregroundColor(.blue)
                 }
                 .padding(.top, 10)
+                
+                // Test Countries Database Button
+                Button(action: {
+                    Task {
+                        do {
+                            try await supabaseManager.testCountriesDatabase()
+                        } catch {
+                            print("Countries test failed: \(error)")
+                        }
+                    }
+                }) {
+                    HStack {
+                        if supabaseManager.isLoadingCountries {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                                .scaleEffect(0.7)
+                        }
+                        Text("Test Countries Database")
+                            .font(.subheadline)
+                            .foregroundColor(.blue)
+                    }
+                }
+                .padding(.top, 5)
                 
                 Spacer()
             }
