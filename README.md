@@ -1,54 +1,54 @@
 # 🚀 Travely - iOS Travel App
 
-Eine moderne iOS Travel App mit **Supabase Backend** und **Google Sign-In** Integration.
+A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integration.
 
 ## ✨ Features
 
 ### 🔐 **Authentication System**
-- **Email/Password Login** - Voll funktionsfähig mit Supabase
-- **Google Sign-In** - Temporär deaktiviert (URL Scheme Fix in Arbeit)
-- **Skip Login** - Für schnelles Testen ohne Anmeldung
-- **Supabase Integration** - Echte Datenbank-Verbindung
+- **Email/Password Login** - Fully functional with Supabase
+- **Google Sign-In** - Temporarily disabled (URL Scheme fix in progress)
+- **Skip Login** - For quick testing without authentication
+- **Supabase Integration** - Real database connection
 
 ### 🎨 **UI/UX Features**
-- **Dark/Light Mode** - Automatischer Theme-Switch
-- **Modern Design** - SwiftUI mit aktuellen iOS Design Patterns
-- **Responsive Layout** - Optimiert für alle iPhone Größen
-- **Loading States** - Smooth Loading-Indikatoren
+- **Dark/Light Mode** - Automatic theme switching
+- **Modern Design** - SwiftUI with current iOS design patterns
+- **Responsive Layout** - Optimized for all iPhone sizes
+- **Loading States** - Smooth loading indicators
 
 ### 🏨 **Travel Features**
-- **Flight Search** - Flugsuche mit verschiedenen Parametern
-- **Hotel Details** - Detaillierte Hotel-Informationen
-- **Destination Browser** - Zielort-Übersicht mit Grid-Layout
-- **Profile Management** - Benutzerprofil und Einstellungen
+- **Flight Search** - Flight search with various parameters
+- **Hotel Details** - Detailed hotel information
+- **Destination Browser** - Destination overview with grid layout
+- **Profile Management** - User profile and settings
 
 ### 🏠 **Home View**
-- Welcome screen mit Quick Actions
+- Welcome screen with quick actions
 - Featured destinations carousel
-- Navigation hub mit Action Cards
+- Navigation hub with action cards
 
 ### ✈️ **Flight Search**
-- Comprehensive flight search mit origin/destination selection
-- Date picker für departure und return dates
+- Comprehensive flight search with origin/destination selection
+- Date picker for departure and return dates
 - Passenger count selection
-- One-way und round-trip options
-- Interactive flight cards mit booking options
+- One-way and round-trip options
+- Interactive flight cards with booking options
 
 ### 🏨 **Hotel Management**
-- Hotel listing mit detailed information
-- Hotel detail view mit amenities, reviews, und booking options
-- Image galleries und rating systems
-- Booking date selection und guest count
+- Hotel listing with detailed information
+- Hotel detail view with amenities, reviews, and booking options
+- Image galleries and rating systems
+- Booking date selection and guest count
 
 ### 🗺️ **Destination Selection**
 - Grid-based destination browsing
-- Search und filter functionality
+- Search and filter functionality
 - Category-based filtering (Europe, Asia, Americas, etc.)
-- Destination detail pages mit booking options
+- Destination detail pages with booking options
 
 ### 👤 **Profile & Settings**
-- User profile management mit editable information
-- Travel preferences und booking history
+- User profile management with editable information
+- Travel preferences and booking history
 - Comprehensive app settings
 - Dark/Light Mode toggle
 
@@ -71,63 +71,63 @@ Eine moderne iOS Travel App mit **Supabase Backend** und **Google Sign-In** Inte
 - **Navigation Links**: Seamless navigation between views
 - **Modal Presentations**: Settings and detail views
 
-## 🛠 **Technologie-Stack**
+## 🛠 **Technology Stack**
 - **Frontend**: SwiftUI (iOS 15.0+)
 - **Backend**: Supabase (PostgreSQL, Auth, Storage)
 - **Authentication**: Supabase Auth + Google Sign-In
 - **State Management**: @StateObject, @EnvironmentObject
 - **Networking**: URLSession + Supabase Swift SDK
-- **UI Framework**: SwiftUI mit modernen Design Patterns
+- **UI Framework**: SwiftUI with modern design patterns
 
-## 📁 **Projekt-Struktur**
+## 📁 **Project Structure**
 ```
 Travely/
-├── Travely.xcodeproj                    # Xcode Projektdatei
-├── Travely/                             # Hauptordner
-│   ├── TravelyApp.swift                 # App-Einstiegspunkt + Authentication
-│   ├── ContentView.swift                # Tab-Navigation
-│   ├── HomeView.swift                   # Startseite
-│   ├── FlightSearchView.swift           # Flugsuche
-│   ├── HotelDetailView.swift            # Hotel-Details
-│   ├── DestinationSelectionView.swift   # Zielorte
-│   ├── ProfileSettingsView.swift        # Profil
-│   ├── AppSettingsView.swift            # Einstellungen
+├── Travely.xcodeproj                    # Xcode project file
+├── Travely/                             # Main folder
+│   ├── TravelyApp.swift                 # App entry point + Authentication
+│   ├── ContentView.swift                # Tab navigation
+│   ├── HomeView.swift                   # Home screen
+│   ├── FlightSearchView.swift           # Flight search
+│   ├── HotelDetailView.swift            # Hotel details
+│   ├── DestinationSelectionView.swift   # Destinations
+│   ├── ProfileSettingsView.swift        # Profile
+│   ├── AppSettingsView.swift            # Settings
 │   ├── ThemeManager.swift               # Dark/Light Mode Management
-│   ├── Assets.xcassets/                 # App-Icons und Farben
-│   │   ├── AppIcon.appiconset/          # App-Icons
-│   │   ├── AccentColor.colorset/        # Akzent-Farben
-│   │   └── profile.imageset/            # Profil-Bilder
-│   ├── GoogleService-Info.plist         # Google Sign-In Konfiguration
-│   └── Info.plist                       # App-Konfiguration
-├── database_schema.sql                  # Supabase Datenbank-Schema
-├── GOOGLE_SETUP_INSTRUCTIONS.md         # Google Sign-In Setup
-└── README.md                            # Projekt-Dokumentation
+│   ├── Assets.xcassets/                 # App icons and colors
+│   │   ├── AppIcon.appiconset/          # App icons
+│   │   ├── AccentColor.colorset/        # Accent colors
+│   │   └── profile.imageset/            # Profile images
+│   ├── GoogleService-Info.plist         # Google Sign-In configuration
+│   └── Info.plist                       # App configuration
+├── database_schema.sql                  # Supabase database schema
+├── GOOGLE_SETUP_INSTRUCTIONS.md         # Google Sign-In setup
+└── README.md                            # Project documentation
 ```
 
 ## 🔧 **Key Components**
 
 ### 🔐 **Authentication System**
-- **Supabase Auth Client** - Echte Benutzer-Authentifizierung
-- **Email/Password Login** - Voll funktionsfähig
-- **Google Sign-In** - Temporär deaktiviert
-- **Session Management** - Automatische Anmeldung
+- **Supabase Auth Client** - Real user authentication
+- **Email/Password Login** - Fully functional
+- **Google Sign-In** - Temporarily disabled
+- **Session Management** - Automatic login
 
 ### 📊 **Data Models**
-- **User**: Profile information und preferences
-- **Flight**: Airline, timing, pricing, und route information
-- **Hotel**: Name, location, amenities, ratings, und pricing
-- **Destination**: Name, country, region, images, und pricing
-- **Booking**: Travel bookings und history
+- **User**: Profile information and preferences
+- **Flight**: Airline, timing, pricing, and route information
+- **Hotel**: Name, location, amenities, ratings, and pricing
+- **Destination**: Name, country, region, images, and pricing
+- **Booking**: Travel bookings and history
 
 ### 🎯 **State Management**
-- **@StateObject** und **@EnvironmentObject** für global state
-- **@State** und **@Binding** für local state management
-- **Form validation** und user input handling
-- **Toggle states** für settings und preferences
-- **Loading states** für async operations
+- **@StateObject** and **@EnvironmentObject** for global state
+- **@State** and **@Binding** for local state management
+- **Form validation** and user input handling
+- **Toggle states** for settings and preferences
+- **Loading states** for async operations
 
 ### 🗄️ **Backend Integration**
-- **Supabase Database** - PostgreSQL mit real-time updates
+- **Supabase Database** - PostgreSQL with real-time updates
 - **Supabase Storage** - File upload/download
 - **Supabase Auth** - User management
 - **Supabase Functions** - Serverless functions
@@ -177,74 +177,74 @@ Travely/
 ## 🚀 **Getting Started**
 
 ### **Installation & Setup**
-1. **Xcode öffnen** und Projekt laden
-2. **iOS 15.0+** als deployment target sicherstellen
-3. **Supabase Dependencies** sind bereits konfiguriert
-4. **Build und Run** - `Cmd + R`
-5. **App testen** mit Email/Password Login oder Skip Login
+1. **Open Xcode** and load the project
+2. **Ensure iOS 15.0+** as deployment target
+3. **Supabase Dependencies** are already configured
+4. **Build and Run** - `Cmd + R`
+5. **Test the app** with Email/Password Login or Skip Login
 
-### **Authentication testen:**
-- **Email/Password Login** - Erstelle einen Account oder logge dich ein
-- **Skip Login** - Für schnelles Testen ohne Anmeldung
-- **Test Supabase Connection** - Teste die Datenbank-Verbindung
+### **Test Authentication:**
+- **Email/Password Login** - Create an account or sign in
+- **Skip Login** - For quick testing without authentication
+- **Test Supabase Connection** - Test the database connection
 
 ## 📋 **Requirements**
 
 - **iOS 15.0+**
 - **Xcode 15.0+**
 - **Swift 5.9+**
-- **Internetverbindung** für Supabase
+- **Internet connection** for Supabase
 
 ## 🔧 **Troubleshooting**
 
-### **Falls die App nicht startet:**
-1. **Build-Fehler**: `Cmd + Shift + K` um zu cleanen, dann `Cmd + R`
-2. **Simulator-Probleme**: Anderen Simulator auswählen
-3. **Supabase Verbindung**: Internetverbindung prüfen
+### **If the app doesn't start:**
+1. **Build errors**: `Cmd + Shift + K` to clean, then `Cmd + R`
+2. **Simulator issues**: Select a different simulator
+3. **Supabase connection**: Check internet connection
 
-### **Authentication Probleme:**
-- **Email/Password Login funktioniert nicht**: Internetverbindung prüfen
-- **Google Sign-In deaktiviert**: Temporär deaktiviert, verwende Email/Password
-- **Skip Login**: Funktioniert immer für schnelles Testen
+### **Authentication issues:**
+- **Email/Password Login not working**: Check internet connection
+- **Google Sign-In disabled**: Temporarily disabled, use Email/Password
+- **Skip Login**: Always works for quick testing
 
-## 🚀 **Nächste Schritte**
-1. **Google Sign-In aktivieren** - URL Scheme Problem lösen
-2. **Datenbank erweitern** - Weitere Travel-Features hinzufügen
-3. **Push Notifications** - Benachrichtigungen für Flüge
-4. **Offline Support** - Lokale Daten-Speicherung
-5. **Payment Integration** - Echte Zahlungsabwicklung
-6. **Advanced Search** - Erweiterte Filter und Suche
+## 🚀 **Next Steps**
+1. **Enable Google Sign-In** - Fix URL Scheme issue
+2. **Expand database** - Add more travel features
+3. **Push Notifications** - Flight notifications
+4. **Offline Support** - Local data storage
+5. **Payment Integration** - Real payment processing
+6. **Advanced Search** - Enhanced filters and search
 
 ## 🎨 **Design Philosophy**
 
-Die App folgt modernen iOS Design-Prinzipien mit Fokus auf:
+The app follows modern iOS design principles with focus on:
 - **Simplicity**: Clean, uncluttered interfaces
 - **Consistency**: Uniform design patterns throughout
 - **Accessibility**: Support for various user needs
 - **Performance**: Efficient rendering and smooth animations
 - **User Experience**: Intuitive navigation and clear information hierarchy
-- **Modern UI**: SwiftUI mit aktuellen iOS Design Patterns
-- **Theme Support**: Dark/Light Mode für bessere User Experience
+- **Modern UI**: SwiftUI with current iOS design patterns
+- **Theme Support**: Dark/Light Mode for better user experience
 
 ## 📱 **Screenshots**
 
-*Screenshots werden in Kürze hinzugefügt*
+*Screenshots will be added soon*
 
 ## 🤝 **Contributing**
 
-1. Fork das Repository
-2. Erstelle einen Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Committe deine Änderungen (`git commit -m 'Add some AmazingFeature'`)
-4. Push zum Branch (`git push origin feature/AmazingFeature`)
-5. Öffne einen Pull Request
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📄 **License**
 
-Dieses Projekt ist unter der MIT License - siehe [LICENSE](LICENSE) Datei für Details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Entwickelt mit ❤️ in SwiftUI + Supabase**
+**Built with ❤️ using SwiftUI + Supabase**
 
-*Travely - Deine moderne iOS Travel App* 🚀✈️🏨
+*Travely - Your modern iOS Travel App* 🚀✈️🏨
 

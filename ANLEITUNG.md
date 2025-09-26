@@ -1,133 +1,133 @@
 # 🚀 Travely - iOS Travel App
 
-Eine moderne iOS Travel App mit **Supabase Backend** und **Google Sign-In** Integration.
+A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integration.
 
 ## ✨ Features
 
 ### 🔐 **Authentication System**
-- **Email/Password Login** - Voll funktionsfähig mit Supabase
-- **Google Sign-In** - Temporär deaktiviert (URL Scheme Fix in Arbeit)
-- **Skip Login** - Für schnelles Testen ohne Anmeldung
-- **Supabase Integration** - Echte Datenbank-Verbindung
+- **Email/Password Login** - Fully functional with Supabase
+- **Google Sign-In** - Temporarily disabled (URL Scheme fix in progress)
+- **Skip Login** - For quick testing without authentication
+- **Supabase Integration** - Real database connection
 
 ### 🎨 **UI/UX Features**
-- **Dark/Light Mode** - Automatischer Theme-Switch
-- **Modern Design** - SwiftUI mit aktuellen iOS Design Patterns
-- **Responsive Layout** - Optimiert für alle iPhone Größen
-- **Loading States** - Smooth Loading-Indikatoren
+- **Dark/Light Mode** - Automatic theme switching
+- **Modern Design** - SwiftUI with current iOS design patterns
+- **Responsive Layout** - Optimized for all iPhone sizes
+- **Loading States** - Smooth loading indicators
 
 ### 🏨 **Travel Features**
-- **Flight Search** - Flugsuche mit verschiedenen Parametern
-- **Hotel Details** - Detaillierte Hotel-Informationen
-- **Destination Browser** - Zielort-Übersicht mit Grid-Layout
-- **Profile Management** - Benutzerprofil und Einstellungen
+- **Flight Search** - Flight search with various parameters
+- **Hotel Details** - Detailed hotel information
+- **Destination Browser** - Destination overview with grid layout
+- **Profile Management** - User profile and settings
 
 ## 🛠 Installation & Setup
 
-### Schritt 1: Xcode öffnen
-1. Öffne Xcode auf deinem Mac
-2. Wähle "Open a project or file" oder drücke `Cmd + O`
+### Step 1: Open Xcode
+1. Open Xcode on your Mac
+2. Choose "Open a project or file" or press `Cmd + O`
 
-### Schritt 2: Projekt öffnen
-1. Navigiere zu dem Ordner: `/Users/marius/Documents/Corsor/Travely`
-2. Wähle die Datei `Travely.xcodeproj` aus
-3. Klicke auf "Open"
+### Step 2: Open Project
+1. Navigate to the folder: `/Users/marius/Documents/Corsor/Travely`
+2. Select the file `Travely.xcodeproj`
+3. Click "Open"
 
-### Schritt 3: Simulator auswählen
-1. In Xcode, oben links neben dem Play-Button, wähle einen iOS Simulator aus
-2. Empfohlene Optionen:
-   - **iPhone 17** (iOS 18.0) - Empfohlen
+### Step 3: Select Simulator
+1. In Xcode, top left next to the Play button, select an iOS Simulator
+2. Recommended options:
+   - **iPhone 17** (iOS 18.0) - Recommended
    - iPhone 15 Pro (iOS 17.0)
    - iPhone 14 Pro (iOS 16.0)
 
-### Schritt 4: App starten
-1. Klicke auf den Play-Button (▶️) oder drücke `Cmd + R`
-2. Xcode wird die App kompilieren und im Simulator starten
+### Step 4: Start App
+1. Click the Play button (▶️) or press `Cmd + R`
+2. Xcode will compile and start the app in the simulator
 
-## 🎯 App testen
-Die Travely App wird im Simulator geöffnet und du kannst:
+## 🎯 Test the App
+The Travely app will open in the simulator and you can:
 
-### 🔐 **Authentication testen:**
-- **Email/Password Login** - Erstelle einen Account oder logge dich ein
-- **Skip Login** - Für schnelles Testen ohne Anmeldung
-- **Test Supabase Connection** - Teste die Datenbank-Verbindung
+### 🔐 **Test Authentication:**
+- **Email/Password Login** - Create an account or sign in
+- **Skip Login** - For quick testing without authentication
+- **Test Supabase Connection** - Test the database connection
 
-### 🧭 **Navigation testen:**
-- **Home Tab**: Übersicht mit Quick Actions
-- **Flights Tab**: Flugsuche mit Suchformular
-- **Destinations Tab**: Zielort-Browser mit Grid-Layout
-- **Profile Tab**: Benutzerprofil und Einstellungen
+### 🧭 **Test Navigation:**
+- **Home Tab**: Overview with quick actions
+- **Flights Tab**: Flight search with search form
+- **Destinations Tab**: Destination browser with grid layout
+- **Profile Tab**: User profile and settings
 
-### ✈️ **Travel Features ausprobieren:**
-- Flugsuche mit verschiedenen Parametern
-- Hotel-Details ansehen
-- Zielorte durchsuchen und filtern
-- Profil bearbeiten
-- App-Einstellungen anpassen
-- Dark/Light Mode wechseln
+### ✈️ **Try Travel Features:**
+- Flight search with various parameters
+- View hotel details
+- Browse and filter destinations
+- Edit profile
+- Adjust app settings
+- Switch Dark/Light Mode
 
 ## 🔧 Troubleshooting
 
-### Falls die App nicht startet:
-1. **Build-Fehler**: Drücke `Cmd + Shift + K` um zu cleanen, dann `Cmd + R` zum neu kompilieren
-2. **Simulator-Probleme**: Wähle einen anderen Simulator aus
-3. **iOS Version**: Stelle sicher, dass der Simulator iOS 15.0+ verwendet
-4. **Supabase Verbindung**: Prüfe Internetverbindung für Datenbank-Zugriff
+### If the app doesn't start:
+1. **Build errors**: Press `Cmd + Shift + K` to clean, then `Cmd + R` to recompile
+2. **Simulator issues**: Select a different simulator
+3. **iOS version**: Make sure the simulator uses iOS 15.0+
+4. **Supabase connection**: Check internet connection for database access
 
-### 🔐 **Authentication Probleme:**
-- **Email/Password Login funktioniert nicht**: Prüfe Internetverbindung
-- **Google Sign-In deaktiviert**: Temporär deaktiviert, verwende Email/Password
-- **Skip Login**: Funktioniert immer für schnelles Testen
+### 🔐 **Authentication issues:**
+- **Email/Password Login not working**: Check internet connection
+- **Google Sign-In disabled**: Temporarily disabled, use Email/Password
+- **Skip Login**: Always works for quick testing
 
-### 🖼 **Falls Bilder nicht laden:**
-- Die App verwendet Unsplash-Bilder über das Internet
-- Stelle sicher, dass der Simulator Internetverbindung hat
-- Bilder werden asynchron geladen (kann einen Moment dauern)
+### 🖼 **If images don't load:**
+- The app uses Unsplash images over the internet
+- Make sure the simulator has internet connection
+- Images are loaded asynchronously (may take a moment)
 
-### 🎨 **Theme Probleme:**
-- **Dark/Light Mode**: Funktioniert automatisch basierend auf System-Einstellungen
-- **Farben**: Alle Farben sind in `Assets.xcassets` definiert
+### 🎨 **Theme issues:**
+- **Dark/Light Mode**: Works automatically based on system settings
+- **Colors**: All colors are defined in `Assets.xcassets`
 
-## 📁 Projekt-Struktur
+## 📁 Project Structure
 ```
 Travely/
-├── Travely.xcodeproj                    # Xcode Projektdatei
-├── Travely/                             # Hauptordner
-│   ├── TravelyApp.swift                 # App-Einstiegspunkt + Authentication
-│   ├── ContentView.swift                # Tab-Navigation
-│   ├── HomeView.swift                   # Startseite
-│   ├── FlightSearchView.swift           # Flugsuche
-│   ├── HotelDetailView.swift            # Hotel-Details
-│   ├── DestinationSelectionView.swift   # Zielorte
-│   ├── ProfileSettingsView.swift        # Profil
-│   ├── AppSettingsView.swift            # Einstellungen
+├── Travely.xcodeproj                    # Xcode project file
+├── Travely/                             # Main folder
+│   ├── TravelyApp.swift                 # App entry point + Authentication
+│   ├── ContentView.swift                # Tab navigation
+│   ├── HomeView.swift                   # Home screen
+│   ├── FlightSearchView.swift           # Flight search
+│   ├── HotelDetailView.swift            # Hotel details
+│   ├── DestinationSelectionView.swift   # Destinations
+│   ├── ProfileSettingsView.swift        # Profile
+│   ├── AppSettingsView.swift            # Settings
 │   ├── ThemeManager.swift               # Dark/Light Mode Management
-│   ├── Assets.xcassets/                 # App-Icons und Farben
-│   │   ├── AppIcon.appiconset/          # App-Icons
-│   │   ├── AccentColor.colorset/        # Akzent-Farben
-│   │   └── profile.imageset/            # Profil-Bilder
-│   ├── GoogleService-Info.plist         # Google Sign-In Konfiguration
-│   └── Info.plist                       # App-Konfiguration
-├── database_schema.sql                  # Supabase Datenbank-Schema
-├── GOOGLE_SETUP_INSTRUCTIONS.md         # Google Sign-In Setup
-└── README.md                            # Projekt-Dokumentation
+│   ├── Assets.xcassets/                 # App icons and colors
+│   │   ├── AppIcon.appiconset/          # App icons
+│   │   ├── AccentColor.colorset/        # Accent colors
+│   │   └── profile.imageset/            # Profile images
+│   ├── GoogleService-Info.plist         # Google Sign-In configuration
+│   └── Info.plist                       # App configuration
+├── database_schema.sql                  # Supabase database schema
+├── GOOGLE_SETUP_INSTRUCTIONS.md         # Google Sign-In setup
+└── README.md                            # Project documentation
 ```
 
-## 🛠 **Technologie-Stack**
+## 🛠 **Technology Stack**
 - **Frontend**: SwiftUI (iOS 15.0+)
 - **Backend**: Supabase (PostgreSQL, Auth, Storage)
 - **Authentication**: Supabase Auth + Google Sign-In
 - **State Management**: @StateObject, @EnvironmentObject
 - **Networking**: URLSession + Supabase Swift SDK
-- **UI Framework**: SwiftUI mit modernen Design Patterns
+- **UI Framework**: SwiftUI with modern design patterns
 
-## ⌨️ **Nützliche Tastenkürzel in Xcode:**
-- `Cmd + R`: App starten
-- `Cmd + Shift + K`: Projekt cleanen
-- `Cmd + .`: App stoppen
-- `Cmd + Shift + O`: Datei schnell öffnen
-- `Cmd + 1-9`: Verschiedene Panels öffnen
-- `Cmd + Shift + A`: Simulator zurücksetzen
+## ⌨️ **Useful Xcode Shortcuts:**
+- `Cmd + R`: Start app
+- `Cmd + Shift + K`: Clean project
+- `Cmd + .`: Stop app
+- `Cmd + Shift + O`: Open file quickly
+- `Cmd + 1-9`: Open different panels
+- `Cmd + Shift + A`: Reset simulator
 
 ## 🎨 **Design System**
 - **Font Family**: Inter
@@ -144,14 +144,14 @@ Travely/
 - **Navigation Links**: Seamless navigation between views
 - **Modal Presentations**: Settings and detail views
 
-## 🚀 **Nächste Schritte**
-1. **Google Sign-In aktivieren** - URL Scheme Problem lösen
-2. **Datenbank erweitern** - Weitere Travel-Features hinzufügen
-3. **Push Notifications** - Benachrichtigungen für Flüge
-4. **Offline Support** - Lokale Daten-Speicherung
+## 🚀 **Next Steps**
+1. **Enable Google Sign-In** - Fix URL Scheme issue
+2. **Expand database** - Add more travel features
+3. **Push Notifications** - Flight notifications
+4. **Offline Support** - Local data storage
 
 ---
 
-**Viel Spaß beim Testen der Travely App!** 🚀✈️🏨
+**Have fun testing the Travely app!** 🚀✈️🏨
 
-*Entwickelt mit ❤️ in SwiftUI + Supabase*
+*Built with ❤️ using SwiftUI + Supabase*
