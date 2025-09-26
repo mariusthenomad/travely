@@ -130,11 +130,19 @@ Travely/
 - `Cmd + Shift + A`: Simulator zurücksetzen
 
 ## 🎨 **Design System**
-- **Primary Color**: Blau (#007AFF)
-- **Secondary Color**: Grau (#8E8E93)
-- **Accent Color**: Orange (#FF9500)
-- **Background**: System Background (Dark/Light)
-- **Text**: System Label (Dark/Light)
+- **Font Family**: Inter
+- **Primary Color**: #1D4ED8 (Blue)
+- **Secondary Text Color**: Gray
+- **Background**: White
+- **Corner Radius**: 20px for cards and buttons
+- **Shadows**: Light shadows for depth and elevation
+- **Icons**: SF Symbols throughout the app
+- **Color Scheme**: Blue (#1D4ED8) as primary, white background
+
+### 🧭 **Navigation System**
+- **Tab Bar**: Bottom navigation with 4 main sections
+- **Navigation Links**: Seamless navigation between views
+- **Modal Presentations**: Settings and detail views
 
 ## 🚀 **Nächste Schritte**
 1. **Google Sign-In aktivieren** - URL Scheme Problem lösen
