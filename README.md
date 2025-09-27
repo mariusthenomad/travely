@@ -1,250 +1,261 @@
 # 🚀 Travely - iOS Travel App
 
-A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integration.
+[![SwiftUI](https://img.shields.io/badge/SwiftUI-iOS_15+-orange)]()
+[![Supabase](https://img.shields.io/badge/Backend-Supabase-blue)]()
+[![OpenStreetMap](https://img.shields.io/badge/Maps-OpenStreetMap-green)]()
+[![Status](https://img.shields.io/badge/Status-In_Development-yellow)]()
+
+A modern iOS Travel App with **Supabase Backend**, **Email Authentication**, **OpenStreetMap Integration**, and planned **Google/Apple Sign-In** integration.  
+Built with SwiftUI and designed to deliver a clean, modern travel experience with real-time location search.
+
+---
 
 ## ✨ Features
 
-### 🔐 **Authentication System**
-- **Email/Password Login** - Fully functional with Supabase
-- **Google Sign-In** - Temporarily disabled (URL Scheme fix in progress)
-- **Skip Login** - For quick testing without authentication
-- **Supabase Integration** - Real database connection
+### 🔐 Authentication
+- Email/Password login with Supabase
+- Google Sign-In (temporarily disabled, URL scheme fix pending)
+- Apple Sign-In (planned)
+- Skip Login mode for testing
 
-### 🎨 **UI/UX Features**
-- **Dark/Light Mode** - Automatic theme switching
-- **Modern Design** - SwiftUI with current iOS design patterns
-- **Responsive Layout** - Optimized for all iPhone sizes
-- **Loading States** - Smooth loading indicators
+### 🗺 Location & Maps
+- **OpenStreetMap Nominatim API** - Real-time city and country search
+- **OpenStreetMap Overpass API** - Points of Interest (POIs) search
+- **Google Places API** - Alternative location search (simulated)
+- **Smart Search** - Automatic search activation, no button required
+- **Multi-source Search** - Switch between OSM and Google data sources
 
-### 🏨 **Travel Features**
-- **Flight Search** - Flight search with various parameters
-- **Hotel Details** - Detailed hotel information
-- **Destination Browser** - Destination overview with grid layout
-- **Profile Management** - User profile and settings
+### 🎨 UI/UX
+- Dark/Light mode with ThemeManager
+- SwiftUI design with modern iOS patterns
+- Responsive layouts
+- Smooth loading states and animations
+- **Swipe Gestures** - Swipe to delete/edit route stops
+- **Floating Action Button** - Quick add location in Routes tab
 
-### 🏠 **Home View**
+### 🏨 Travel & Routes
+- **Interactive Route Planning** - Add, edit, and delete route stops
+- **Nights Management** - Adjust trip length with date calculations
+- **Flight Search** - One-way & round-trip with booking integration
+- **Hotel Details** - Amenities, reviews, and booking information
+- **Destination Browser** - Grid layout with search and filtering
+- **Add Location** - Real-time search with OpenStreetMap integration
+
+### 🏠 Home & Navigation
 - Welcome screen with quick actions
 - Featured destinations carousel
 - Navigation hub with action cards
+- **Tab-based Navigation** - Home, Routes, Destinations, Profile
+- **Floating Plus Button** - Context-aware location addition
 
-### ✈️ **Flight Search**
-- Comprehensive flight search with origin/destination selection
-- Date picker for departure and return dates
-- Passenger count selection
-- One-way and round-trip options
-- Interactive flight cards with booking options
+---
 
-### 🏨 **Hotel Management**
-- Hotel listing with detailed information
-- Hotel detail view with amenities, reviews, and booking options
-- Image galleries and rating systems
-- Booking date selection and guest count
+## 🗺 Roadmap
 
-### 🗺️ **Destination Selection**
-- Grid-based destination browsing
-- Search and filter functionality
-- Category-based filtering (Europe, Asia, Americas, etc.)
-- Destination detail pages with booking options
+| Status | Feature |
+|--------|----------|
+| ✅ Done | Basic Supabase integration (Auth, DB connection) |
+| ✅ Done | Email/Password Login |
+| ✅ Done | **OpenStreetMap Nominatim API** integration |
+| ✅ Done | **OpenStreetMap Overpass API** integration |
+| ✅ Done | **Real-time location search** in Destinations |
+| ✅ Done | **Add Location** with OSM search in Routes |
+| ✅ Done | **Swipe gestures** for route management |
+| ✅ Done | **Nights editing** with automatic date calculation |
+| ✅ Done | **Floating action button** for quick location addition |
+| 🚧 In Progress | Google Sign-In (fix URL scheme) |
+| 🚧 In Progress | Apple Sign-In integration |
+| 🚧 In Progress | Backend: Travel routes database |
+| 📝 Planned | **Enhanced POI categories** (restaurants, attractions, etc.) |
+| 📝 Planned | **Offline map caching** for better performance |
+| 📝 Planned | **Route optimization** and travel time calculations |
+| 📝 Planned | **Push Notifications** (flight updates) |
+| 📝 Planned | **Payment integration** for bookings |
+| 📝 Planned | **Social features** - share routes with friends |
 
-### 👤 **Profile & Settings**
-- User profile management with editable information
-- Travel preferences and booking history
-- Comprehensive app settings
-- Dark/Light Mode toggle
+---
 
-## Design System
+## 🛠 Technology Stack
 
-### Typography
-- **Font Family**: Inter
-- **Primary Text Color**: #FF9500 (Orange)
-- **Secondary Text Color**: Gray
-- **Background**: White
+- **Frontend**: SwiftUI (iOS 15+)  
+- **Backend**: Supabase (PostgreSQL, Auth, Storage, Functions)  
+- **Maps & Location**: OpenStreetMap (Nominatim + Overpass APIs)
+- **Auth**: Supabase Auth + Google/Apple Sign-In  
+- **Networking**: URLSession + Supabase Swift SDK  
+- **State Management**: SwiftUI state containers (@State, @StateObject, @EnvironmentObject)
+- **Gestures**: SwiftUI DragGesture for swipe interactions
+- **Animations**: SwiftUI withAnimation and spring animations
 
-### UI Components
-- **Corner Radius**: 20px for cards and buttons
-- **Shadows**: Light shadows for depth and elevation
-- **Icons**: SF Symbols throughout the app
-- **Color Scheme**: Orange (#FF9500) as primary, white background
+---
 
-### Navigation
-- **Tab Bar**: Bottom navigation with 4 main sections
-- **Navigation Links**: Seamless navigation between views
-- **Modal Presentations**: Settings and detail views
+## 🚀 Getting Started
 
-## 🛠 **Technology Stack**
-- **Frontend**: SwiftUI (iOS 15.0+)
-- **Backend**: Supabase (PostgreSQL, Auth, Storage)
-- **Authentication**: Supabase Auth + Google Sign-In
-- **State Management**: @StateObject, @EnvironmentObject
-- **Networking**: URLSession + Supabase Swift SDK
-- **UI Framework**: SwiftUI with modern design patterns
+### Prerequisites
+- Xcode 15.0+
+- iOS 15.0+ deployment target
+- Supabase account and project
+- OpenStreetMap API access (free, no API key required)
 
-## 📁 **Project Structure**
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/travely.git
+   cd travely
+   ```
+
+2. **Configure Supabase**
+   - Create a new Supabase project
+   - Update `TravelyApp.swift` with your Supabase URL and API key
+   - Set up authentication providers in Supabase dashboard
+
+3. **Open in Xcode**
+   ```bash
+   open Travely.xcodeproj
+   ```
+
+4. **Build and Run**
+   - Select your target device/simulator
+   - Press ⌘+R to build and run
+
+### Configuration
+
+#### Supabase Setup
+```swift
+// TravelyApp.swift
+private let supabaseURL = "YOUR_SUPABASE_URL"
+private let supabaseKey = "YOUR_SUPABASE_ANON_KEY"
+```
+
+#### OpenStreetMap APIs
+- **Nominatim API**: No configuration required (free tier)
+- **Overpass API**: No API key needed
+- **Rate Limits**: 1 request per second (automatically handled)
+
+---
+
+## 📱 App Structure
+
 ```
 Travely/
-├── Travely.xcodeproj                    # Xcode project file
-├── Travely/                             # Main folder
-│   ├── TravelyApp.swift                 # App entry point + Authentication
-│   ├── ContentView.swift                # Tab navigation
-│   ├── HomeView.swift                   # Home screen
-│   ├── FlightSearchView.swift           # Flight search
-│   ├── HotelDetailView.swift            # Hotel details
-│   ├── DestinationSelectionView.swift   # Destinations
-│   ├── ProfileSettingsView.swift        # Profile
-│   ├── AppSettingsView.swift            # Settings
-│   ├── ThemeManager.swift               # Dark/Light Mode Management
-│   ├── Assets.xcassets/                 # App icons and colors
-│   │   ├── AppIcon.appiconset/          # App icons
-│   │   ├── AccentColor.colorset/        # Accent colors
-│   │   └── profile.imageset/            # Profile images
-│   ├── GoogleService-Info.plist         # Google Sign-In configuration
-│   └── Info.plist                       # App configuration
-├── database_schema.sql                  # Supabase database schema
-├── GOOGLE_SETUP_INSTRUCTIONS.md         # Google Sign-In setup
-└── README.md                            # Project documentation
+├── 🏠 HomeView.swift - Welcome screen and navigation hub
+├── 🗺 TravelRouteView.swift - Route planning with swipe gestures
+├── 🌍 DestinationSelectionView.swift - OSM-powered location search
+├── ✈️ FlightSearchView.swift - Flight search and booking
+├── 🏨 HotelDetailView.swift - Hotel information and booking
+├── 👤 ProfileSettingsView.swift - User profile and settings
+├── 🎨 ThemeManager.swift - Dark/light mode management
+├── 🔧 Extensions.swift - Utility extensions
+└── 📱 TravelyApp.swift - Main app entry point
 ```
 
-## 🔧 **Key Components**
+### Key Components
 
-### 🔐 **Authentication System**
-- **Supabase Auth Client** - Real user authentication
-- **Email/Password Login** - Fully functional
-- **Google Sign-In** - Temporarily disabled
-- **Session Management** - Automatic login
+- **NominatimManager** - Handles city/country search via OpenStreetMap
+- **OverpassManager** - Manages POI search (restaurants, cafes, etc.)
+- **PlacesManager** - Google Places API integration (simulated)
+- **ThemeManager** - Centralized theme and color management
 
-### 📊 **Data Models**
-- **User**: Profile information and preferences
-- **Flight**: Airline, timing, pricing, and route information
-- **Hotel**: Name, location, amenities, ratings, and pricing
-- **Destination**: Name, country, region, images, and pricing
-- **Booking**: Travel bookings and history
+---
 
-### 🎯 **State Management**
-- **@StateObject** and **@EnvironmentObject** for global state
-- **@State** and **@Binding** for local state management
-- **Form validation** and user input handling
-- **Toggle states** for settings and preferences
-- **Loading states** for async operations
+## 🔍 API Integration Details
 
-### 🗄️ **Backend Integration**
-- **Supabase Database** - PostgreSQL with real-time updates
-- **Supabase Storage** - File upload/download
-- **Supabase Auth** - User management
-- **Supabase Functions** - Serverless functions
+### OpenStreetMap Nominatim API
+```swift
+// Real-time city and country search
+let url = "https://nominatim.openstreetmap.org/search?format=json&q=\(query)&limit=10"
+```
 
-## Features in Detail
+**Features:**
+- Global coverage of cities, countries, and landmarks
+- No API key required
+- 1 request per second rate limit
+- Returns coordinates, display names, and location types
 
-### Flight Search
-- Advanced search form with validation
-- Dynamic flight results generation
-- Price comparison and sorting
-- Interactive booking flow
+### OpenStreetMap Overpass API
+```swift
+// Points of Interest search
+let query = """
+[out:json][timeout:25];
+(
+  node["amenity"~"restaurant|cafe|bar"](around:1000,\(lat),\(lon));
+  way["amenity"~"restaurant|cafe|bar"](around:1000,\(lat),\(lon));
+);
+out center;
+"""
+```
 
-### Hotel Booking
-- Detailed hotel information display
-- Amenity icons and descriptions
-- Review system with ratings
-- Date selection and guest management
+**Features:**
+- POI search (restaurants, cafes, attractions)
+- Radius-based queries
+- Real-time data from OpenStreetMap
+- No API key required
 
-### Destination Exploration
-- Visual destination cards with images
-- Search and filter capabilities
-- Regional categorization
-- Booking integration
+---
 
-### User Experience
-- Intuitive navigation patterns
-- Consistent design language
-- Responsive layouts
-- Accessibility considerations
+## 🎯 Usage Examples
 
-## Technical Implementation
+### Adding a Location to Route
+1. Navigate to **Routes** tab
+2. Tap the **floating plus button**
+3. Enter location name (e.g., "Berlin")
+4. Select from OpenStreetMap results
+5. Choose number of nights
+6. Location is added to your route
 
-### SwiftUI Features Used
-- NavigationView and NavigationLink
-- TabView for main navigation
-- LazyVGrid for efficient list rendering
-- AsyncImage for remote image loading
-- Sheet presentations for modals
-- Alert dialogs for confirmations
+### Searching Destinations
+1. Go to **Destinations** tab
+2. Type in search bar (e.g., "Paris")
+3. Results appear automatically from OpenStreetMap
+4. Switch between OSM and Google data sources
+5. Tap result to view details
 
-### Custom Components
-- Reusable card components
-- Custom toggle and selection rows
-- Form input components
-- Action buttons with consistent styling
+### Managing Route Stops
+- **Swipe left** on a route stop to delete
+- **Swipe right** on a route stop to edit
+- **Tap "Planned Nights"** to adjust trip length
+- **Drag to reorder** route stops (planned)
 
-## 🚀 **Getting Started**
+---
 
-### **Installation & Setup**
-1. **Open Xcode** and load the project
-2. **Ensure iOS 15.0+** as deployment target
-3. **Supabase Dependencies** are already configured
-4. **Build and Run** - `Cmd + R`
-5. **Test the app** with Email/Password Login or Skip Login
-
-### **Test Authentication:**
-- **Email/Password Login** - Create an account or sign in
-- **Skip Login** - For quick testing without authentication
-- **Test Supabase Connection** - Test the database connection
-
-## 📋 **Requirements**
-
-- **iOS 15.0+**
-- **Xcode 15.0+**
-- **Swift 5.9+**
-- **Internet connection** for Supabase
-
-## 🔧 **Troubleshooting**
-
-### **If the app doesn't start:**
-1. **Build errors**: `Cmd + Shift + K` to clean, then `Cmd + R`
-2. **Simulator issues**: Select a different simulator
-3. **Supabase connection**: Check internet connection
-
-### **Authentication issues:**
-- **Email/Password Login not working**: Check internet connection
-- **Google Sign-In disabled**: Temporarily disabled, use Email/Password
-- **Skip Login**: Always works for quick testing
-
-## 🚀 **Next Steps**
-1. **Enable Google Sign-In** - Fix URL Scheme issue
-2. **Expand database** - Add more travel features
-3. **Push Notifications** - Flight notifications
-4. **Offline Support** - Local data storage
-5. **Payment Integration** - Real payment processing
-6. **Advanced Search** - Enhanced filters and search
-
-## 🎨 **Design Philosophy**
-
-The app follows modern iOS design principles with focus on:
-- **Simplicity**: Clean, uncluttered interfaces
-- **Consistency**: Uniform design patterns throughout
-- **Accessibility**: Support for various user needs
-- **Performance**: Efficient rendering and smooth animations
-- **User Experience**: Intuitive navigation and clear information hierarchy
-- **Modern UI**: SwiftUI with current iOS design patterns
-- **Theme Support**: Dark/Light Mode for better user experience
-
-## 📱 **Screenshots**
-
-*Screenshots will be added soon*
-
-## 🤝 **Contributing**
+## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 **License**
+### Development Guidelines
+- Follow SwiftUI best practices
+- Use meaningful variable and function names
+- Add comments for complex logic
+- Test on multiple device sizes
+- Ensure accessibility compliance
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with ❤️ using SwiftUI + Supabase**
+## 🙏 Acknowledgments
 
-*Travely - Your modern iOS Travel App* 🚀✈️🏨
+- **OpenStreetMap** contributors for providing free, open-source map data
+- **Supabase** for the excellent backend-as-a-service platform
+- **SwiftUI** community for inspiration and best practices
+- **Apple** for the amazing SwiftUI framework
 
+---
+
+## 📞 Support
+
+- 📧 Email: support@travely.app
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/travely/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/travely/discussions)
+
+---
+
+**Made with ❤️ using SwiftUI and OpenStreetMap**

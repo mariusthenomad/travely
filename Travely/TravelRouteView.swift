@@ -14,7 +14,7 @@ struct TravelRoute: Identifiable {
 
 struct RouteStop: Identifiable {
     let id: Int
-    let destination: String
+    var destination: String
     let country: String
     let countryEmoji: String
     var duration: String
@@ -102,7 +102,7 @@ struct TicketSheetView: View {
                         VStack(spacing: 8) {
                             Text("Ticket Details")
                                 .font(.custom("Inter", size: 28))
-                                .fontWeight(.bold)
+                                .font(.custom("Inter", size: 14).weight(.bold))
                                 .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                             
                             Text("\(stop.flightInfo)")
@@ -207,7 +207,6 @@ struct TicketSheetView: View {
                                     
                                     Text(existingTicket != nil ? "Update Ticket" : "Save Ticket")
                                         .font(.custom("Inter", size: 18))
-                                        .fontWeight(.semibold)
                                 }
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
@@ -220,7 +219,6 @@ struct TicketSheetView: View {
                                 Button(action: deleteTicket) {
                                     Text("Delete Ticket")
                                         .font(.custom("Inter", size: 16))
-                                        .fontWeight(.semibold)
                                         .foregroundColor(.red)
                                         .frame(maxWidth: .infinity)
                                         .frame(height: 50)
@@ -236,7 +234,6 @@ struct TicketSheetView: View {
                             Button(action: onDismiss) {
                                 Text("Cancel")
                                     .font(.custom("Inter", size: 16))
-                                    .fontWeight(.semibold)
                                     .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                                     .frame(maxWidth: .infinity)
                                     .frame(height: 50)
@@ -318,6 +315,11 @@ struct TravelRouteView: View {
     @State private var selectedTab = 0 // 0 = Route, 1 = Bookings
     @State private var nights = [0, 0, 5, 2, 5, 5, 4, 0] // Nights for each stop
     @State private var currentRoute: TravelRoute = featuredRoute // Make route mutable
+    @State private var showingDeleteAlert = false
+    @State private var stopToDelete: (index: Int, stop: RouteStop)? = nil
+    @State private var showingEditSheet = false
+    @State private var stopToEdit: (index: Int, stop: RouteStop)? = nil
+    @State private var showingNightsEditor = false
     
     // Computed property for total nights
     private var totalNights: Int {
@@ -372,6 +374,69 @@ struct TravelRouteView: View {
         }
     }
     
+    // Function to delete a stop
+    private func deleteStop(at index: Int) {
+        guard index < currentRoute.stops.count && index < nights.count else { return }
+        
+        // Don't allow deleting the first or last stop (start/end points)
+        if index == 0 || index == currentRoute.stops.count - 1 {
+            return
+        }
+        
+        // Remove the stop and corresponding nights
+        var updatedStops = currentRoute.stops
+        updatedStops.remove(at: index)
+        
+        var updatedNights = nights
+        updatedNights.remove(at: index)
+        
+        // Update the route
+        currentRoute = TravelRoute(
+            id: currentRoute.id,
+            title: currentRoute.title,
+            description: currentRoute.description,
+            duration: currentRoute.duration,
+            totalPrice: currentRoute.totalPrice,
+            imageURL: currentRoute.imageURL,
+            stops: updatedStops,
+            priceBreakdown: currentRoute.priceBreakdown
+        )
+        
+        // Update nights array
+        nights = updatedNights
+        
+        // Remove any tickets associated with this stop
+        let stopId = currentRoute.stops[index].id
+        tickets.removeAll { $0.stopId == stopId }
+        
+        // Update dates after deletion
+        updateDates()
+    }
+    
+    // Function to update a stop
+    private func updateStop(at index: Int, with newDestination: String) {
+        guard index > 0 && index < currentRoute.stops.count - 1 else { return }
+        
+        // Update the stop destination
+        var updatedStops = currentRoute.stops
+        updatedStops[index].destination = newDestination
+        
+        // Update the route
+        currentRoute = TravelRoute(
+            id: currentRoute.id,
+            title: currentRoute.title,
+            description: currentRoute.description,
+            duration: currentRoute.duration,
+            totalPrice: currentRoute.totalPrice,
+            imageURL: currentRoute.imageURL,
+            stops: updatedStops,
+            priceBreakdown: currentRoute.priceBreakdown
+        )
+        
+        // Update dates
+        updateDates()
+    }
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -390,7 +455,9 @@ struct TravelRouteView: View {
                     // Custom Header with Progress and Tabs
                     HStack {
                         // Progress Indicator
-                        VStack(alignment: .leading, spacing: 4) {
+                        Button(action: {
+                            showingNightsEditor = true
+                        }) {
                             HStack(spacing: 8) {
                                 ZStack {
                                     Circle()
@@ -405,22 +472,25 @@ struct TravelRouteView: View {
                                     
                                     Text("\(totalNights)")
                                         .font(.custom("Inter", size: 14))
-                                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 14).weight(.bold))
                                         .foregroundColor(progressColor)
                                 }
                                 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("\(totalNights)/21")
                                         .font(.custom("Inter", size: 16))
-                                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 14).weight(.bold))
                                         .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                                     
                                     Text("Nights planned")
                                         .font(.custom("Inter", size: 12))
                                         .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
                                 }
+                                
+                                Spacer()
                             }
                         }
+                        .buttonStyle(PlainButtonStyle())
                         
                         Spacer()
                         
@@ -429,7 +499,6 @@ struct TravelRouteView: View {
                             Button(action: { selectedTab = 0 }) {
                                 Text("Route")
                                     .font(.custom("Inter", size: 16))
-                                    .fontWeight(.semibold)
                                     .foregroundColor(selectedTab == 0 ? .white : Color(red: 0.5, green: 0.5, blue: 0.5))
                                     .frame(width: 80, height: 32)
                                     .background(selectedTab == 0 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.clear)
@@ -439,7 +508,6 @@ struct TravelRouteView: View {
                             Button(action: { selectedTab = 1 }) {
                                 Text("Bookings")
                                     .font(.custom("Inter", size: 16))
-                                    .fontWeight(.semibold)
                                     .foregroundColor(selectedTab == 1 ? .white : Color(red: 0.5, green: 0.5, blue: 0.5))
                                     .frame(width: 80, height: 32)
                                     .background(selectedTab == 1 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.clear)
@@ -471,7 +539,19 @@ struct TravelRouteView: View {
                                         },
                                         onNightsChanged: {
                                             updateDates()
-                                        }
+                                        },
+                                        onDelete: { stopToDelete in
+                                            self.stopToDelete = (index: index, stop: stopToDelete)
+                                            showingDeleteAlert = true
+                                        },
+                                        onEdit: { stopToEdit in
+                                            if let index = currentRoute.stops.firstIndex(where: { $0.id == stopToEdit.id }) {
+                                                self.stopToEdit = (index: index, stop: stopToEdit)
+                                                showingEditSheet = true
+                                            }
+                                        },
+                                        canDelete: index != 0 && index != currentRoute.stops.count - 1,
+                                        canEdit: true // Allow editing for all stops
                                     )
                                     
                                     // Spacing between cards
@@ -492,7 +572,7 @@ struct TravelRouteView: View {
                         VStack {
                             Text("Bookings")
                                 .font(.custom("Inter", size: 24))
-                                .fontWeight(.bold)
+                                .font(.custom("Inter", size: 14).weight(.bold))
                                 .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                             
                             Text("Your bookings will appear here")
@@ -512,7 +592,15 @@ struct TravelRouteView: View {
             StaysView(stays: sampleStays)
         }
         .sheet(isPresented: $showingAddLocation) {
-            AddLocationView()
+            AddLocationView(
+                onSave: { location, date, nights in
+                    // TODO: Implement save functionality
+                    showingAddLocation = false
+                },
+                onCancel: {
+                    showingAddLocation = false
+                }
+            )
         }
         .sheet(isPresented: $showingTicketSheet) {
             if let selectedStop = selectedStopForTicket {
@@ -526,6 +614,581 @@ struct TravelRouteView: View {
                 )
             }
         }
+        .alert("Delete Location", isPresented: $showingDeleteAlert) {
+            Button("Delete", role: .destructive) {
+                if let stopToDelete = stopToDelete {
+                    deleteStop(at: stopToDelete.index)
+                }
+                self.stopToDelete = nil
+            }
+            Button("Cancel", role: .cancel) {
+                self.stopToDelete = nil
+            }
+        } message: {
+            if let stopToDelete = stopToDelete {
+                Text("Are you sure you want to delete \(stopToDelete.stop.destination)? This action cannot be undone.")
+            }
+        }
+        .sheet(isPresented: $showingEditSheet) {
+            if let stopToEdit = stopToEdit {
+                EditStopView(
+                    stop: stopToEdit.stop,
+                    onSave: { newDestination in
+                        updateStop(at: stopToEdit.index, with: newDestination)
+                        self.stopToEdit = nil
+                        showingEditSheet = false
+                    },
+                    onCancel: {
+                        self.stopToEdit = nil
+                        showingEditSheet = false
+                    }
+                )
+            }
+        }
+        .sheet(isPresented: $showingNightsEditor) {
+            NightsEditorView(
+                nights: $nights,
+                onSave: {
+                    updateDates()
+                    showingNightsEditor = false
+                },
+                onCancel: {
+                    showingNightsEditor = false
+                }
+            )
+        }
+    }
+}
+
+struct EditStopView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    let stop: RouteStop
+    let onSave: (String) -> Void
+    let onCancel: () -> Void
+    
+    @State private var searchText = ""
+    @State private var selectedCategory = "All"
+    @State private var showingSearch = false
+    
+    let categories = ["All", "Europe", "Asia", "Americas", "Africa", "Oceania"]
+    
+    // Sample data for compatibility
+    let popularCountries: [Country] = [
+        Country(id: 1, name: "Germany", flag: "🇩🇪", imageURL: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&h=300&fit=crop&crop=center", cityCount: 5),
+        Country(id: 2, name: "France", flag: "🇫🇷", imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop&crop=center", cityCount: 8),
+        Country(id: 3, name: "Italy", flag: "🇮🇹", imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop&crop=center", cityCount: 6),
+        Country(id: 4, name: "Spain", flag: "🇪🇸", imageURL: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop&crop=center", cityCount: 7),
+        Country(id: 5, name: "Japan", flag: "🇯🇵", imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop&crop=center", cityCount: 4),
+        Country(id: 6, name: "Thailand", flag: "🇹🇭", imageURL: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=400&h=300&fit=crop&crop=center", cityCount: 3),
+        Country(id: 7, name: "USA", flag: "🇺🇸", imageURL: "https://images.unsplash.com/photo-1563492065-1a120d5d8b96?w=400&h=300&fit=crop&crop=center", cityCount: 10),
+        Country(id: 8, name: "Australia", flag: "🇦🇺", imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop&crop=center", cityCount: 5)
+    ]
+    
+    let popularCities: [City] = [
+        City(id: 1, name: "Berlin", country: "Germany", imageURL: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=400&h=300&fit=crop&crop=center"),
+        City(id: 2, name: "Munich", country: "Germany", imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop&crop=center"),
+        City(id: 3, name: "Paris", country: "France", imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop&crop=center"),
+        City(id: 4, name: "Lyon", country: "France", imageURL: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop&crop=center"),
+        City(id: 5, name: "Rome", country: "Italy", imageURL: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=300&fit=crop&crop=center"),
+        City(id: 6, name: "Milan", country: "Italy", imageURL: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=400&h=300&fit=crop&crop=center"),
+        City(id: 7, name: "Madrid", country: "Spain", imageURL: "https://images.unsplash.com/photo-1563492065-1a120d5d8b96?w=400&h=300&fit=crop&crop=center"),
+        City(id: 8, name: "Barcelona", country: "Spain", imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop&crop=center"),
+        City(id: 9, name: "Tokyo", country: "Japan", imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop&crop=center"),
+        City(id: 10, name: "Osaka", country: "Japan", imageURL: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop&crop=center"),
+        City(id: 11, name: "Bangkok", country: "Thailand", imageURL: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400&h=300&fit=crop&crop=center"),
+        City(id: 12, name: "Chiang Mai", country: "Thailand", imageURL: "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=400&h=300&fit=crop&crop=center"),
+        City(id: 13, name: "New York", country: "USA", imageURL: "https://images.unsplash.com/photo-1563492065-1a120d5d8b96?w=400&h=300&fit=crop&crop=center"),
+        City(id: 14, name: "Los Angeles", country: "USA", imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop&crop=center"),
+        City(id: 15, name: "Sydney", country: "Australia", imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop&crop=center"),
+        City(id: 16, name: "Melbourne", country: "Australia", imageURL: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop&crop=center")
+    ]
+    
+    var filteredCountries: [Country] {
+        let filtered = popularCountries.filter { country in
+            if selectedCategory == "All" {
+                return true
+            } else {
+                let region = getRegionForCountry(country.name)
+                return region == selectedCategory
+            }
+        }
+        
+        if searchText.isEmpty {
+            return filtered
+        } else {
+            return filtered.filter { country in
+                country.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
+    var filteredCities: [City] {
+        let filtered = popularCities.filter { city in
+            if selectedCategory == "All" {
+                return true
+            } else {
+                let region = getRegionForCountry(city.country)
+                return region == selectedCategory
+            }
+        }
+        
+        if searchText.isEmpty {
+            return filtered
+        } else {
+            return filtered.filter { city in
+                city.name.localizedCaseInsensitiveContains(searchText) ||
+                city.country.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+    }
+    
+    func getRegionForCountry(_ country: String) -> String {
+        switch country {
+        case "France", "Italy", "Spain", "UK", "Germany", "Austria", "Switzerland", "Netherlands", "Belgium", "Portugal", "Greece", "Poland", "Czechia", "Hungary", "Sweden", "Norway", "Denmark", "Finland", "Ireland", "Croatia", "Bulgaria", "Romania", "Slovakia", "Slovenia", "Estonia", "Latvia", "Lithuania":
+            return "Europe"
+        case "Japan", "Thailand", "China", "India", "South Korea", "Singapore", "Malaysia", "Indonesia", "Philippines", "Vietnam", "Cambodia", "Laos", "Myanmar", "Sri Lanka", "Nepal", "Bhutan", "Bangladesh", "Pakistan", "Afghanistan", "Iran", "Iraq", "Turkey", "Saudi Arabia", "UAE", "Israel", "Jordan", "Lebanon", "Syria", "Kuwait", "Qatar", "Bahrain", "Oman", "Yemen":
+            return "Asia"
+        case "USA", "Canada", "Mexico", "Brazil", "Argentina", "Chile", "Colombia", "Peru", "Venezuela", "Ecuador", "Bolivia", "Paraguay", "Uruguay", "Guyana", "Suriname", "French Guiana", "Costa Rica", "Panama", "Guatemala", "Honduras", "Nicaragua", "El Salvador", "Belize", "Cuba", "Jamaica", "Haiti", "Dominican Republic", "Puerto Rico", "Trinidad and Tobago", "Barbados", "Antigua and Barbuda", "Saint Lucia", "Grenada", "Saint Vincent and the Grenadines", "Dominica", "Saint Kitts and Nevis":
+            return "Americas"
+        case "South Africa", "Egypt", "Nigeria", "Kenya", "Morocco", "Algeria", "Tunisia", "Libya", "Sudan", "Ethiopia", "Ghana", "Tanzania", "Uganda", "Cameroon", "Ivory Coast", "Madagascar", "Mozambique", "Angola", "Burkina Faso", "Mali", "Malawi", "Zambia", "Somalia", "Senegal", "Zimbabwe", "Guinea", "Rwanda", "Benin", "Tunisia", "Burundi", "South Sudan", "Togo", "Sierra Leone", "Libya", "Liberia", "Central African Republic", "Mauritania", "Eritrea", "Gambia", "Botswana", "Namibia", "Gabon", "Lesotho", "Guinea-Bissau", "Equatorial Guinea", "Mauritius", "Eswatini", "Djibouti", "Fiji", "Comoros", "Cabo Verde", "São Tomé and Príncipe", "Seychelles", "Marshall Islands", "Kiribati", "Tonga", "Micronesia", "Palau", "Samoa", "Vanuatu", "Solomon Islands", "Tuvalu", "Nauru":
+            return "Africa"
+        case "Australia", "New Zealand", "Papua New Guinea", "Fiji", "Samoa", "Tonga", "Vanuatu", "Solomon Islands", "Kiribati", "Tuvalu", "Nauru", "Palau", "Marshall Islands", "Micronesia":
+            return "Oceania"
+        default:
+            return "All"
+        }
+    }
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                // Background gradient
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.white,
+                        Color(red: 1.0, green: 0.95, blue: 0.9)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    // Header
+                    HStack {
+                        Text("Edit Location")
+                            .font(.largeTitle)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 16)
+                    
+                    // Current Location Info
+                    VStack(spacing: 12) {
+                        HStack {
+                            Text("Current Location:")
+                                .font(.custom("Inter", size: 16))
+                                .foregroundColor(themeManager.secondaryTextColor)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            Image(systemName: "location.fill")
+                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                .font(.system(size: 16))
+                            
+                            Text(stop.destination)
+                                .font(.custom("Inter", size: 18))
+                                .foregroundColor(themeManager.textColor)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(12)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                    
+                    // Search Bar
+                    VStack(spacing: 16) {
+                        HStack(spacing: 12) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "magnifyingglass")
+                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .font(.system(size: 16))
+                                
+                                TextField("Search destinations...", text: $searchText)
+                                    .font(.custom("Inter", size: 16))
+                                    .foregroundColor(themeManager.textColor)
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            .background(Color.gray.opacity(0.1))
+                            .cornerRadius(15)
+                            
+                            Button(action: { showingSearch.toggle() }) {
+                                Image(systemName: showingSearch ? "xmark" : "slider.horizontal.3")
+                                    .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                    .font(.system(size: 18))
+                            }
+                            .frame(width: 44, height: 44)
+                            .background(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1))
+                            .cornerRadius(22)
+                        }
+                        .padding(.horizontal, 20)
+                        
+                        // Category Filter
+                        if showingSearch {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 8) {
+                                    ForEach(categories, id: \.self) { category in
+                                        Button(action: { selectedCategory = category }) {
+                                            Text(category)
+                                                .font(.custom("Inter", size: 14))
+                                                .foregroundColor(selectedCategory == category ? .white : Color(red: 1.0, green: 0.4, blue: 0.2))
+                                                .padding(.horizontal, 16)
+                                                .padding(.vertical, 10)
+                                                .background(selectedCategory == category ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.clear)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: 15)
+                                                        .stroke(Color(red: 1.0, green: 0.4, blue: 0.2), lineWidth: 1)
+                                                )
+                                                .cornerRadius(15)
+                                        }
+                                    }
+                                }
+                                .padding(.horizontal, 20)
+                            }
+                        }
+                    }
+                    .padding(.bottom, 20)
+                    .background(themeManager.oledBackgroundColor)
+                    
+                    // Main Content
+                    ScrollView {
+                        VStack(spacing: 24) {
+                            // Countries Section
+                            VStack(alignment: .leading, spacing: 16) {
+                                HStack {
+                                    Text("Countries")
+                                        .font(.custom("Inter", size: 20))
+                                        .foregroundColor(themeManager.textColor)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 20)
+                                
+                                LazyVStack(spacing: 12) {
+                                    ForEach(Array(filteredCountries.prefix(10))) { country in
+                                        Button(action: {
+                                            onSave(country.name)
+                                        }) {
+                                            HStack(spacing: 12) {
+                                                AsyncImage(url: URL(string: country.imageURL)) { image in
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                } placeholder: {
+                                                    ZStack {
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [
+                                                                Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1),
+                                                                Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.3)
+                                                            ]),
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        )
+                                                        
+                                                        VStack(spacing: 4) {
+                                                            Image(systemName: "photo")
+                                                                .font(.system(size: 16))
+                                                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                                                            
+                                                            Text("Loading...")
+                                                                .font(.custom("Inter", size: 8))
+                                                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                                                        }
+                                                    }
+                                                }
+                                                .frame(width: 60, height: 60)
+                                                .cornerRadius(8)
+                                                .clipped()
+                                                
+                                                VStack(alignment: .leading, spacing: 4) {
+                                                    Text(country.name)
+                                                        .font(.custom("Inter", size: 16))
+                                                        .foregroundColor(themeManager.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                    Text("\(country.cityCount) Cities")
+                                                        .font(.custom("Inter", size: 14))
+                                                        .foregroundColor(themeManager.secondaryTextColor)
+                                                }
+                                                
+                                                Spacer()
+                                                
+                                                Image(systemName: "chevron.right")
+                                                    .foregroundColor(themeManager.secondaryTextColor)
+                                                    .font(.system(size: 12))
+                                            }
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 12)
+                                            .background(Color.white)
+                                            .cornerRadius(12)
+                                            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                    }
+                                }
+                                .padding(.horizontal, 20)
+                            }
+                            
+                            // Cities Section
+                            VStack(alignment: .leading, spacing: 16) {
+                                HStack {
+                                    Text("Cities")
+                                        .font(.custom("Inter", size: 20))
+                                        .foregroundColor(themeManager.textColor)
+                                    
+                                    Spacer()
+                                }
+                                .padding(.horizontal, 20)
+                                
+                                LazyVStack(spacing: 12) {
+                                    ForEach(Array(filteredCities.prefix(10))) { city in
+                                        Button(action: {
+                                            onSave(city.name)
+                                        }) {
+                                            HStack(spacing: 12) {
+                                                AsyncImage(url: URL(string: city.imageURL)) { image in
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                } placeholder: {
+                                                    ZStack {
+                                                        LinearGradient(
+                                                            gradient: Gradient(colors: [
+                                                                Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1),
+                                                                Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.3)
+                                                            ]),
+                                                            startPoint: .topLeading,
+                                                            endPoint: .bottomTrailing
+                                                        )
+                                                        
+                                                        VStack(spacing: 4) {
+                                                            Image(systemName: "photo")
+                                                                .font(.system(size: 16))
+                                                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                                                            
+                                                            Text("Loading...")
+                                                                .font(.custom("Inter", size: 8))
+                                                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                                                        }
+                                                    }
+                                                }
+                                                .frame(width: 60, height: 60)
+                                                .cornerRadius(8)
+                                                .clipped()
+                                                
+                                                VStack(alignment: .leading, spacing: 4) {
+                                                    Text(city.name)
+                                                        .font(.custom("Inter", size: 16))
+                                                        .foregroundColor(themeManager.textColor)
+                                                        .lineLimit(1)
+                                                    
+                                                    Text(city.country)
+                                                        .font(.custom("Inter", size: 14))
+                                                        .foregroundColor(themeManager.secondaryTextColor)
+                                                }
+                                                
+                                                Spacer()
+                                                
+                                                Image(systemName: "chevron.right")
+                                                    .foregroundColor(themeManager.secondaryTextColor)
+                                                    .font(.system(size: 12))
+                                            }
+                                            .padding(.horizontal, 16)
+                                            .padding(.vertical, 12)
+                                            .background(Color.white)
+                                            .cornerRadius(12)
+                                            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                                        }
+                                        .buttonStyle(PlainButtonStyle())
+                                    }
+                                }
+                                .padding(.horizontal, 20)
+                            }
+                        }
+                        .padding(.top, 8)
+                        .padding(.bottom, 100)
+                    }
+                }
+            }
+            .navigationBarHidden(true)
+            .navigationBarItems(
+                leading: Button("Cancel") {
+                    onCancel()
+                },
+                trailing: Button("Done") {
+                    onCancel()
+                }
+            )
+        }
+    }
+}
+
+struct NightsEditorView: View {
+    @EnvironmentObject var themeManager: ThemeManager
+    @Binding var nights: [Int]
+    let onSave: () -> Void
+    let onCancel: () -> Void
+    
+    @State private var tempNights: [Int] = []
+    
+    var body: some View {
+        NavigationView {
+            ZStack {
+                // Background gradient
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.white,
+                        Color(red: 1.0, green: 0.95, blue: 0.9)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
+                
+                VStack(spacing: 0) {
+                    // Header
+                    HStack {
+                        Text("Edit Nights")
+                            .font(.largeTitle)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 16)
+                    
+                    // Total Nights Summary
+                    VStack(spacing: 12) {
+                        HStack {
+                            Text("Total Nights:")
+                                .font(.custom("Inter", size: 16))
+                                .foregroundColor(themeManager.secondaryTextColor)
+                            
+                            Spacer()
+                        }
+                        
+                        HStack {
+                            Image(systemName: "moon.fill")
+                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                .font(.system(size: 16))
+                            
+                            Text("\(tempNights.reduce(0, +))/21")
+                                .font(.custom("Inter", size: 18))
+                                .foregroundColor(themeManager.textColor)
+                            
+                            Spacer()
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(12)
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 20)
+                    
+                    // Nights Editor
+                    ScrollView {
+                        VStack(spacing: 16) {
+                            ForEach(Array(tempNights.enumerated()), id: \.offset) { index, night in
+                                if index > 0 && index < tempNights.count - 1 { // Skip start and end points
+                                    VStack(spacing: 8) {
+                                        HStack {
+                                            Text("Stop \(index + 1)")
+                                                .font(.custom("Inter", size: 16))
+                                                .foregroundColor(themeManager.textColor)
+                                            
+                                            Spacer()
+                                            
+                                            Text("\(night) nights")
+                                                .font(.custom("Inter", size: 14))
+                                                .foregroundColor(themeManager.secondaryTextColor)
+                                        }
+                                        
+                                        HStack {
+                                            Button(action: {
+                                                if tempNights[index] > 0 {
+                                                    tempNights[index] -= 1
+                                                }
+                                            }) {
+                                                Image(systemName: "minus.circle.fill")
+                                                    .font(.system(size: 24))
+                                                    .foregroundColor(tempNights[index] > 0 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                            }
+                                            .disabled(tempNights[index] <= 0)
+                                            
+                                            Spacer()
+                                            
+                                            Text("\(tempNights[index])")
+                                                .font(.custom("Inter", size: 20))
+                                                .font(.custom("Inter", size: 14).weight(.bold))
+                                                .foregroundColor(themeManager.textColor)
+                                                .frame(minWidth: 40)
+                                            
+                                            Spacer()
+                                            
+                                            Button(action: {
+                                                if tempNights.reduce(0, +) < 21 { // Max 21 nights total
+                                                    tempNights[index] += 1
+                                                }
+                                            }) {
+                                                Image(systemName: "plus.circle.fill")
+                                                    .font(.system(size: 24))
+                                                    .foregroundColor(tempNights.reduce(0, +) < 21 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                            }
+                                            .disabled(tempNights.reduce(0, +) >= 21)
+                                        }
+                                        .padding(.horizontal, 20)
+                                    }
+                                    .padding(.horizontal, 20)
+                                    .padding(.vertical, 16)
+                                    .background(Color.white)
+                                    .cornerRadius(12)
+                                    .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                                }
+                            }
+                        }
+                        .padding(.top, 8)
+                        .padding(.bottom, 100)
+                    }
+                }
+            }
+            .navigationBarHidden(true)
+            .navigationBarItems(
+                leading: Button("Cancel") {
+                    onCancel()
+                },
+                trailing: Button("Save") {
+                    nights = tempNights
+                    onSave()
+                }
+            )
+        }
+        .onAppear {
+            tempNights = nights
+        }
     }
 }
 
@@ -537,8 +1200,72 @@ struct RouteStopRowNew: View {
     let tickets: [Ticket]
     let onTicketTap: (RouteStop) -> Void
     let onNightsChanged: () -> Void
+    let onDelete: (RouteStop) -> Void
+    let onEdit: (RouteStop) -> Void
+    let canDelete: Bool
+    let canEdit: Bool
+    
+    @State private var offset: CGFloat = 0
+    @State private var showingDeleteButton = false
+    @State private var showingEditButton = false
     
     var body: some View {
+        ZStack {
+            // Edit button background (left side, always present but hidden)
+            if canEdit {
+                HStack {
+                    Button(action: {
+                        onEdit(stop)
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "pencil")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            Text("Edit")
+                                .font(.custom("Inter", size: 10))
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 60, height: 60)
+                        .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
+                        .cornerRadius(8)
+                    }
+                    .opacity(showingEditButton ? 1 : 0)
+                    .scaleEffect(showingEditButton ? 1 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
+                    
+                    Spacer()
+                }
+            }
+            
+            // Delete button background (right side, always present but hidden)
+            if canDelete {
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        onDelete(stop)
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "trash.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            Text("Delete")
+                                .font(.custom("Inter", size: 10))
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 60, height: 60)
+                        .background(Color.red)
+                        .cornerRadius(8)
+                    }
+                    .opacity(showingDeleteButton ? 1 : 0)
+                    .scaleEffect(showingDeleteButton ? 1 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
+                }
+            }
+            
+            // Main content card
         HStack(spacing: 16) {
             // Stop number circle (green like in screenshot)
             ZStack {
@@ -548,7 +1275,7 @@ struct RouteStopRowNew: View {
                 
                 Text("\(stopNumber)")
                     .font(.custom("Inter", size: 16))
-                    .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                     .foregroundColor(.white)
             }
             
@@ -557,7 +1284,6 @@ struct RouteStopRowNew: View {
                 // City name
                 Text(stop.destination)
                     .font(.custom("Inter", size: 18))
-                    .fontWeight(.semibold)
                     .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                 
                 // Dates
@@ -603,7 +1329,6 @@ struct RouteStopRowNew: View {
                     
                     Text("\(nights)")
                         .font(.custom("Inter", size: 18))
-                        .fontWeight(.semibold)
                         .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                         .frame(minWidth: 20)
                     
@@ -628,6 +1353,111 @@ struct RouteStopRowNew: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+            .offset(x: offset)
+            .simultaneousGesture(
+                DragGesture(minimumDistance: 25)
+                    .onChanged { value in
+                        // Only respond to very clear horizontal swipes
+                        let horizontalMovement = abs(value.translation.width)
+                        let verticalMovement = abs(value.translation.height)
+                        
+                        // Ultra strict horizontal detection - only if horizontal is 3x vertical
+                        if horizontalMovement > verticalMovement * 3 && horizontalMovement > 40 {
+                            let newOffset = value.translation.width
+                            
+                            // Ultra smooth interpolation for better animation
+                            withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
+                                if newOffset < 0 {
+                                    // Left swipe - show delete button (if allowed)
+                                    if canDelete {
+                                        offset = max(newOffset, -70) // Limit to 70 points
+                                        showingDeleteButton = offset < -20 // Show button after 20 points
+                                        showingEditButton = false // Hide edit button
+                                    }
+                                } else if newOffset > 0 {
+                                    // Right swipe - show edit button (if allowed)
+                                    if canEdit {
+                                        offset = min(newOffset, 70) // Limit to 70 points
+                                        showingEditButton = offset > 20 // Show button after 20 points
+                                        showingDeleteButton = false // Hide delete button
+                                    } else if canDelete && showingDeleteButton {
+                                        // Right swipe - hide delete button (only if currently showing)
+                                        offset = min(newOffset - 70, 0) // Start from -70 and go towards 0
+                                        showingDeleteButton = offset < -20
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .onEnded { value in
+                        // Only respond to very clear horizontal swipes
+                        let horizontalMovement = abs(value.translation.width)
+                        let verticalMovement = abs(value.translation.height)
+                        
+                        // Ultra strict horizontal detection
+                        if horizontalMovement > verticalMovement * 3 && horizontalMovement > 40 {
+                            // Use ultra smooth spring animation
+                            withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
+                                if showingEditButton {
+                                    // Currently showing edit button
+                                    if value.translation.width < -20 {
+                                        // Left swipe - hide edit button and return to normal
+                                        offset = 0
+                                        showingEditButton = false
+                                    } else if value.translation.width > 20 {
+                                        // Right swipe - stay in edit position
+                                        offset = 70
+                                        showingEditButton = true
+                                    } else {
+                                        // Small movement - return to normal position
+                                        offset = 0
+                                        showingEditButton = false
+                                    }
+                                } else if showingDeleteButton {
+                                    // Currently showing delete button
+                                    if value.translation.width > 20 {
+                                        // Right swipe - hide delete button and return to normal
+                                        offset = 0
+                                        showingDeleteButton = false
+                                    } else if value.translation.width < -20 {
+                                        // Left swipe - stay in delete position
+                                        offset = -70
+                                        showingDeleteButton = true
+                                    } else {
+                                        // Small movement - return to normal position
+                                        offset = 0
+                                        showingDeleteButton = false
+                                    }
+                                } else {
+                                    // Currently not showing any button
+                                    if value.translation.width < -50 && canDelete {
+                                        // Left swipe - show delete button
+                                        offset = -70
+                                        showingDeleteButton = true
+                                    } else if value.translation.width > 50 && canEdit {
+                                        // Right swipe - show edit button
+                                        offset = 70
+                                        showingEditButton = true
+                                    } else {
+                                        // Small movement or no clear direction - return to normal
+                                        offset = 0
+                                        showingDeleteButton = false
+                                        showingEditButton = false
+                                    }
+                                }
+                            }
+                        } else {
+                            // If movement is not clearly horizontal, reset to normal position
+                            withAnimation(.spring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
+                                offset = 0
+                                showingDeleteButton = false
+                                showingEditButton = false
+                            }
+                        }
+                    }
+            )
+        }
+        .clipped()
     }
 }
 
@@ -649,7 +1479,7 @@ struct RouteStopRow: View {
                 
                 Text("\(stopNumber)")
                     .font(.custom("Inter", size: 16))
-                    .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                     .foregroundColor(.white)
             }
             
@@ -662,7 +1492,6 @@ struct RouteStopRow: View {
                         
                         Text(stop.destination)
                             .font(.custom("Inter", size: 16))
-                            .fontWeight(.semibold)
                             .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
                     }
                     
@@ -682,7 +1511,6 @@ struct RouteStopRow: View {
                     
                     Text(stop.duration)
                         .font(.custom("Inter", size: 14))
-                        .fontWeight(.medium)
                         .foregroundColor(.white)
                 }
             }
@@ -747,7 +1575,6 @@ struct BookingRow: View {
             
             Text("€\(item.price)")
                 .font(.custom("Inter", size: 16))
-                .fontWeight(.semibold)
                 .foregroundColor(.white)
         }
         .padding(.horizontal, 20)
@@ -767,7 +1594,6 @@ struct StayCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(stay.name)
                         .font(.custom("Inter", size: 18))
-                        .fontWeight(.semibold)
                         .foregroundColor(themeManager.textColor)
                     
                     HStack(spacing: 6) {
@@ -785,7 +1611,7 @@ struct StayCard: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("€\(stay.pricePerNight)")
                         .font(.custom("Inter", size: 16))
-                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                         .foregroundColor(.white)
                     
                     Text("per night")
@@ -803,7 +1629,6 @@ struct StayCard: View {
                 
                 Text("\(stay.nights) nights")
                     .font(.custom("Inter", size: 14))
-                    .fontWeight(.medium)
                     .foregroundColor(.white)
             }
             
@@ -850,7 +1675,7 @@ struct RouteCard: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(route.title)
                         .font(.custom("Inter", size: 22))
-                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                         .foregroundColor(themeManager.textColor)
                     
                     Text(route.duration)
@@ -863,7 +1688,7 @@ struct RouteCard: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text("€\(route.totalPrice)")
                         .font(.custom("Inter", size: 24))
-                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                         .foregroundColor(.white)
                     
                     Text("per person")
@@ -889,7 +1714,6 @@ struct RouteCard: View {
                 Button(action: {}) {
                     Text("Customize")
                         .font(.custom("Inter", size: 16))
-                        .fontWeight(.semibold)
                         .foregroundColor(themeManager.primaryColor)
                         .frame(maxWidth: .infinity)
                         .frame(height: 44)
@@ -900,7 +1724,6 @@ struct RouteCard: View {
                 Button(action: {}) {
                     Text("Book Route")
                         .font(.custom("Inter", size: 16))
-                        .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 44)
@@ -958,7 +1781,6 @@ struct RouteStopView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(stop.destination)
                             .font(.custom("Inter", size: 16))
-                            .fontWeight(.semibold)
                             .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
                         
                         Text(stop.country)
@@ -971,7 +1793,6 @@ struct RouteStopView: View {
                     VStack(alignment: .trailing, spacing: 4) {
                         Text(stop.duration)
                             .font(.custom("Inter", size: 16))
-                            .fontWeight(.semibold)
                             .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
                         
                         Text(stop.dates)
@@ -994,7 +1815,6 @@ struct RouteStopView: View {
                         
                         Text(stop.flightPrice)
                             .font(.custom("Inter", size: 14))
-                            .fontWeight(.medium)
                             .foregroundColor(themeManager.primaryColor)
                     }
                     .padding(.horizontal, 12)
@@ -1027,7 +1847,6 @@ struct QuickRouteCard: View {
             VStack(alignment: .leading, spacing: 6) {
                 Text(route.title)
                     .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
                     .foregroundColor(themeManager.textColor)
                     .lineLimit(2)
                 
@@ -1037,7 +1856,7 @@ struct QuickRouteCard: View {
                 
                 Text("€\(route.totalPrice)")
                     .font(.custom("Inter", size: 16))
-                    .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                     .foregroundColor(.white)
             }
             .padding(.horizontal, 12)
@@ -1063,7 +1882,7 @@ struct RouteDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text(route.title)
                             .font(.custom("Inter", size: 28))
-                            .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                             .foregroundColor(themeManager.textColor)
                         
                         Text(route.description)
@@ -1091,7 +1910,6 @@ struct RouteDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Price Breakdown")
                             .font(.custom("Inter", size: 20))
-                            .fontWeight(.semibold)
                             .foregroundColor(themeManager.textColor)
                             .padding(.horizontal, 20)
                         
@@ -1106,7 +1924,6 @@ struct RouteDetailView: View {
                                     
                                     Text("€\(item.price)")
                                         .font(.custom("Inter", size: 16))
-                                        .fontWeight(.medium)
                                         .foregroundColor(themeManager.primaryColor)
                                 }
                                 .padding(.horizontal, 20)
@@ -1122,7 +1939,6 @@ struct RouteDetailView: View {
                     Button(action: {}) {
                         Text("Book This Route")
                             .font(.custom("Inter", size: 18))
-                            .fontWeight(.semibold)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
@@ -1159,7 +1975,7 @@ struct DetailedRouteStopView: View {
                         
                         Text(stop.destination)
                             .font(.custom("Inter", size: 20))
-                            .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                             .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
                     }
                     
@@ -1173,7 +1989,7 @@ struct DetailedRouteStopView: View {
                 VStack(alignment: .trailing, spacing: 4) {
                     Text(stop.duration)
                         .font(.custom("Inter", size: 18))
-                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                         .foregroundColor(.white)
                     
                     Text(stop.dates)
@@ -1202,7 +2018,7 @@ struct DetailedRouteStopView: View {
                     
                     Text(stop.flightPrice)
                         .font(.custom("Inter", size: 16))
-                        .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                         .foregroundColor(.white)
                 }
                 .padding(16)
@@ -1452,7 +2268,7 @@ struct StaysView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Your Stays")
                             .font(.custom("Inter", size: 28))
-                            .fontWeight(.bold)
+                                        .font(.custom("Inter", size: 16).weight(.bold))
                             .foregroundColor(themeManager.textColor)
                         
                         Text("Accommodation for your Asia Adventure")
@@ -1479,253 +2295,6 @@ struct StaysView: View {
             .navigationBarItems(trailing: Button("Done") {
                 presentationMode.wrappedValue.dismiss()
             })
-        }
-    }
-}
-
-struct AddLocationView: View {
-    @EnvironmentObject var themeManager: ThemeManager
-    @Environment(\.presentationMode) var presentationMode
-    
-    @State private var destination = ""
-    @State private var country = ""
-    @State private var countryEmoji = ""
-    @State private var startDate = Date()
-    @State private var endDate = Date()
-    @State private var transportType = "flight" // "flight", "train", "bus"
-    @State private var transportPrice = ""
-    @State private var transportDuration = ""
-    
-    let transportOptions = ["flight", "train", "bus"]
-    
-    var body: some View {
-        NavigationView {
-            ZStack {
-                // Background gradient like flights
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.white,
-                        Color(red: 1.0, green: 0.95, blue: 0.9) // Light peach/pink
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-                
-                ScrollView {
-                    VStack(spacing: 24) {
-                    // Header
-                    VStack(spacing: 8) {
-                        Text("Add New Location")
-                            .font(.custom("Inter", size: 28))
-                            .fontWeight(.bold)
-                            .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2)) // Dark gray
-                        
-                        Text("Add a new destination to your Asia 26 trip")
-                            .font(.custom("Inter", size: 16))
-                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5)) // Medium gray
-                    }
-                    .padding(.top, 20)
-                    
-                    // Form
-                    VStack(spacing: 20) {
-                        // Destination
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Destination")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                            
-                            TextField("e.g., Tokyo", text: $destination)
-                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
-                        }
-                        
-                        // Country
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Country")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                            
-                            TextField("e.g., Japan", text: $country)
-                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
-                        }
-                        
-                        // Country Emoji
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Country Emoji")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                            
-                            TextField("e.g., 🇯🇵", text: $countryEmoji)
-                                .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
-                        }
-                        
-                        // Dates
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Travel Dates")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                            
-                            HStack(spacing: 12) {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("Start Date")
-                                        .font(.custom("Inter", size: 14))
-                                        .foregroundColor(themeManager.secondaryTextColor)
-                                    
-                                    ZStack {
-                                        // White background with border
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color.white)
-                                            .frame(height: 50)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1)
-                                            )
-                                        
-                                        // DatePicker centered
-                                        DatePicker("", selection: $startDate, displayedComponents: .date)
-                                            .datePickerStyle(CompactDatePickerStyle())
-                                            .colorScheme(themeManager.isDarkMode ? .dark : .light)
-                                            .labelsHidden()
-                                            .frame(maxWidth: .infinity)
-                                            .multilineTextAlignment(.center)
-                                    }
-                                }
-                                
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text("End Date")
-                                        .font(.custom("Inter", size: 14))
-                                        .foregroundColor(themeManager.secondaryTextColor)
-                                    
-                                    ZStack {
-                                        // White background with border
-                                        RoundedRectangle(cornerRadius: 15)
-                                            .fill(Color.white)
-                                            .frame(height: 50)
-                                            .overlay(
-                                                RoundedRectangle(cornerRadius: 15)
-                                                    .stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1)
-                                            )
-                                        
-                                        // DatePicker centered
-                                        DatePicker("", selection: $endDate, displayedComponents: .date)
-                                            .datePickerStyle(CompactDatePickerStyle())
-                                            .colorScheme(themeManager.isDarkMode ? .dark : .light)
-                                            .labelsHidden()
-                                            .frame(maxWidth: .infinity)
-                                            .multilineTextAlignment(.center)
-                                    }
-                                }
-                            }
-                        }
-                        
-                        // Transport
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Transport to this location")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                            
-                            HStack(spacing: 12) {
-                                ForEach(transportOptions, id: \.self) { option in
-                                    Button(action: { transportType = option }) {
-                                        HStack(spacing: 6) {
-                                            if option == "flight" {
-                                                Image(systemName: "airplane.departure")
-                                                    .font(.system(size: 16))
-                                            } else if option == "train" {
-                                                Image(systemName: "tram.fill")
-                                                    .font(.system(size: 16))
-                                            } else { // bus
-                                                Image(systemName: "bus.fill")
-                                                    .font(.system(size: 16))
-                                            }
-                                            
-                                            Text(option.capitalized)
-                                                .font(.custom("Inter", size: 16))
-                                                .fontWeight(.semibold)
-                                        }
-                                        .foregroundColor(transportType == option ? .white : Color(red: 0.3, green: 0.3, blue: 0.3))
-                                        .frame(maxWidth: .infinity)
-                                        .frame(height: 50)
-                                        .background(transportType == option ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.white)
-                                        .cornerRadius(15)
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
-                                                .stroke(transportType == option ? Color.clear : Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1)
-                                        )
-                                        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-                                    }
-                                }
-                            }
-                        }
-                        
-                        // Transport Details
-                        HStack(spacing: 16) {
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Duration")
-                                    .font(.custom("Inter", size: 14))
-                                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                                
-                                TextField("e.g., 2h 30m", text: $transportDuration)
-                                    .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
-                            }
-                            
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Price")
-                                    .font(.custom("Inter", size: 14))
-                                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                                
-                                TextField("e.g., €299", text: $transportPrice)
-                                    .textFieldStyle(CustomTextFieldStyle(themeManager: themeManager))
-                            }
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    
-                    // Action Buttons
-                    VStack(spacing: 16) {
-                        Button(action: {
-                            presentationMode.wrappedValue.dismiss()
-                        }) {
-                            HStack {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 18))
-                                
-                                Text("Add Location")
-                                    .font(.custom("Inter", size: 18))
-                                    .fontWeight(.semibold)
-                            }
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .frame(height: 50)
-                            .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange like Get Cash Advance
-                            .cornerRadius(15)
-                        }
-                        
-                        Button(action: { presentationMode.wrappedValue.dismiss() }) {
-                            Text("Cancel")
-                                .font(.custom("Inter", size: 16))
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 50)
-                                .background(Color.white)
-                                .cornerRadius(15)
-                                .overlay(
-                                            RoundedRectangle(cornerRadius: 15)
-                                        .stroke(Color(red: 0.2, green: 0.2, blue: 0.2), lineWidth: 1)
-                                )
-                        }
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 100)
-                }
-            }
-            .navigationTitle("Add Location")
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button("Done") {
-                presentationMode.wrappedValue.dismiss()
-            })
-        }
     }
 }
 }
