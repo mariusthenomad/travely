@@ -257,4 +257,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ using SwiftUI and OpenStreetMap**
+**Made with ❤️ using SwiftUI, Supabase, and OpenStreetMap**
