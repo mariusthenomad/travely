@@ -252,9 +252,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: support@travely.app
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/travely/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/travely/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/mariusthenomad/travely/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/mariusthenomad/travely/discussions)
 
 ---
 
