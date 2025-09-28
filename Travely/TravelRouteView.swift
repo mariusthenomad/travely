@@ -1213,51 +1213,47 @@ struct RouteStopRowNew: View {
         ZStack {
             // Action buttons background (left side, both buttons next to each other)
             HStack(spacing: 8) {
-                // Edit button (leftmost)
-                if canEdit {
-                    Button(action: {
-                        onEdit(stop)
-                    }) {
-                        VStack(spacing: 4) {
-                            Image(systemName: "pencil")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                            
-                            Text("Edit")
-                                .font(.custom("Inter", size: 10))
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 60, height: 60)
-                        .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
-                        .cornerRadius(8)
+                // Edit button (leftmost) - ALWAYS SHOW
+                Button(action: {
+                    onEdit(stop)
+                }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "pencil")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
+                        
+                        Text("Edit")
+                            .font(.custom("Inter", size: 10))
+                            .foregroundColor(.white)
                     }
-                    .opacity(showingEditButton ? 1 : 0)
-                    .scaleEffect(showingEditButton ? 1 : 0.8)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
+                    .frame(width: 60, height: 60)
+                    .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
+                    .cornerRadius(8)
                 }
+                .opacity(showingEditButton ? 1 : 0)
+                .scaleEffect(showingEditButton ? 1 : 0.8)
+                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
                 
-                // Delete button (next to edit button)
-                if canDelete {
-                    Button(action: {
-                        onDelete(stop)
-                    }) {
-                        VStack(spacing: 4) {
-                            Image(systemName: "trash.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                            
-                            Text("Delete")
-                                .font(.custom("Inter", size: 10))
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 60, height: 60)
-                        .background(Color.red)
-                        .cornerRadius(8)
+                // Delete button (next to edit button) - ALWAYS SHOW
+                Button(action: {
+                    onDelete(stop)
+                }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "trash.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
+                        
+                        Text("Delete")
+                            .font(.custom("Inter", size: 10))
+                            .foregroundColor(.white)
                     }
-                    .opacity(showingDeleteButton ? 1 : 0)
-                    .scaleEffect(showingDeleteButton ? 1 : 0.8)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
+                    .frame(width: 60, height: 60)
+                    .background(Color.red)
+                    .cornerRadius(8)
                 }
+                .opacity(showingDeleteButton ? 1 : 0)
+                .scaleEffect(showingDeleteButton ? 1 : 0.8)
+                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 
                 Spacer()
             }
@@ -1362,12 +1358,10 @@ struct RouteStopRowNew: View {
                             
                             withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
                                 if newOffset < 0 {
-                                    // Left swipe - show buttons
-                                    if canEdit || canDelete {
-                                        offset = max(newOffset, -140)
-                                        showingDeleteButton = offset < -10 && canDelete
-                                        showingEditButton = offset < -70 && canEdit
-                                    }
+                                    // Left swipe - show buttons ALWAYS
+                                    offset = max(newOffset, -140)
+                                    showingDeleteButton = offset < -10
+                                    showingEditButton = offset < -70
                                 } else if newOffset > 0 {
                                     // Right swipe - hide buttons
                                     if showingDeleteButton || showingEditButton {
@@ -1407,26 +1401,18 @@ struct RouteStopRowNew: View {
                                         showingDeleteButton = false
                                     }
                                 } else {
-                                    // Currently not showing any button
-                                    if value.translation.width < -30 && (canDelete || canEdit) {
-                                        // Left swipe - show buttons
-                                        if canEdit && canDelete {
+                                        // Currently not showing any button
+                                        if value.translation.width < -30 {
+                                            // Left swipe - show buttons ALWAYS
                                             offset = -140
                                             showingEditButton = true
                                             showingDeleteButton = true
-                                        } else if canDelete {
-                                            offset = -70
-                                            showingDeleteButton = true
-                                        } else if canEdit {
-                                            offset = -70
-                                            showingEditButton = true
+                                        } else {
+                                            // Small movement - return to normal
+                                            offset = 0
+                                            showingDeleteButton = false
+                                            showingEditButton = false
                                         }
-                                    } else {
-                                        // Small movement - return to normal
-                                        offset = 0
-                                        showingDeleteButton = false
-                                        showingEditButton = false
-                                    }
                                 }
                             }
                         } else {
