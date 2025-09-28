@@ -16,7 +16,7 @@ Travely - Project Overview
 
 🎯 Current Week Focus (UI Design)
 
-Day 4 - Thursday (Today)
+Day 4 - Thursday (This Week)
 **Goal**: Flat Design System + Home Tab  
 **Time**: 3-4 hours afternoon
 
@@ -24,6 +24,15 @@ Day 4 - Thursday (Today)
 - ✅ Create FlatDesignComponents.swift
 - 🔄 Home Tab Redesign (Replace cards with FlatCard components)
 - ⏳ Home Tab Testing & Polish
+
+Day 7 - Sunday (Today)
+**Goal**: Settings Tab + Final Polish  
+**Time**: 4-5 hours weekend
+
+**Tasks**:
+- ⏳ Settings Tab Redesign (Use FlatToggle components)
+- ⏳ Account Management (Add login/logout sections)
+- ⏳ Final UI Polish (Test all tabs, ensure consistency)
 
 Day 5 - Friday
 **Goal**: Routes Tab Redesign  
