@@ -1230,8 +1230,8 @@ struct RouteStopRowNew: View {
                     .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
                     .cornerRadius(8)
                 }
-                .opacity(showingEditButton ? 1 : 0.3) // ALWAYS VISIBLE FOR TESTING
-                .scaleEffect(showingEditButton ? 1 : 0.8)
+                .opacity(1.0) // ALWAYS FULLY VISIBLE FOR TESTING
+                .scaleEffect(1.0) // ALWAYS FULL SIZE FOR TESTING
                 .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
                 
                 // Delete button (next to edit button) - ALWAYS VISIBLE FOR TESTING
@@ -1251,8 +1251,8 @@ struct RouteStopRowNew: View {
                     .background(Color.red)
                     .cornerRadius(8)
                 }
-                .opacity(showingDeleteButton ? 1 : 0.3) // ALWAYS VISIBLE FOR TESTING
-                .scaleEffect(showingDeleteButton ? 1 : 0.8)
+                .opacity(1.0) // ALWAYS FULLY VISIBLE FOR TESTING
+                .scaleEffect(1.0) // ALWAYS FULL SIZE FOR TESTING
                 .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 
                 Spacer()
