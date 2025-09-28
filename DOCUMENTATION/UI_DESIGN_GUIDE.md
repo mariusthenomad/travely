@@ -1,23 +1,23 @@
 # UI Design Guide - Travely
 
-## Design Prinzipien
+## Design Principles
 
-### Flaches Design Konzept
-- **Minimalistisch**: Weniger Schatten, mehr Fokus auf Content
-- **Klarheit**: Einfache, klare Linien und Strukturen
-- **Hierarchie**: Visueller Fokus durch Typografie und Spacing
-- **Konsistenz**: Einheitliches Design-System über alle Tabs
+### Flat Design Concept
+- **Minimalist**: Less shadows, more focus on content
+- **Clarity**: Simple, clear lines and structures
+- **Hierarchy**: Visual focus through typography and spacing
+- **Consistency**: Unified design system across all tabs
 
 ---
 
-## Tab-spezifische Design Updates
+## Tab-Specific Design Updates
 
 ### Home Tab
-**Aktuelle Elemente zu überarbeiten:**
-- [ ] Card-Designs flacher gestalten (Schatten reduzieren)
-- [ ] Button-Styles vereinfachen
-- [ ] Spacing zwischen Elementen optimieren
-- [ ] Typografie-Hierarchie verbessern
+**Current elements to be revised:**
+- [ ] Flatten card designs (reduce shadows)
+- [ ] Simplify button styles
+- [ ] Optimize spacing between elements
+- [ ] Improve typography hierarchy
 
 **Design Guidelines:**
 ```swift
@@ -39,15 +39,15 @@
 ```
 
 ### Routes Tab
-**Funktionalitäts-Updates:**
-- [ ] **Links-Wisch**: Edit-Button neben Delete-Button hinzufügen
-- [ ] **Rechts-Wisch**: Aktuelle Edit-Funktion entfernen
-- [ ] **Swipe-Gesten**: Neue Gesture-Handler implementieren
+**Functionality Updates:**
+- [ ] **Left-Swipe**: Add Edit button next to Delete button
+- [ ] **Right-Swipe**: Remove current edit function
+- [ ] **Swipe Gestures**: Implement new gesture handlers
 
 **Design Updates:**
-- [ ] Route-Liste flacher gestalten
-- [ ] Swipe-Actions visuell verbessern
-- [ ] Edit/Delete Buttons konsistent stylen
+- [ ] Flatten route list
+- [ ] Visually improve swipe actions
+- [ ] Consistently style Edit/Delete buttons
 
 ```swift
 // Swipe Actions Design
@@ -61,21 +61,21 @@
 
 ### Destination Tab
 **Design Updates:**
-- [ ] Destination-Cards flacher gestalten
-- [ ] Such-Interface vereinfachen
-- [ ] Filter-Optionen minimalistisch gestalten
-- [ ] Detail-Views konsistent stylen
+- [ ] Flatten destination cards
+- [ ] Simplify search interface
+- [ ] Design filter options minimally
+- [ ] Consistently style detail views
 
-### Einstellungen Tab
-**Neue Features:**
-- [ ] **Subscription Management**: App Store Kauf wiederherstellen Button
-- [ ] **Account Settings**: Login/Logout Bereiche
-- [ ] **Theme Options**: Dark/Light Mode Toggle
+### Settings Tab
+**New Features:**
+- [ ] **Subscription Management**: App Store purchase restore button
+- [ ] **Account Settings**: Login/Logout sections
+- [ ] **Theme Options**: Dark/Light Mode toggle
 
 **Design Updates:**
-- [ ] Settings-Gruppen flacher gestalten
-- [ ] Toggle-Switches modernisieren
-- [ ] Section-Header vereinfachen
+- [ ] Flatten settings groups
+- [ ] Modernize toggle switches
+- [ ] Simplify section headers
 
 ---
 

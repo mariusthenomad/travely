@@ -1,74 +1,74 @@
-# Tech Stack & Kosten - Travely
+# Tech Stack & Costs - Travely
 
 ## 💻 Development Tools
 
 ### 🖥️ **IDE & Editor**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Cursor** | $20/Monat | AI-powered Code Editor für Swift/iOS Development |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Cursor** | $20/Month | AI-powered Code Editor for Swift/iOS Development |
 
 ### 📱 **iOS Development**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Xcode** | Kostenlos | Apple's IDE für iOS/macOS Development |
-| **Swift** | Kostenlos | Apple's Programmiersprache |
-| **SwiftUI** | Kostenlos | Apple's moderne UI Framework |
-| **iOS Simulator** | Kostenlos | In Xcode integrierter iOS Simulator |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Xcode** | Free | Apple's IDE for iOS/macOS Development |
+| **Swift** | Free | Apple's Programming Language |
+| **SwiftUI** | Free | Apple's Modern UI Framework |
+| **iOS Simulator** | Free | iOS Simulator integrated in Xcode |
 
 ### 🗄️ **Backend & Database**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Node.js** | Kostenlos | JavaScript Runtime für Backend |
-| **Express.js** | Kostenlos | Web Framework für Node.js |
-| **PostgreSQL** | Kostenlos | Open Source Datenbank |
-| **Prisma** | Kostenlos | Database ORM für TypeScript/Node.js |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Node.js** | Free | JavaScript Runtime for Backend |
+| **Express.js** | Free | Web Framework for Node.js |
+| **PostgreSQL** | Free | Open Source Database |
+| **Prisma** | Free | Database ORM for TypeScript/Node.js |
 
 ### 🔐 **Authentication**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Apple Sign-In** | Kostenlos | Apple's Authentication Service |
-| **Google Sign-In** | Kostenlos | Google's Authentication Service |
-| **Firebase Auth** | Kostenlos (bis 10k MAU) | Google's Authentication Platform |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Apple Sign-In** | Free | Apple's Authentication Service |
+| **Google Sign-In** | Free | Google's Authentication Service |
+| **Firebase Auth** | Free (up to 10k MAU) | Google's Authentication Platform |
 
 ### ☁️ **Cloud Services**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Apple Developer Program** | $99/Jahr | App Store Distribution |
-| **GitHub** | Kostenlos | Code Repository & Version Control |
-| **Vercel** | Kostenlos (Hobby Plan) | Backend Hosting |
-| **Railway** | Kostenlos (bis 5$/Monat) | Alternative Backend Hosting |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Apple Developer Program** | $99/Year | App Store Distribution |
+| **GitHub** | Free | Code Repository & Version Control |
+| **Vercel** | Free (Hobby Plan) | Backend Hosting |
+| **Railway** | Free (up to $5/Month) | Alternative Backend Hosting |
 
 ### 📊 **Analytics & Monitoring**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Apple Analytics** | Kostenlos | In-App Analytics |
-| **Firebase Analytics** | Kostenlos | Google's Analytics Platform |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Apple Analytics** | Free | In-App Analytics |
+| **Firebase Analytics** | Free | Google's Analytics Platform |
 
 ### 🗺️ **Maps & Location**
-| Tool | Kosten | Beschreibung |
-|------|--------|--------------|
-| **Apple Maps** | Kostenlos | Apple's Mapping Service |
-| **OpenStreetMap** | Kostenlos | Open Source Mapping Data |
-| **MapKit** | Kostenlos | Apple's Maps Framework |
+| Tool | Cost | Description |
+|------|------|-------------|
+| **Apple Maps** | Free | Apple's Mapping Service |
+| **OpenStreetMap** | Free | Open Source Mapping Data |
+| **MapKit** | Free | Apple's Maps Framework |
 
 ---
 
-## 💰 **Kostenübersicht**
+## 💰 **Cost Overview**
 
-### 🔥 **Aktuelle Kosten (Monatlich)**
-- **Cursor**: $20/Monat
-- **Sonstige**: $0/Monat
-- **Gesamt**: $20/Monat
+### 🔥 **Current Costs (Monthly)**
+- **Cursor**: $20/Month
+- **Others**: $0/Month
+- **Total**: $20/Month
 
-### 📅 **Jährliche Kosten**
-- **Apple Developer Program**: $99/Jahr
-- **Cursor**: $240/Jahr
-- **Gesamt**: $339/Jahr
+### 📅 **Annual Costs**
+- **Apple Developer Program**: $99/Year
+- **Cursor**: $240/Year
+- **Total**: $339/Year
 
-### 💡 **Zukünftige Kosten (bei Wachstum)**
-- **Firebase Auth**: Kostenlos bis 10.000 MAU, dann $0.0055/MAU
-- **Backend Hosting**: Kostenlos bis 100GB Bandwidth, dann $0.10/GB
-- **Database**: Kostenlos bis 1GB, dann $0.10/GB
+### 💡 **Future Costs (with Growth)**
+- **Firebase Auth**: Free up to 10,000 MAU, then $0.0055/MAU
+- **Backend Hosting**: Free up to 100GB Bandwidth, then $0.10/GB
+- **Database**: Free up to 1GB, then $0.10/GB
 
 ---
 

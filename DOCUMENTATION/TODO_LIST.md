@@ -1,167 +1,167 @@
-# Travely - To-Do Liste & Projektplanung
+# Travely - To-Do List & Project Planning
 
-## Überblick
-Diese Dokumentation enthält alle aktuellen To-Dos für die Weiterentwicklung der Travely iOS App - aufgeteilt in detaillierte Sub-Tasks für effiziente Zusammenarbeit.
+## Overview
+This documentation contains all current to-dos for the further development of the Travely iOS App - divided into detailed sub-tasks for efficient collaboration.
 
 ---
 
-## Backend Entwicklung
+## Backend Development
 
-### Bereits implementiert
-- ✅ Suchfunktion für Länder
-- ✅ Suchfunktion für Städte
+### Already Implemented
+- ✅ Country search functionality
+- ✅ City search functionality
 
 ### Backend Sub-Tasks
-- [ ] **Komplettes Backend erstellen**
+- [ ] **Complete Backend Creation**
   - Status: Pending
-  - Beschreibung: Vollständiges Backend-System aufbauen (Suchfunktionen sind bereits vorhanden)
+  - Description: Build complete backend system (search functionalities are already available)
 
-- [ ] **Backend: User Authentication API implementieren**
+- [ ] **Backend: User Authentication API Implementation**
   - Status: Pending
-  - Beschreibung: JWT, Registration, Login Endpoints erstellen
+  - Description: Create JWT, Registration, Login Endpoints
 
 - [ ] **Backend: User Management API**
   - Status: Pending
-  - Beschreibung: Profile, Settings, Preferences API implementieren
+  - Description: Implement Profile, Settings, Preferences API
 
 - [ ] **Backend: Travel Features API**
   - Status: Pending
-  - Beschreibung: Route Saving, Favorites, History API erstellen
+  - Description: Create Route Saving, Favorites, History API
 
 - [ ] **Backend: Subscription Management API**
   - Status: Pending
-  - Beschreibung: Status, Verification, Features API implementieren
+  - Description: Implement Status, Verification, Features API
 
 ---
 
-## Authentifizierung & User Management
+## Authentication & User Management
 
 ### Apple Login Sub-Tasks
-- [ ] **Apple Login: Apple Sign-In SDK Integration und Setup**
+- [ ] **Apple Login: Apple Sign-In SDK Integration and Setup**
   - Status: Pending
-  - Beschreibung: Apple Sign-In SDK konfigurieren und einrichten
+  - Description: Configure and setup Apple Sign-In SDK
 
-- [ ] **Apple Login: UI und Funktionalität implementieren**
+- [ ] **Apple Login: UI and Functionality Implementation**
   - Status: Pending
-  - Beschreibung: Apple Sign-In Button und Login-Flow erstellen
+  - Description: Create Apple Sign-In Button and Login Flow
 
 ### Google Login Sub-Tasks
-- [ ] **Google Login: Google Sign-In SDK Integration und Setup**
+- [ ] **Google Login: Google Sign-In SDK Integration and Setup**
   - Status: Pending
-  - Beschreibung: Google Sign-In SDK konfigurieren und einrichten
+  - Description: Configure and setup Google Sign-In SDK
 
-- [ ] **Google Login: UI und Funktionalität implementieren**
+- [ ] **Google Login: UI and Functionality Implementation**
   - Status: Pending
-  - Beschreibung: Google Sign-In Button und Login-Flow erstellen
+  - Description: Create Google Sign-In Button and Login Flow
 
-### E-Mail Login Sub-Tasks
-- [ ] **E-Mail Login: Registrierung und E-Mail Verification implementieren**
+### Email Login Sub-Tasks
+- [ ] **Email Login: Registration and Email Verification Implementation**
   - Status: Pending
-  - Beschreibung: E-Mail Registrierung mit Verification-Flow
+  - Description: Email registration with verification flow
 
-- [ ] **E-Mail Login: Login und Password Reset implementieren**
+- [ ] **Email Login: Login and Password Reset Implementation**
   - Status: Pending
-  - Beschreibung: Login-Funktionalität und Password Reset
+  - Description: Login functionality and password reset
 
-- [ ] **E-Mail Login: UI Screens (Login, Register, Reset) erstellen**
+- [ ] **Email Login: UI Screens (Login, Register, Reset) Creation**
   - Status: Pending
-  - Beschreibung: UI für E-Mail Authentication Screens
+  - Description: UI for Email Authentication Screens
 
 ---
 
-## Onboarding-Flow Sub-Tasks
+## Onboarding Flow Sub-Tasks
 
 ### Onboarding Screens
-- [ ] **Onboarding: Welcome Screen mit App Branding erstellen**
+- [ ] **Onboarding: Welcome Screen with App Branding Creation**
   - Status: Pending
-  - Beschreibung: Welcome Screen mit Logo und App-Introduction
+  - Description: Welcome Screen with logo and app introduction
 
 - [ ] **Onboarding: Authentication Selection Screen (Apple, Google, Email)**
   - Status: Pending
-  - Beschreibung: Screen für Login-Option Auswahl
+  - Description: Screen for login option selection
 
-- [ ] **Onboarding: Free vs Paid Version Auswahl Screen**
+- [ ] **Onboarding: Free vs Paid Version Selection Screen**
   - Status: Pending
-  - Beschreibung: Subscription Selection Screen
+  - Description: Subscription Selection Screen
 
-- [ ] **Onboarding: Navigation zwischen Screens und Flow Management**
+- [ ] **Onboarding: Navigation between Screens and Flow Management**
   - Status: Pending
-  - Beschreibung: Onboarding Flow Navigation und State Management
+  - Description: Onboarding Flow Navigation and State Management
 
 ---
 
-## Einstellungen Sub-Tasks
+## Settings Sub-Tasks
 
 ### Subscription Management
-- [ ] **Einstellungen: Subscription Management Bereich hinzufügen**
+- [ ] **Settings: Add Subscription Management Section**
   - Status: Pending
-  - Beschreibung: Subscription Status und Management UI
+  - Description: Subscription Status and Management UI
 
-- [ ] **Einstellungen: App Store Kauf wiederherstellen Button implementieren**
+- [ ] **Settings: Implement App Store Purchase Restore Button**
   - Status: Pending
-  - Beschreibung: Restore Purchases Funktionalität
+  - Description: Restore Purchases functionality
 
-- [ ] **Einstellungen: Account/Login/Logout Bereiche hinzufügen**
+- [ ] **Settings: Add Account/Login/Logout Sections**
   - Status: Pending
-  - Beschreibung: Account Management in Settings
+  - Description: Account Management in Settings
 
 ---
 
 ## UI/UX Design Sub-Tasks
 
-### Design Updates pro Tab
-- [ ] **UI Design: Home Tab flacher gestalten**
+### Design Updates per Tab
+- [ ] **UI Design: Flatten Home Tab**
   - Status: Pending
-  - Beschreibung: Cards, Buttons, Spacing in Home Tab optimieren
+  - Description: Optimize Cards, Buttons, Spacing in Home Tab
 
-- [ ] **UI Design: Routes Tab flacher gestalten**
+- [ ] **UI Design: Flatten Routes Tab**
   - Status: Pending
-  - Beschreibung: Liste, Cards, Actions in Routes Tab optimieren
+  - Description: Optimize List, Cards, Actions in Routes Tab
 
-- [ ] **UI Design: Destination Tab flacher gestalten**
+- [ ] **UI Design: Flatten Destination Tab**
   - Status: Pending
-  - Beschreibung: Search, Cards, Filters in Destination Tab optimieren
+  - Description: Optimize Search, Cards, Filters in Destination Tab
 
-- [ ] **UI Design: Einstellungen Tab flacher gestalten**
+- [ ] **UI Design: Flatten Settings Tab**
   - Status: Pending
-  - Beschreibung: Groups, Toggles, Headers in Settings optimieren
+  - Description: Optimize Groups, Toggles, Headers in Settings
 
 ---
 
-## Routes Funktionalität Sub-Tasks
+## Routes Functionality Sub-Tasks
 
-### Swipe-Gesten Updates
-- [ ] **Routes: Links-Wisch Edit-Button neben Delete-Button hinzufügen**
+### Swipe Gesture Updates
+- [ ] **Routes: Add Left-Swipe Edit Button next to Delete Button**
   - Status: Pending
-  - Beschreibung: Edit-Button bei Links-Swipe neben Delete implementieren
+  - Description: Implement Edit Button on left-swipe next to delete
 
-- [ ] **Routes: Rechts-Wisch Edit-Funktion entfernen**
+- [ ] **Routes: Remove Right-Swipe Edit Function**
   - Status: Pending
-  - Beschreibung: Aktuelle Rechts-Swipe Edit-Funktion entfernen
+  - Description: Remove current right-swipe edit function
 
-- [ ] **Routes: Neue Swipe-Gesture Handler implementieren**
+- [ ] **Routes: Implement New Swipe Gesture Handler**
   - Status: Pending
-  - Beschreibung: Swipe-Gesture Logic für neue Funktionalität
+  - Description: Swipe gesture logic for new functionality
 
-- [ ] **Routes: Swipe-Actions UI visuell verbessern**
+- [ ] **Routes: Visually Improve Swipe Actions UI**
   - Status: Pending
-  - Beschreibung: Visuelles Design der Swipe-Actions optimieren
+  - Description: Optimize visual design of swipe actions
 
 ---
 
-## Dokumentation Sub-Tasks
+## Documentation Sub-Tasks
 
-- ✅ **Dokumentationsordner erstellen**
+- ✅ **Create Documentation Folder**
   - Status: Completed
-  - Beschreibung: Strukturierte To-Do Liste und Projekt-Dokumentation angelegt
+  - Description: Structured to-do list and project documentation created
 
-- [ ] **GitHub Dokumentation aktualisieren**
+- [ ] **Update GitHub Documentation**
   - Status: Pending
-  - Beschreibung: Aktuelle To-Dos in GitHub README/Dokumentation übernehmen
+  - Description: Integrate current to-dos in GitHub README/documentation
 
-- [ ] **README.md mit neuen Features aktualisieren**
+- [ ] **Update README.md with New Features**
   - Status: Pending
-  - Beschreibung: README mit aktuellen Features und To-Dos aktualisieren
+  - Description: Update README with current features and to-dos
 
 ---
 

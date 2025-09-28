@@ -1,22 +1,22 @@
-# Authentifizierung & Login-System - Travely
+# Authentication & Login System - Travely
 
-## 🔐 Übersicht
-Implementierung eines umfassenden Authentifizierungssystems mit mehreren Login-Optionen für optimale User Experience.
+## 🔐 Overview
+Implementation of a comprehensive authentication system with multiple login options for optimal user experience.
 
 ---
 
-## 🎯 Login-Optionen
+## 🎯 Login Options
 
-### 📧 E-Mail Login (Priorität: Hoch)
+### 📧 Email Login (Priority: High)
 **Features:**
-- [ ] E-Mail Registrierung
-- [ ] E-Mail Login
+- [ ] Email Registration
+- [ ] Email Login
 - [ ] Password Reset
-- [ ] E-Mail Verification
+- [ ] Email Verification
 
-**Implementierung:**
+**Implementation:**
 ```swift
-// E-Mail Authentication
+// Email Authentication
 struct EmailAuthView: View {
     @State private var email = ""
     @State private var password = ""
@@ -24,14 +24,14 @@ struct EmailAuthView: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            TextField("E-Mail", text: $email)
+            TextField("Email", text: $email)
                 .textFieldStyle(FlatTextFieldStyle())
             
-            SecureField("Passwort", text: $password)
+            SecureField("Password", text: $password)
                 .textFieldStyle(FlatTextFieldStyle())
             
             PrimaryButton(
-                title: isSignUp ? "Registrieren" : "Anmelden",
+                title: isSignUp ? "Register" : "Login",
                 action: handleAuth
             )
         }
@@ -42,7 +42,7 @@ struct EmailAuthView: View {
 ### 🍎 Apple Login
 **Features:**
 - [ ] Apple Sign-In Integration
-- [ ] Privacy-konforme Anmeldung
+- [ ] Privacy-compliant authentication
 - [ ] Seamless User Experience
 
 **Setup:**
@@ -82,7 +82,7 @@ struct GoogleSignInButton: View {
         Button(action: signInWithGoogle) {
             HStack {
                 Image("google_logo")
-                Text("Mit Google anmelden")
+                Text("Sign in with Google")
             }
             .frame(maxWidth: .infinity)
             .padding()

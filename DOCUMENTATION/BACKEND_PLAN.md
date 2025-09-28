@@ -1,33 +1,33 @@
-# Backend Entwicklungsplan - Travely
+# Backend Development Plan - Travely
 
-## Aktueller Status
-- ✅ **Suchfunktionen implementiert**: Länder und Städte Suche funktioniert bereits
-- 🚧 **Backend-Architektur**: Noch zu erweitern und zu vervollständigen
+## Current Status
+- ✅ **Search functionalities implemented**: Country and city search already working
+- 🚧 **Backend architecture**: Still to be expanded and completed
 
 ---
 
-## Backend Komponenten
+## Backend Components
 
-### Datenbank Schema
+### Database Schema
 ```sql
--- Länder Tabelle (bereits vorhanden)
+-- Countries table (already available)
 countries_schema.sql
 
--- Hauptdatenbank Schema
+-- Main database schema
 database_schema.sql
 ```
 
-### Suchfunktionen (✅ Implementiert)
-- [x] Länder-Suche
-- [x] Städte-Suche
-- [x] Destination-Suche
+### Search Functions (✅ Implemented)
+- [x] Country search
+- [x] City search
+- [x] Destination search
 
-### Noch zu implementieren
+### Still to be implemented
 
-#### Authentifizierung
-- [ ] User Registrierung/Login API
+#### Authentication
+- [ ] User Registration/Login API
 - [ ] JWT Token Management
-- [ ] Password Reset Funktionalität
+- [ ] Password Reset Functionality
 - [ ] Email Verification
 
 #### User Management
@@ -53,30 +53,30 @@ database_schema.sql
 
 ---
 
-## Technologie Stack
+## Technology Stack
 
 ### Backend Framework
 - **Node.js** + Express
-- **TypeScript** für Type Safety
-- **Prisma** als ORM
-- **PostgreSQL** als Datenbank
+- **TypeScript** for Type Safety
+- **Prisma** as ORM
+- **PostgreSQL** as database
 
 ### Authentication
-- **JWT** für Token Management
-- **bcrypt** für Password Hashing
+- **JWT** for Token Management
+- **bcrypt** for Password Hashing
 - **Google/Apple OAuth** Integration
 
 ### APIs
-- **REST API** für Standard Operations
-- **GraphQL** für komplexe Queries (optional)
+- **REST API** for Standard Operations
+- **GraphQL** for complex queries (optional)
 
 ---
 
-## Implementierungsreihenfolge
+## Implementation Order
 
 ### Phase 1: Core Backend
 1. **User Authentication System**
-   - Registrierung/Login
+   - Registration/Login
    - JWT Implementation
    - Password Management
 
@@ -110,7 +110,7 @@ database_schema.sql
 
 ## Development Setup
 
-### Lokale Entwicklung
+### Local Development
 ```bash
 # Backend Repository Setup
 npm install
@@ -131,7 +131,7 @@ APPLE_CLIENT_ID="..."
 
 ---
 
-## API Endpoints (Geplant)
+## API Endpoints (Planned)
 
 ### Authentication
 ```
