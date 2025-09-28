@@ -1348,79 +1348,58 @@ struct RouteStopRowNew: View {
             .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
             .offset(x: offset)
             .gesture(
-                DragGesture(minimumDistance: 10)
+                DragGesture(minimumDistance: 20)
                     .onChanged { value in
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
-                        
-                            if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                                let newOffset = value.translation.width
-                                
-                                withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                    if newOffset < 0 {
-                                        // Left swipe - show buttons ALWAYS
-                                        offset = max(newOffset, -140)
-                                        showingDeleteButton = offset < -10
-                                        showingEditButton = offset < -70
-                                    } else if newOffset > 0 {
-                                        // Right swipe - hide buttons
-                                        if showingDeleteButton || showingEditButton {
-                                            offset = max(newOffset - max(showingEditButton ? 140 : 70, 0), 0)
-                                            showingEditButton = offset < -70
-                                            showingDeleteButton = offset < -10
-                                        }
-                                    }
-                                }
+                        // Only respond to horizontal swipes
+                        if abs(value.translation.width) > abs(value.translation.height) {
+                            let newOffset = value.translation.width
+                            
+                            // Left swipe (negative) - show buttons
+                            if newOffset < 0 {
+                                offset = max(newOffset, -140)
+                                showingEditButton = offset < -70
+                                showingDeleteButton = offset < -10
                             }
+                            // Right swipe (positive) - hide buttons if they're showing
+                            else if newOffset > 0 && (showingEditButton || showingDeleteButton) {
+                                offset = min(newOffset, 0)
+                                showingEditButton = offset < -70
+                                showingDeleteButton = offset < -10
+                            }
+                        }
                     }
                     .onEnded { value in
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
+                        let swipeDistance = value.translation.width
+                        let swipeVelocity = value.predictedEndTranslation.width - value.translation.width
                         
-                        if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                            withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if showingDeleteButton || showingEditButton {
-                                    if value.translation.width > 20 {
-                                        // Right swipe - hide all buttons
-                                        offset = 0
-                                        showingEditButton = false
-                                        showingDeleteButton = false
-                                    } else if value.translation.width < -20 {
-                                        // Left swipe - stay in button position
-                                        if showingEditButton && showingDeleteButton {
-                                            offset = -140
-                                        } else if showingDeleteButton {
-                                            offset = -70
-                                        } else {
-                                            offset = 0
-                                        }
-                                    } else {
-                                        // Small movement - return to normal
-                                        offset = 0
-                                        showingEditButton = false
-                                        showingDeleteButton = false
-                                    }
-                                } else {
-                                        // Currently not showing any button
-                                        if value.translation.width < -30 {
-                                            // Left swipe - show buttons ALWAYS
-                                            offset = -140
-                                            showingEditButton = true
-                                            showingDeleteButton = true
-                                        } else {
-                                            // Small movement - return to normal
-                                            offset = 0
-                                            showingDeleteButton = false
-                                            showingEditButton = false
-                                        }
-                                }
+                        // Left swipe - show buttons
+                        if swipeDistance < -50 || swipeVelocity < -100 {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                offset = -140
+                                showingEditButton = true
+                                showingDeleteButton = true
                             }
-                        } else {
-                            // Reset to normal position
-                            withAnimation(.spring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
+                        }
+                        // Right swipe - hide buttons
+                        else if swipeDistance > 50 || swipeVelocity > 100 {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
                                 offset = 0
-                                showingDeleteButton = false
                                 showingEditButton = false
+                                showingDeleteButton = false
+                            }
+                        }
+                        // Small swipe - return to current state
+                        else {
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.8)) {
+                                if showingEditButton || showingDeleteButton {
+                                    offset = -140
+                                    showingEditButton = true
+                                    showingDeleteButton = true
+                                } else {
+                                    offset = 0
+                                    showingEditButton = false
+                                    showingDeleteButton = false
+                                }
                             }
                         }
                     }
