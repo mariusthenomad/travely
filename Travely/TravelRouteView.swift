@@ -1205,60 +1205,9 @@ struct RouteStopRowNew: View {
     let canDelete: Bool
     let canEdit: Bool
     
-    @State private var offset: CGFloat = 0
-    @State private var showingDeleteButton = false
-    @State private var showingEditButton = false
     
     var body: some View {
-        ZStack {
-            // Action buttons background (left side, both buttons next to each other)
-            HStack(spacing: 8) {
-                // Edit button (leftmost) - ALWAYS VISIBLE FOR TESTING
-                Button(action: {
-                    onEdit(stop)
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "pencil")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        Text("Edit")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 60, height: 60)
-                    .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
-                    .cornerRadius(8)
-                }
-                .opacity(1.0) // ALWAYS FULLY VISIBLE FOR TESTING
-                .scaleEffect(1.0) // ALWAYS FULL SIZE FOR TESTING
-                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
-                
-                // Delete button (next to edit button) - ALWAYS VISIBLE FOR TESTING
-                Button(action: {
-                    onDelete(stop)
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "trash.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        Text("Delete")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 60, height: 60)
-                    .background(Color.red)
-                    .cornerRadius(8)
-                }
-                .opacity(1.0) // ALWAYS FULLY VISIBLE FOR TESTING
-                .scaleEffect(1.0) // ALWAYS FULL SIZE FOR TESTING
-                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
-                
-                Spacer()
-            }
-            
-            // Main content card
+        // Main content card
         HStack(spacing: 16) {
             // Stop number circle (green like in screenshot)
             ZStack {
@@ -1346,104 +1295,45 @@ struct RouteStopRowNew: View {
         .background(Color.white)
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
-            .offset(x: offset)
-            .simultaneousGesture(
-                DragGesture(minimumDistance: 5)
-                    .onChanged { value in
-                        // Only respond to very clear horizontal swipes
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
+        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+            // Edit button (leftmost)
+            if canEdit {
+                Button(action: {
+                    onEdit(stop)
+                }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "pencil")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
                         
-                        // Horizontal detection - if horizontal is 1.5x vertical and at least 15 points
-                        if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                            let newOffset = value.translation.width
-                            
-                            // Ultra smooth interpolation for better animation
-                            withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if newOffset < 0 {
-                                    // Left swipe - show both edit and delete buttons
-                                    if canEdit || canDelete {
-                                        offset = max(newOffset, -140) // Limit to 140 points for both buttons
-                                        showingDeleteButton = offset < -5 && canDelete // Show delete button after 5 points
-                                        showingEditButton = offset < -65 && canEdit // Show edit button after 65 points (leftmost)
-                                    }
-                                } else if newOffset > 0 {
-                                    // Right swipe - hide buttons and return to normal
-                                    if showingDeleteButton || showingEditButton {
-                                        offset = max(newOffset - max(showingEditButton ? 140 : 70, 0), 0)
-                                        showingEditButton = offset < -65
-                                        showingDeleteButton = offset < -5
-                                    }
-                                }
-                            }
-                        }
+                        Text("Edit")
+                            .font(.custom("Inter", size: 10))
+                            .foregroundColor(.white)
                     }
-                    .onEnded { value in
-                        // Only respond to very clear horizontal swipes
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
+                    .frame(width: 60, height: 60)
+                }
+                .tint(Color(red: 1.0, green: 0.4, blue: 0.2))
+            }
+            
+            // Delete button (next to edit)
+            if canDelete {
+                Button(action: {
+                    onDelete(stop)
+                }) {
+                    VStack(spacing: 4) {
+                        Image(systemName: "trash.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.white)
                         
-                        // Horizontal detection
-                        if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                            // Use ultra smooth spring animation
-                            withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if showingDeleteButton || showingEditButton {
-                                    // Currently showing buttons
-                                    if value.translation.width > 20 {
-                                        // Right swipe - hide all buttons and return to normal
-                                        offset = 0
-                                        showingEditButton = false
-                                        showingDeleteButton = false
-                                    } else if value.translation.width < -20 {
-                                        // Left swipe - stay in button position
-                                        if showingEditButton && showingDeleteButton {
-                                            offset = -140 // Both buttons visible
-                                        } else if showingDeleteButton {
-                                            offset = -70 // Only delete button
-                                        } else {
-                                            offset = 0 // No buttons
-                                        }
-                                    } else {
-                                        // Small movement - return to normal position
-                                        offset = 0
-                                        showingEditButton = false
-                                        showingDeleteButton = false
-                                    }
-                                } else {
-                                    // Currently not showing any button
-                                    if value.translation.width < -20 && (canDelete || canEdit) {
-                                        // Left swipe - show buttons
-                                        if canEdit && canDelete {
-                                            offset = -140 // Show both buttons
-                                            showingEditButton = true
-                                            showingDeleteButton = true
-                                        } else if canDelete {
-                                            offset = -70 // Show only delete button
-                                            showingDeleteButton = true
-                                        } else if canEdit {
-                                            offset = -70 // Show only edit button
-                                            showingEditButton = true
-                                        }
-                                    } else {
-                                        // Small movement or no clear direction - return to normal
-                                        offset = 0
-                                        showingDeleteButton = false
-                                        showingEditButton = false
-                                    }
-                                }
-                            }
-                        } else {
-                            // If movement is not clearly horizontal, reset to normal position
-                            withAnimation(.spring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                offset = 0
-                                showingDeleteButton = false
-                                showingEditButton = false
-                            }
-                        }
+                        Text("Delete")
+                            .font(.custom("Inter", size: 10))
+                            .foregroundColor(.white)
                     }
-            )
+                    .frame(width: 60, height: 60)
+                }
+                .tint(.red)
+            }
         }
-        .clipped()
     }
 }
 
