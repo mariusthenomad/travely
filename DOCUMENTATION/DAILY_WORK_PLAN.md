@@ -2,14 +2,17 @@
 
 ## 📅 7-Day Sprint Overview
 
-This plan breaks down all 29 tasks into manageable daily chunks of 3 major changes per day for efficient progress tracking.
+This plan breaks down all 29 tasks into manageable daily chunks:
+- **Weekdays (Mon-Fri)**: 3 tasks per day, 3-4 hours afternoon work
+- **Weekends (Sat-Sun)**: 4-6 hours total, more relaxed pace
+- Perfect balance between progress and work-life balance
 
 ---
 
-## 🗓️ Day 1: Foundation & Authentication Setup
+## 🗓️ Day 1: Foundation & Authentication Setup (Monday)
 
 ### 🎯 **Daily Goal**: Establish authentication foundation
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 3-4 hours (Afternoon)
 
 #### Task 1: Apple Login SDK Integration
 - [ ] **Apple Login: Apple Sign-In SDK Integration and Setup**
@@ -39,10 +42,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 2: Authentication Implementation
+## 🗓️ Day 2: Authentication Implementation (Tuesday)
 
 ### 🎯 **Daily Goal**: Complete authentication functionality
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 3-4 hours (Afternoon)
 
 #### Task 1: Apple Login Implementation
 - [ ] **Apple Login: UI and Functionality Implementation**
@@ -72,10 +75,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 3: Onboarding Flow
+## 🗓️ Day 3: Onboarding Flow (Wednesday)
 
 ### 🎯 **Daily Goal**: Create user onboarding experience
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 3-4 hours (Afternoon)
 
 #### Task 1: Welcome Screen
 - [ ] **Onboarding: Welcome Screen with App Branding Creation**
@@ -105,10 +108,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 4: UI Design Updates - Home & Routes
+## 🗓️ Day 4: UI Design Updates - Home & Routes (Thursday)
 
 ### 🎯 **Daily Goal**: Modernize UI with flat design
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 3-4 hours (Afternoon)
 
 #### Task 1: Home Tab Redesign
 - [ ] **UI Design: Flatten Home Tab**
@@ -138,10 +141,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 5: UI Design Updates - Destination & Settings
+## 🗓️ Day 5: UI Design Updates - Destination & Settings (Friday)
 
 ### 🎯 **Daily Goal**: Complete UI modernization
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 3-4 hours (Afternoon)
 
 #### Task 1: Destination Tab Redesign
 - [ ] **UI Design: Flatten Destination Tab**
@@ -171,10 +174,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 6: Backend API Development
+## 🗓️ Day 6: Backend API Development (Saturday)
 
 ### 🎯 **Daily Goal**: Build core backend functionality
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 5-6 hours (Weekend Morning + Afternoon)
 
 #### Task 1: User Authentication API
 - [ ] **Backend: User Authentication API Implementation**
@@ -204,10 +207,10 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 
 ---
 
-## 🗓️ Day 7: Subscription & Polish
+## 🗓️ Day 7: Subscription & Polish (Sunday)
 
 ### 🎯 **Daily Goal**: Complete subscription system and final polish
-**Estimated Time**: 6-8 hours
+**Estimated Time**: 4-5 hours (Weekend)
 
 #### Task 1: Subscription Management
 - [ ] **Backend: Subscription Management API**
@@ -259,8 +262,8 @@ This plan breaks down all 29 tasks into manageable daily chunks of 3 major chang
 ## 🎯 Success Metrics
 
 ### Daily Goals
-- **3 major tasks completed per day**
-- **6-8 hours focused development time**
+- **3 major tasks completed per day (Weekdays: 3-4 hours afternoon)**
+- **Weekend: 4-6 hours total (more relaxed pace)**
 - **All deliverables tested and functional**
 - **Code committed to GitHub daily**
 

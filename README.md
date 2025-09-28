@@ -86,15 +86,15 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 ## 🗺 Development Roadmap
 
 ### 📅 7-Day Sprint Plan
-| Day | Focus Area | Tasks | Status |
-|-----|------------|-------|--------|
-| **Day 1** | Authentication Setup | Apple SDK, Google SDK, Email UI | 📝 Planned |
-| **Day 2** | Authentication Implementation | Apple Login, Google Login, Email Backend | 📝 Planned |
-| **Day 3** | Onboarding Flow | Welcome Screen, Auth Selection, Subscription | 📝 Planned |
-| **Day 4** | UI Design - Home & Routes | Home Redesign, Routes Redesign, Swipe Enhancement | 📝 Planned |
-| **Day 5** | UI Design - Destination & Settings | Destination Redesign, Settings Redesign, Account Management | 📝 Planned |
-| **Day 6** | Backend API Development | Auth API, User Management, Travel Features | 📝 Planned |
-| **Day 7** | Subscription & Polish | Subscription API, App Store Integration, Final Polish | 📝 Planned |
+| Day | Focus Area | Tasks | Time |
+|-----|------------|-------|------|
+| **Monday** | Authentication Setup | Apple SDK, Google SDK, Email UI | 3-4h afternoon |
+| **Tuesday** | Authentication Implementation | Apple Login, Google Login, Email Backend | 3-4h afternoon |
+| **Wednesday** | Onboarding Flow | Welcome Screen, Auth Selection, Subscription | 3-4h afternoon |
+| **Thursday** | UI Design - Home & Routes | Home Redesign, Routes Redesign, Swipe Enhancement | 3-4h afternoon |
+| **Friday** | UI Design - Destination & Settings | Destination Redesign, Settings Redesign, Account Management | 3-4h afternoon |
+| **Saturday** | Backend API Development | Auth API, User Management, Travel Features | 5-6h weekend |
+| **Sunday** | Subscription & Polish | Subscription API, App Store Integration, Final Polish | 4-5h weekend |
 
 ### ✅ Completed Features
 | Feature | Status | Description |
