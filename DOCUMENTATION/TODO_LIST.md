@@ -111,20 +111,20 @@ This documentation contains all current to-dos for the further development of th
 
 ### Design Updates per Tab
 - [ ] **UI Design: Flatten Home Tab**
-  - Status: Pending
-  - Description: Optimize Cards, Buttons, Spacing in Home Tab
+  - Status: In Progress
+  - Description: Replace existing cards with FlatCard components, update button styles
 
 - [ ] **UI Design: Flatten Routes Tab**
   - Status: Pending
-  - Description: Optimize List, Cards, Actions in Routes Tab
+  - Description: Update route list cards with FlatCard components, enhance swipe actions
 
 - [ ] **UI Design: Flatten Destination Tab**
   - Status: Pending
-  - Description: Optimize Search, Cards, Filters in Destination Tab
+  - Description: Update destination cards with FlatCard components, improve search interface
 
 - [ ] **UI Design: Flatten Settings Tab**
   - Status: Pending
-  - Description: Optimize Groups, Toggles, Headers in Settings
+  - Description: Redesign settings groups with FlatToggle components, modernize controls
 
 ---
 
@@ -155,13 +155,31 @@ This documentation contains all current to-dos for the further development of th
   - Status: Completed
   - Description: Structured to-do list and project documentation created
 
-- [ ] **Update GitHub Documentation**
-  - Status: Pending
+- ✅ **Update GitHub Documentation**
+  - Status: Completed
   - Description: Integrate current to-dos in GitHub README/documentation
 
-- [ ] **Update README.md with New Features**
-  - Status: Pending
+- ✅ **Update README.md with New Features**
+  - Status: Completed
   - Description: Update README with current features and to-dos
+
+- ✅ **Create Flat Design System**
+  - Status: Completed
+  - Description: FlatDesignComponents.swift with complete design system
+
+## Current Focus (This Week)
+
+### 🎨 UI Design Implementation (Days 4-7)
+- [ ] **UI Design: Flatten Home Tab** - Status: In Progress
+- [ ] **UI Design: Flatten Routes Tab** - Status: Pending
+- [ ] **UI Design: Flatten Destination Tab** - Status: Pending
+- [ ] **UI Design: Flatten Settings Tab** - Status: Pending
+
+### 🔄 Routes Functionality Updates
+- [ ] **Routes: Add Left-Swipe Edit Button next to Delete Button** - Status: Pending
+- [ ] **Routes: Remove Right-Swipe Edit Function** - Status: Pending
+- [ ] **Routes: Implement New Swipe Gesture Handler** - Status: Pending
+- [ ] **Routes: Visually Improve Swipe Actions UI** - Status: Pending
 
 ---
 
