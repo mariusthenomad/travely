@@ -8,6 +8,38 @@
 A modern iOS Travel App with **Supabase Backend**, **Email Authentication**, **OpenStreetMap Integration**, and planned **Google/Apple Sign-In** integration.  
 Built with SwiftUI and designed to deliver a clean, modern travel experience with real-time location search.
 
+## 📚 Project Documentation
+
+This project now includes comprehensive documentation in the `/DOCUMENTATION` folder:
+
+- **[TODO_LIST.md](DOCUMENTATION/TODO_LIST.md)** - Complete task breakdown with 29+ sub-tasks
+- **[TECH_STACK.md](DOCUMENTATION/TECH_STACK.md)** - Technology stack and cost overview
+- **[BACKEND_PLAN.md](DOCUMENTATION/BACKEND_PLAN.md)** - Backend development roadmap
+- **[UI_DESIGN_GUIDE.md](DOCUMENTATION/UI_DESIGN_GUIDE.md)** - Design system and guidelines
+- **[AUTH_FLOW.md](DOCUMENTATION/AUTH_FLOW.md)** - Authentication implementation plan
+- **[SUBTASK_DETAILS.md](DOCUMENTATION/SUBTASK_DETAILS.md)** - Detailed implementation instructions
+
+## 🎯 Current Development Status
+
+### ✅ Completed Features
+- OpenStreetMap integration (Länder/Städte Suche)
+- Basic UI structure
+- Route planning with swipe gestures
+
+### 🚧 Active Development (29 Sub-Tasks)
+- **Backend**: Complete API development (5 tasks)
+- **Authentication**: Apple/Google/Email login (8 tasks)  
+- **Onboarding**: User flow and subscription selection (4 tasks)
+- **UI Design**: Flat design implementation (4 tasks)
+- **Routes**: Enhanced swipe functionality (4 tasks)
+- **Settings**: Subscription management (3 tasks)
+- **Documentation**: GitHub integration (1 task)
+
+### 💰 Cost Structure
+- **Current**: $20/month (Cursor Pro)
+- **Future**: $339/year total (including Apple Developer Program)
+- **Free Services**: GitHub, Vercel, PostgreSQL, Firebase Auth
+
 ---
 
 ## ✨ Features
@@ -50,41 +82,71 @@ Built with SwiftUI and designed to deliver a clean, modern travel experience wit
 
 ---
 
-## 🗺 Roadmap
+## 🗺 Development Roadmap
 
-| Status | Feature |
-|--------|----------|
-| ✅ Done | Basic Supabase integration (Auth, DB connection) |
-| ✅ Done | Email/Password Login |
-| ✅ Done | **OpenStreetMap Nominatim API** integration |
-| ✅ Done | **OpenStreetMap Overpass API** integration |
-| ✅ Done | **Real-time location search** in Destinations |
-| ✅ Done | **Add Location** with OSM search in Routes |
-| ✅ Done | **Swipe gestures** for route management |
-| ✅ Done | **Nights editing** with automatic date calculation |
-| ✅ Done | **Floating action button** for quick location addition |
-| 🚧 In Progress | Google Sign-In (fix URL scheme) |
-| 🚧 In Progress | Apple Sign-In integration |
-| 🚧 In Progress | Backend: Travel routes database |
-| 📝 Planned | **Enhanced POI categories** (restaurants, attractions, etc.) |
-| 📝 Planned | **Offline map caching** for better performance |
-| 📝 Planned | **Route optimization** and travel time calculations |
-| 📝 Planned | **Push Notifications** (flight updates) |
-| 📝 Planned | **Payment integration** for bookings |
-| 📝 Planned | **Social features** - share routes with friends |
+### 🔥 High Priority (This Week)
+| Task | Status | Description |
+|------|--------|-------------|
+| Apple/Google Login Setup | 🚧 In Progress | SDK Integration and UI implementation |
+| E-Mail Authentication | 📝 Planned | Registration, login, password reset |
+| UI Design Updates | 📝 Planned | Flat design for all tabs |
+| Routes Swipe Enhancement | 📝 Planned | Edit button on left-swipe, remove right-swipe |
+
+### 🟡 Medium Priority (Next Week)
+| Task | Status | Description |
+|------|--------|-------------|
+| Backend API Development | 📝 Planned | Authentication, user management, travel features |
+| Onboarding Flow | 📝 Planned | Welcome, auth selection, subscription choice |
+| Subscription Management | 📝 Planned | App Store integration, restore purchases |
+
+### 🟢 Low Priority (Future)
+| Task | Status | Description |
+|------|--------|-------------|
+| Advanced Features | 📝 Planned | Push notifications, social features, offline caching |
+| Performance Optimization | 📝 Planned | Route optimization, caching, analytics |
+
+### ✅ Completed Features
+| Feature | Status | Description |
+|---------|--------|-------------|
+| OpenStreetMap Integration | ✅ Done | Nominatim + Overpass API |
+| Basic UI Structure | ✅ Done | SwiftUI tabs and navigation |
+| Route Planning | ✅ Done | Swipe gestures, floating button |
+| Project Documentation | ✅ Done | Complete task breakdown and guides |
 
 ---
 
-## 🛠 Technology Stack
+## 🛠 Technology Stack & Costs
 
-- **Frontend**: SwiftUI (iOS 15+)  
-- **Backend**: Supabase (PostgreSQL, Auth, Storage, Functions)  
-- **Maps & Location**: OpenStreetMap (Nominatim + Overpass APIs)
-- **Auth**: Supabase Auth + Google/Apple Sign-In  
-- **Networking**: URLSession + Supabase Swift SDK  
-- **State Management**: SwiftUI state containers (@State, @StateObject, @EnvironmentObject)
-- **Gestures**: SwiftUI DragGesture for swipe interactions
-- **Animations**: SwiftUI withAnimation and spring animations
+### 💻 Development Tools
+- **IDE**: Cursor Pro ($20/month) - AI-powered development
+- **Platform**: Xcode (Free) - iOS development
+- **Version Control**: GitHub (Free) - Code repository
+
+### 📱 iOS Development
+- **Framework**: SwiftUI (iOS 15+) - Modern UI framework
+- **Language**: Swift - Apple's programming language
+- **Architecture**: MVVM - Model-View-ViewModel pattern
+- **State Management**: Combine + SwiftUI state containers
+
+### 🔧 Backend & Database
+- **Backend**: Node.js + Express (Free) - API development
+- **Database**: PostgreSQL (Free) - Data storage
+- **ORM**: Prisma (Free) - Database management
+- **Hosting**: Vercel (Free) - Backend deployment
+
+### 🔐 Authentication
+- **Apple Sign-In**: AuthenticationServices (Free)
+- **Google Sign-In**: GoogleSignIn SDK (Free)
+- **E-Mail Auth**: Custom implementation (Free)
+- **Firebase Auth**: Google platform (Free up to 10k MAU)
+
+### 🗺 Maps & Location
+- **Maps**: Apple Maps + OpenStreetMap (Free)
+- **APIs**: Nominatim + Overpass API (Free)
+- **Framework**: MapKit (Free)
+
+### 💰 Total Monthly Cost: $20 (Cursor Pro only)
+### 💰 Total Annual Cost: $339 (including Apple Developer Program)
 
 ---
 
