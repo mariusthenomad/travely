@@ -151,58 +151,28 @@ struct DestinationSelectionView: View {
                     
                     // Search Bar
                     VStack(spacing: 16) {
-                        HStack(spacing: 12) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(themeManager.secondaryTextColor)
-                                    .font(.system(size: 16))
-                                
-                                TextField("Search destinations...", text: $searchText)
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.textColor)
-                                    .onChange(of: searchText) { _ in
-                                        performNominatimSearch()
-                                    }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
+                        // Search Bar
+                        HStack(spacing: 8) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(themeManager.secondaryTextColor)
+                                .font(.system(size: 16))
                             
-                            // Search Status Indicator
-                            VStack(spacing: 2) {
-                                Image(systemName: "location.fill")
-                                    .font(.system(size: 16))
-                                Text("OSM")
-                                    .font(.system(size: 8))
-                            }
-                            .foregroundColor(.white)
-                            .frame(width: 50, height: 50)
-                            .background(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            .cornerRadius(25)
+                            TextField("Search", text: $searchText)
+                                .font(.custom("Inter", size: 16))
+                                .foregroundColor(themeManager.textColor)
+                                .onChange(of: searchText) { _ in
+                                    performNominatimSearch()
+                                }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(15)
                         .padding(.horizontal, 20)
                     }
                     .padding(.bottom, 20)
                     .background(themeManager.oledBackgroundColor)
                     
-                    // Search Mode Indicator
-                    HStack {
-                        Image(systemName: "location.fill")
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            .font(.system(size: 14))
-                        
-                        Text("OpenStreetMap Suche aktiv")
-                            .font(.custom("Inter", size: 14))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
-                        
-                        Spacer()
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 8)
-                    .background(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1))
-                    .cornerRadius(8)
-                    .padding(.horizontal, 20)
                     
                     // Main Content - API Results Only
                     ScrollView {
@@ -244,11 +214,11 @@ struct DestinationSelectionView: View {
                                         .font(.system(size: 64))
                                         .foregroundColor(themeManager.secondaryTextColor)
                                     
-                                    Text("OpenStreetMap Nominatim Suche")
+                                    Text("Search")
                                         .font(.custom("Inter", size: 24))
                                         .foregroundColor(themeManager.textColor)
                                     
-                                    Text("Gib einen Ort ein um zu suchen")
+                                    Text("Enter a place to search")
                                         .font(.custom("Inter", size: 16))
                                         .foregroundColor(themeManager.secondaryTextColor)
                                         .multilineTextAlignment(.center)

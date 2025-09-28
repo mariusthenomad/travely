@@ -1211,9 +1211,10 @@ struct RouteStopRowNew: View {
     
     var body: some View {
         ZStack {
-            // Edit button background (left side, always present but hidden)
-            if canEdit {
-                HStack {
+            // Action buttons background (left side, both buttons next to each other)
+            HStack(spacing: 8) {
+                // Edit button (leftmost)
+                if canEdit {
                     Button(action: {
                         onEdit(stop)
                     }) {
@@ -1233,16 +1234,10 @@ struct RouteStopRowNew: View {
                     .opacity(showingEditButton ? 1 : 0)
                     .scaleEffect(showingEditButton ? 1 : 0.8)
                     .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
-                    
-                    Spacer()
                 }
-            }
-            
-            // Delete button background (right side, always present but hidden)
-            if canDelete {
-                HStack {
-                    Spacer()
-                    
+                
+                // Delete button (next to edit button)
+                if canDelete {
                     Button(action: {
                         onDelete(stop)
                     }) {
@@ -1263,6 +1258,8 @@ struct RouteStopRowNew: View {
                     .scaleEffect(showingDeleteButton ? 1 : 0.8)
                     .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 }
+                
+                Spacer()
             }
             
             // Main content card
@@ -1355,35 +1352,31 @@ struct RouteStopRowNew: View {
         .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
             .offset(x: offset)
             .simultaneousGesture(
-                DragGesture(minimumDistance: 25)
+                DragGesture(minimumDistance: 10)
                     .onChanged { value in
                         // Only respond to very clear horizontal swipes
                         let horizontalMovement = abs(value.translation.width)
                         let verticalMovement = abs(value.translation.height)
                         
-                        // Ultra strict horizontal detection - only if horizontal is 3x vertical
-                        if horizontalMovement > verticalMovement * 3 && horizontalMovement > 40 {
+                        // Horizontal detection - if horizontal is 2x vertical and at least 20 points
+                        if horizontalMovement > verticalMovement * 2 && horizontalMovement > 20 {
                             let newOffset = value.translation.width
                             
                             // Ultra smooth interpolation for better animation
                             withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
                                 if newOffset < 0 {
-                                    // Left swipe - show delete button (if allowed)
-                                    if canDelete {
-                                        offset = max(newOffset, -70) // Limit to 70 points
-                                        showingDeleteButton = offset < -20 // Show button after 20 points
-                                        showingEditButton = false // Hide edit button
+                                    // Left swipe - show both edit and delete buttons
+                                    if canEdit || canDelete {
+                                        offset = max(newOffset, -140) // Limit to 140 points for both buttons
+                                        showingDeleteButton = offset < -10 && canDelete // Show delete button after 10 points
+                                        showingEditButton = offset < -70 && canEdit // Show edit button after 70 points (leftmost)
                                     }
                                 } else if newOffset > 0 {
-                                    // Right swipe - show edit button (if allowed)
-                                    if canEdit {
-                                        offset = min(newOffset, 70) // Limit to 70 points
-                                        showingEditButton = offset > 20 // Show button after 20 points
-                                        showingDeleteButton = false // Hide delete button
-                                    } else if canDelete && showingDeleteButton {
-                                        // Right swipe - hide delete button (only if currently showing)
-                                        offset = min(newOffset - 70, 0) // Start from -70 and go towards 0
-                                        showingDeleteButton = offset < -20
+                                    // Right swipe - hide buttons and return to normal
+                                    if showingDeleteButton || showingEditButton {
+                                        offset = max(newOffset - max(showingEditButton ? 140 : 70, 0), 0)
+                                        showingEditButton = offset < -70
+                                        showingDeleteButton = offset < -10
                                     }
                                 }
                             }
@@ -1394,50 +1387,47 @@ struct RouteStopRowNew: View {
                         let horizontalMovement = abs(value.translation.width)
                         let verticalMovement = abs(value.translation.height)
                         
-                        // Ultra strict horizontal detection
-                        if horizontalMovement > verticalMovement * 3 && horizontalMovement > 40 {
+                        // Horizontal detection
+                        if horizontalMovement > verticalMovement * 2 && horizontalMovement > 20 {
                             // Use ultra smooth spring animation
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if showingEditButton {
-                                    // Currently showing edit button
-                                    if value.translation.width < -20 {
-                                        // Left swipe - hide edit button and return to normal
-                                        offset = 0
-                                        showingEditButton = false
-                                    } else if value.translation.width > 20 {
-                                        // Right swipe - stay in edit position
-                                        offset = 70
-                                        showingEditButton = true
-                                    } else {
-                                        // Small movement - return to normal position
-                                        offset = 0
-                                        showingEditButton = false
-                                    }
-                                } else if showingDeleteButton {
-                                    // Currently showing delete button
+                                if showingDeleteButton || showingEditButton {
+                                    // Currently showing buttons
                                     if value.translation.width > 20 {
-                                        // Right swipe - hide delete button and return to normal
+                                        // Right swipe - hide all buttons and return to normal
                                         offset = 0
+                                        showingEditButton = false
                                         showingDeleteButton = false
                                     } else if value.translation.width < -20 {
-                                        // Left swipe - stay in delete position
-                                        offset = -70
-                                        showingDeleteButton = true
+                                        // Left swipe - stay in button position
+                                        if showingEditButton && showingDeleteButton {
+                                            offset = -140 // Both buttons visible
+                                        } else if showingDeleteButton {
+                                            offset = -70 // Only delete button
+                                        } else {
+                                            offset = 0 // No buttons
+                                        }
                                     } else {
                                         // Small movement - return to normal position
                                         offset = 0
+                                        showingEditButton = false
                                         showingDeleteButton = false
                                     }
                                 } else {
                                     // Currently not showing any button
-                                    if value.translation.width < -50 && canDelete {
-                                        // Left swipe - show delete button
-                                        offset = -70
-                                        showingDeleteButton = true
-                                    } else if value.translation.width > 50 && canEdit {
-                                        // Right swipe - show edit button
-                                        offset = 70
-                                        showingEditButton = true
+                                    if value.translation.width < -30 && (canDelete || canEdit) {
+                                        // Left swipe - show buttons
+                                        if canEdit && canDelete {
+                                            offset = -140 // Show both buttons
+                                            showingEditButton = true
+                                            showingDeleteButton = true
+                                        } else if canDelete {
+                                            offset = -70 // Show only delete button
+                                            showingDeleteButton = true
+                                        } else if canEdit {
+                                            offset = -70 // Show only edit button
+                                            showingEditButton = true
+                                        }
                                     } else {
                                         // Small movement or no clear direction - return to normal
                                         offset = 0
