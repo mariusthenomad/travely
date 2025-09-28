@@ -348,13 +348,13 @@ struct AddLocationView: View {
                     .padding(.horizontal, 20)
                     .padding(.bottom, 20)
                     
-                    // Search Bar
-                    VStack(spacing: 16) {
+                    // Search Bar - Centered
+                    VStack(spacing: 0) {
                         // Search Bar
-                        HStack(spacing: 8) {
+                        HStack(spacing: 12) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(themeManager.secondaryTextColor)
-                                .font(.system(size: 16))
+                                .font(.system(size: 18))
                             
                             TextField("Search", text: $searchText)
                                 .font(.custom("Inter", size: 16))
@@ -363,44 +363,46 @@ struct AddLocationView: View {
                                     performNominatimSearch()
                                 }
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(15)
                         .padding(.horizontal, 20)
-                        
+                        .padding(.vertical, 16)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(16)
+                        .padding(.horizontal, 24)
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 24)
                     .background(themeManager.oledBackgroundColor)
                     
                     // Main Content - API Results Only
                     ScrollView {
-                        LazyVStack(spacing: 16) {
+                        LazyVStack(spacing: 12) {
                             if !searchText.isEmpty {
                                 // Nominatim API Results
                                 if nominatimManager.isLoading {
-                                    HStack {
-                                        Spacer()
+                                    VStack(spacing: 16) {
                                         ProgressView()
                                             .scaleEffect(1.2)
-                                        Spacer()
+                                            .tint(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                        
+                                        Text("Searching...")
+                                            .font(.custom("Inter", size: 16))
+                                            .foregroundColor(themeManager.secondaryTextColor)
                                     }
-                                    .padding(.top, 50)
+                                    .padding(.top, 60)
                                 } else if nominatimManager.searchResults.isEmpty && !searchText.isEmpty {
-                                    VStack(spacing: 16) {
+                                    VStack(spacing: 20) {
                                         Image(systemName: "magnifyingglass")
-                                            .font(.system(size: 48))
+                                            .font(.system(size: 56))
                                             .foregroundColor(themeManager.secondaryTextColor)
                                         
                                         Text("No places found")
-                                            .font(.custom("Inter", size: 18))
+                                            .font(.custom("Inter", size: 20))
                                             .foregroundColor(themeManager.textColor)
                                         
                                         Text("Try a different search term")
-                                            .font(.custom("Inter", size: 14))
+                                            .font(.custom("Inter", size: 16))
                                             .foregroundColor(themeManager.secondaryTextColor)
                                     }
-                                    .padding(.top, 50)
+                                    .padding(.top, 60)
                                 } else {
                                     ForEach(nominatimManager.searchResults) { place in
                                         Button(action: {
@@ -412,40 +414,41 @@ struct AddLocationView: View {
                                     }
                                 }
                             } else {
-                                VStack(spacing: 16) {
+                                VStack(spacing: 24) {
                                     Image(systemName: "magnifyingglass")
-                                        .font(.system(size: 48))
+                                        .font(.system(size: 64))
                                         .foregroundColor(themeManager.secondaryTextColor)
                                     
                                     Text("Search")
-                                        .font(.custom("Inter", size: 24))
+                                        .font(.custom("Inter", size: 28))
+                                        .fontWeight(.semibold)
                                         .foregroundColor(themeManager.textColor)
                                     
                                     Text("Enter a place to search")
-                                        .font(.custom("Inter", size: 16))
+                                        .font(.custom("Inter", size: 18))
                                         .foregroundColor(themeManager.secondaryTextColor)
                                         .multilineTextAlignment(.center)
-                                        .padding(.horizontal, 40)
+                                        .padding(.horizontal, 60)
                                     
                                     // Error message display
                                     if let errorMessage = nominatimManager.errorMessage {
                                         Text("Error: \(errorMessage)")
-                                            .font(.custom("Inter", size: 14))
+                                            .font(.custom("Inter", size: 16))
                                             .foregroundColor(.red)
                                             .multilineTextAlignment(.center)
-                                            .padding(.horizontal, 40)
+                                            .padding(.horizontal, 60)
                                     }
                                 }
-                                .padding(.top, 100)
+                                .padding(.top, 80)
                             }
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.top, 8)
-                        .padding(.bottom, 100)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 20)
+                        .padding(.bottom, 120)
                     }
                     
                     // Add Button
-                    VStack(spacing: 16) {
+                    VStack(spacing: 12) {
                         Button(action: {
                             // Add the selected location if any
                             if !searchText.isEmpty && !nominatimManager.searchResults.isEmpty {
@@ -453,9 +456,9 @@ struct AddLocationView: View {
                                 onSave(firstResult.display_name, selectedDate, selectedNights)
                             }
                         }) {
-                            HStack {
+                            HStack(spacing: 8) {
                                 Image(systemName: "plus")
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 20))
                                 
                                 Text("Add Location")
                                     .font(.custom("Inter", size: 18))
@@ -463,9 +466,9 @@ struct AddLocationView: View {
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .frame(height: 50)
+                            .frame(height: 56)
                             .background(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            .cornerRadius(25)
+                            .cornerRadius(28)
                         }
                         .disabled(searchText.isEmpty || nominatimManager.searchResults.isEmpty)
                         .opacity(searchText.isEmpty || nominatimManager.searchResults.isEmpty ? 0.5 : 1.0)
@@ -475,20 +478,20 @@ struct AddLocationView: View {
                         }) {
                             Text("Cancel")
                                 .font(.custom("Inter", size: 16))
-                                .fontWeight(.semibold)
-                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                .fontWeight(.medium)
+                                .foregroundColor(Color(red: 0.4, green: 0.4, blue: 0.4))
                                 .frame(maxWidth: .infinity)
-                                .frame(height: 50)
+                                .frame(height: 48)
                                 .background(Color.white)
-                                .cornerRadius(25)
+                                .cornerRadius(24)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .stroke(Color(red: 0.2, green: 0.2, blue: 0.2), lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: 24)
+                                        .stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1)
                                 )
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 50)
+                    .padding(.horizontal, 24)
+                    .padding(.bottom, 40)
                 }
             }
             .navigationBarHidden(true)
