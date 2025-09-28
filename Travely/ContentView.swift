@@ -449,11 +449,11 @@ struct AddLocationView: View {
                             }
                         }
                         
-                        Spacer()
+                        Spacer(minLength: 60)
                     }
                     
                     // Add Button
-                    VStack(spacing: 12) {
+                    VStack(spacing: 16) {
                         Button(action: {
                             // Add the selected location if any
                             if !searchText.isEmpty && !nominatimManager.searchResults.isEmpty {
@@ -496,6 +496,7 @@ struct AddLocationView: View {
                         }
                     }
                     .padding(.horizontal, 24)
+                    .padding(.top, 24)
                     .padding(.bottom, 40)
                 }
             }
