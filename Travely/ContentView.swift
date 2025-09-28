@@ -237,12 +237,31 @@ struct AddLocationView: View {
                                 Spacer()
                             }
                             
-                            DatePicker("", selection: $selectedDate, displayedComponents: .date)
-                                .datePickerStyle(CompactDatePickerStyle())
+                            Button(action: {
+                                // Date picker will be triggered by the button
+                            }) {
+                                HStack {
+                                    Image(systemName: "calendar")
+                                        .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                        .font(.system(size: 16))
+                                    
+                                    Text(selectedDate, style: .date)
+                                        .font(.custom("Inter", size: 16))
+                                        .foregroundColor(themeManager.textColor)
+                                    
+                                    Spacer()
+                                }
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 12)
-                                .background(Color.gray.opacity(0.1))
+                                .background(Color.white)
                                 .cornerRadius(12)
+                                .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+                            }
+                            .overlay(
+                                DatePicker("", selection: $selectedDate, displayedComponents: .date)
+                                    .datePickerStyle(CompactDatePickerStyle())
+                                    .opacity(0.011)
+                            )
                         }
                         
                         // Nights Selection
@@ -331,55 +350,25 @@ struct AddLocationView: View {
                     
                     // Search Bar
                     VStack(spacing: 16) {
-                        HStack(spacing: 12) {
-                            HStack(spacing: 8) {
-                                Image(systemName: "magnifyingglass")
-                                    .foregroundColor(themeManager.secondaryTextColor)
-                                    .font(.system(size: 16))
-                                
-                                TextField("Search destinations...", text: $searchText)
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.textColor)
-                                    .onChange(of: searchText) { _ in
-                                        performNominatimSearch()
-                                    }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(15)
+                        // Search Bar
+                        HStack(spacing: 8) {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(themeManager.secondaryTextColor)
+                                .font(.system(size: 16))
                             
-                            // Search Status Indicator
-                            VStack(spacing: 2) {
-                                Image(systemName: "location.fill")
-                                    .font(.system(size: 16))
-                                Text("OSM")
-                                    .font(.system(size: 8))
-                            }
-                            .foregroundColor(.white)
-                            .frame(width: 50, height: 50)
-                            .background(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            .cornerRadius(25)
+                            TextField("Search", text: $searchText)
+                                .font(.custom("Inter", size: 16))
+                                .foregroundColor(themeManager.textColor)
+                                .onChange(of: searchText) { _ in
+                                    performNominatimSearch()
+                                }
                         }
+                        .padding(.horizontal, 16)
+                        .padding(.vertical, 12)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(15)
                         .padding(.horizontal, 20)
                         
-                        // Search Mode Indicator
-                        HStack {
-                            Image(systemName: "location.fill")
-                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
-                                .font(.system(size: 14))
-                            
-                            Text("OpenStreetMap Suche aktiv")
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            
-                            Spacer()
-                        }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 8)
-                        .background(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1))
-                        .cornerRadius(8)
-                        .padding(.horizontal, 20)
                     }
                     .padding(.bottom, 20)
                     .background(themeManager.oledBackgroundColor)
@@ -403,11 +392,11 @@ struct AddLocationView: View {
                                             .font(.system(size: 48))
                                             .foregroundColor(themeManager.secondaryTextColor)
                                         
-                                        Text("Keine Orte gefunden")
+                                        Text("No places found")
                                             .font(.custom("Inter", size: 18))
                                             .foregroundColor(themeManager.textColor)
                                         
-                                        Text("Versuche einen anderen Suchbegriff")
+                                        Text("Try a different search term")
                                             .font(.custom("Inter", size: 14))
                                             .foregroundColor(themeManager.secondaryTextColor)
                                     }
@@ -424,15 +413,15 @@ struct AddLocationView: View {
                                 }
                             } else {
                                 VStack(spacing: 16) {
-                                    Image(systemName: "location.fill")
+                                    Image(systemName: "magnifyingglass")
                                         .font(.system(size: 48))
-                                        .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                        .foregroundColor(themeManager.secondaryTextColor)
                                     
-                                    Text("OpenStreetMap Nominatim Suche")
+                                    Text("Search")
                                         .font(.custom("Inter", size: 24))
                                         .foregroundColor(themeManager.textColor)
                                     
-                                    Text("Gib einen Ort ein um zu suchen")
+                                    Text("Enter a place to search")
                                         .font(.custom("Inter", size: 16))
                                         .foregroundColor(themeManager.secondaryTextColor)
                                         .multilineTextAlignment(.center)
@@ -440,7 +429,7 @@ struct AddLocationView: View {
                                     
                                     // Error message display
                                     if let errorMessage = nominatimManager.errorMessage {
-                                        Text("Fehler: \(errorMessage)")
+                                        Text("Error: \(errorMessage)")
                                             .font(.custom("Inter", size: 14))
                                             .foregroundColor(.red)
                                             .multilineTextAlignment(.center)
@@ -454,17 +443,55 @@ struct AddLocationView: View {
                         .padding(.top, 8)
                         .padding(.bottom, 100)
                     }
+                    
+                    // Add Button
+                    VStack(spacing: 16) {
+                        Button(action: {
+                            // Add the selected location if any
+                            if !searchText.isEmpty && !nominatimManager.searchResults.isEmpty {
+                                let firstResult = nominatimManager.searchResults.first!
+                                onSave(firstResult.display_name, selectedDate, selectedNights)
+                            }
+                        }) {
+                            HStack {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 18))
+                                
+                                Text("Add Location")
+                                    .font(.custom("Inter", size: 18))
+                                    .fontWeight(.semibold)
+                            }
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(Color(red: 1.0, green: 0.4, blue: 0.2))
+                            .cornerRadius(25)
+                        }
+                        .disabled(searchText.isEmpty || nominatimManager.searchResults.isEmpty)
+                        .opacity(searchText.isEmpty || nominatimManager.searchResults.isEmpty ? 0.5 : 1.0)
+                        
+                        Button(action: {
+                            onCancel()
+                        }) {
+                            Text("Cancel")
+                                .font(.custom("Inter", size: 16))
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 50)
+                                .background(Color.white)
+                                .cornerRadius(25)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 25)
+                                        .stroke(Color(red: 0.2, green: 0.2, blue: 0.2), lineWidth: 1)
+                                )
+                        }
+                    }
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 50)
                 }
             }
             .navigationBarHidden(true)
-            .navigationBarItems(
-                leading: Button("Cancel") {
-                    onCancel()
-                },
-                trailing: Button("Done") {
-                    onCancel()
-                }
-            )
         }
     }
 }
