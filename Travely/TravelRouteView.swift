@@ -1209,9 +1209,7 @@ struct RouteStopRowNew: View {
     
     var body: some View {
         // Simple card without swipe functionality
-            
-            // Main content card
-            HStack(spacing: 16) {
+        HStack(spacing: 16) {
             // Stop number circle (green like in screenshot)
             ZStack {
                 Circle()
@@ -1291,7 +1289,6 @@ struct RouteStopRowNew: View {
                     .font(.custom("Inter", size: 12))
                     .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
             }
-        }
         }
         .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
         .padding(.vertical, 12)
