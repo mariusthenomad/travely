@@ -1211,7 +1211,7 @@ struct RouteStopRowNew: View {
     
     var body: some View {
         ZStack {
-            // Action buttons background (left side, both buttons next to each other) - ALWAYS VISIBLE
+            // Action buttons background (left side, both buttons next to each other)
             HStack(spacing: 8) {
                 // Edit button (leftmost)
                 if canEdit {
@@ -1231,6 +1231,9 @@ struct RouteStopRowNew: View {
                         .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
                         .cornerRadius(8)
                     }
+                    .opacity(showingEditButton ? 1 : 0)
+                    .scaleEffect(showingEditButton ? 1 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
                 }
                 
                 // Delete button (next to edit button)
@@ -1251,6 +1254,9 @@ struct RouteStopRowNew: View {
                         .background(Color.red)
                         .cornerRadius(8)
                     }
+                    .opacity(showingDeleteButton ? 1 : 0)
+                    .scaleEffect(showingDeleteButton ? 1 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 }
                 
                 Spacer()
