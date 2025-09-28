@@ -1211,49 +1211,30 @@ struct RouteStopRowNew: View {
     
     var body: some View {
         ZStack {
-            // Action buttons background (left side, both buttons next to each other)
+            // Action buttons background (left side, ONLY DELETE BUTTON)
             HStack(spacing: 8) {
-                // Edit button (leftmost) - ALWAYS SHOW
-                Button(action: {
-                    onEdit(stop)
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "pencil")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        Text("Edit")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(.white)
+                // Delete button - ONLY THIS ONE
+                if canDelete {
+                    Button(action: {
+                        onDelete(stop)
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "trash.fill")
+                                .font(.system(size: 16))
+                                .foregroundColor(.white)
+                            
+                            Text("Delete")
+                                .font(.custom("Inter", size: 10))
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 60, height: 60)
+                        .background(Color.red)
+                        .cornerRadius(8)
                     }
-                    .frame(width: 60, height: 60)
-                    .background(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange
-                    .cornerRadius(8)
+                    .opacity(showingDeleteButton ? 1 : 0)
+                    .scaleEffect(showingDeleteButton ? 1 : 0.8)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 }
-                .opacity(showingEditButton ? 1 : 0)
-                .scaleEffect(showingEditButton ? 1 : 0.8)
-                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingEditButton)
-                
-                // Delete button (next to edit button) - ALWAYS SHOW
-                Button(action: {
-                    onDelete(stop)
-                }) {
-                    VStack(spacing: 4) {
-                        Image(systemName: "trash.fill")
-                            .font(.system(size: 16))
-                            .foregroundColor(.white)
-                        
-                        Text("Delete")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(.white)
-                    }
-                    .frame(width: 60, height: 60)
-                    .background(Color.red)
-                    .cornerRadius(8)
-                }
-                .opacity(showingDeleteButton ? 1 : 0)
-                .scaleEffect(showingDeleteButton ? 1 : 0.8)
-                .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
                 
                 Spacer()
             }
@@ -1358,15 +1339,15 @@ struct RouteStopRowNew: View {
                             
                             withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
                                 if newOffset < 0 {
-                                    // Left swipe - show buttons ALWAYS
-                                    offset = max(newOffset, -140)
-                                    showingDeleteButton = offset < -10
-                                    showingEditButton = offset < -70
+                                    // Left swipe - show DELETE button only
+                                    if canDelete {
+                                        offset = max(newOffset, -70)
+                                        showingDeleteButton = offset < -10
+                                    }
                                 } else if newOffset > 0 {
-                                    // Right swipe - hide buttons
-                                    if showingDeleteButton || showingEditButton {
-                                        offset = max(newOffset - max(showingEditButton ? 140 : 70, 0), 0)
-                                        showingEditButton = offset < -70
+                                    // Right swipe - hide DELETE button
+                                    if showingDeleteButton {
+                                        offset = max(newOffset - 70, 0)
                                         showingDeleteButton = offset < -10
                                     }
                                 }
@@ -1379,40 +1360,31 @@ struct RouteStopRowNew: View {
                         
                         if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
                             withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if showingDeleteButton || showingEditButton {
+                                if showingDeleteButton {
                                     if value.translation.width > 20 {
-                                        // Right swipe - hide all buttons
+                                        // Right swipe - hide DELETE button
                                         offset = 0
-                                        showingEditButton = false
                                         showingDeleteButton = false
                                     } else if value.translation.width < -20 {
-                                        // Left swipe - stay in button position
-                                        if showingEditButton && showingDeleteButton {
-                                            offset = -140
-                                        } else if showingDeleteButton {
-                                            offset = -70
-                                        } else {
-                                            offset = 0
-                                        }
+                                        // Left swipe - stay in DELETE button position
+                                        offset = -70
+                                        showingDeleteButton = true
                                     } else {
                                         // Small movement - return to normal
                                         offset = 0
-                                        showingEditButton = false
                                         showingDeleteButton = false
                                     }
                                 } else {
-                                        // Currently not showing any button
-                                        if value.translation.width < -30 {
-                                            // Left swipe - show buttons ALWAYS
-                                            offset = -140
-                                            showingEditButton = true
-                                            showingDeleteButton = true
-                                        } else {
-                                            // Small movement - return to normal
-                                            offset = 0
-                                            showingDeleteButton = false
-                                            showingEditButton = false
-                                        }
+                                    // Currently not showing DELETE button
+                                    if value.translation.width < -30 && canDelete {
+                                        // Left swipe - show DELETE button
+                                        offset = -70
+                                        showingDeleteButton = true
+                                    } else {
+                                        // Small movement - return to normal
+                                        offset = 0
+                                        showingDeleteButton = false
+                                    }
                                 }
                             }
                         } else {
@@ -1420,7 +1392,6 @@ struct RouteStopRowNew: View {
                             withAnimation(.spring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
                                 offset = 0
                                 showingDeleteButton = false
-                                showingEditButton = false
                             }
                         }
                     }
