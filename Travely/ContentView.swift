@@ -373,9 +373,9 @@ struct AddLocationView: View {
                     .background(themeManager.oledBackgroundColor)
                     
                     // Main Content - API Results Only
-                    ScrollView {
-                        LazyVStack(spacing: 12) {
-                            if !searchText.isEmpty {
+                    if !searchText.isEmpty {
+                        ScrollView {
+                            LazyVStack(spacing: 12) {
                                 // Nominatim API Results
                                 if nominatimManager.isLoading {
                                     VStack(spacing: 16) {
@@ -388,7 +388,7 @@ struct AddLocationView: View {
                                             .foregroundColor(themeManager.secondaryTextColor)
                                     }
                                     .padding(.top, 60)
-                                } else if nominatimManager.searchResults.isEmpty && !searchText.isEmpty {
+                                } else if nominatimManager.searchResults.isEmpty {
                                     VStack(spacing: 20) {
                                         Image(systemName: "magnifyingglass")
                                             .font(.system(size: 56))
@@ -413,38 +413,43 @@ struct AddLocationView: View {
                                         .buttonStyle(PlainButtonStyle())
                                     }
                                 }
-                            } else {
-                                VStack(spacing: 24) {
-                                    Image(systemName: "magnifyingglass")
-                                        .font(.system(size: 64))
-                                        .foregroundColor(themeManager.secondaryTextColor)
-                                    
-                                    Text("Search")
-                                        .font(.custom("Inter", size: 28))
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(themeManager.textColor)
-                                    
-                                    Text("Enter a place to search")
-                                        .font(.custom("Inter", size: 18))
-                                        .foregroundColor(themeManager.secondaryTextColor)
-                                        .multilineTextAlignment(.center)
-                                        .padding(.horizontal, 60)
-                                    
-                                    // Error message display
-                                    if let errorMessage = nominatimManager.errorMessage {
-                                        Text("Error: \(errorMessage)")
-                                            .font(.custom("Inter", size: 16))
-                                            .foregroundColor(.red)
-                                            .multilineTextAlignment(.center)
-                                            .padding(.horizontal, 60)
-                                    }
-                                }
-                                .padding(.top, 80)
+                            }
+                            .padding(.horizontal, 24)
+                            .padding(.top, 20)
+                            .padding(.bottom, 120)
+                        }
+                    } else {
+                        // Centered Search Icon between Search Field and Buttons
+                        Spacer()
+                        
+                        VStack(spacing: 32) {
+                            Image(systemName: "magnifyingglass")
+                                .font(.system(size: 72))
+                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                            
+                            VStack(spacing: 8) {
+                                Text("Search")
+                                    .font(.custom("Inter", size: 24))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(themeManager.textColor)
+                                
+                                Text("Enter a place to search")
+                                    .font(.custom("Inter", size: 16))
+                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .multilineTextAlignment(.center)
+                            }
+                            
+                            // Error message display
+                            if let errorMessage = nominatimManager.errorMessage {
+                                Text("Error: \(errorMessage)")
+                                    .font(.custom("Inter", size: 14))
+                                    .foregroundColor(.red)
+                                    .multilineTextAlignment(.center)
+                                    .padding(.horizontal, 40)
                             }
                         }
-                        .padding(.horizontal, 24)
-                        .padding(.top, 20)
-                        .padding(.bottom, 120)
+                        
+                        Spacer()
                     }
                     
                     // Add Button
