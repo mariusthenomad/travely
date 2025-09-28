@@ -1205,39 +1205,10 @@ struct RouteStopRowNew: View {
     let canDelete: Bool
     let canEdit: Bool
     
-    @State private var offset: CGFloat = 0
-    @State private var showingDeleteButton = false
-    @State private var showingEditButton = false
+    // Swipe functionality removed - no state needed
     
     var body: some View {
-        ZStack {
-            // Action buttons background (left side, ONLY DELETE BUTTON)
-            HStack(spacing: 8) {
-                // Delete button - ONLY THIS ONE
-                if canDelete {
-                    Button(action: {
-                        onDelete(stop)
-                    }) {
-                        VStack(spacing: 4) {
-                            Image(systemName: "trash.fill")
-                                .font(.system(size: 16))
-                                .foregroundColor(.white)
-                            
-                            Text("Delete")
-                                .font(.custom("Inter", size: 10))
-                                .foregroundColor(.white)
-                        }
-                        .frame(width: 60, height: 60)
-                        .background(Color.red)
-                        .cornerRadius(8)
-                    }
-                    .opacity(showingDeleteButton ? 1 : 0)
-                    .scaleEffect(showingDeleteButton ? 1 : 0.8)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.7, blendDuration: 0.1), value: showingDeleteButton)
-                }
-                
-                Spacer()
-            }
+        // Simple card without swipe functionality
             
             // Main content card
             HStack(spacing: 16) {
@@ -1321,83 +1292,13 @@ struct RouteStopRowNew: View {
                     .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
             }
         }
-            .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 20)
-            .background(Color.white)
-            .cornerRadius(12)
-            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
-            .offset(x: offset)
-            .gesture(
-                DragGesture(minimumDistance: 10)
-                    .onChanged { value in
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
-                        
-                        if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                            let newOffset = value.translation.width
-                            
-                            withAnimation(.interactiveSpring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if newOffset < 0 {
-                                    // Left swipe - show DELETE button only
-                                    if canDelete {
-                                        offset = max(newOffset, -70)
-                                        showingDeleteButton = offset < -10
-                                    }
-                                } else if newOffset > 0 {
-                                    // Right swipe - hide DELETE button
-                                    if showingDeleteButton {
-                                        offset = max(newOffset - 70, 0)
-                                        showingDeleteButton = offset < -10
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .onEnded { value in
-                        let horizontalMovement = abs(value.translation.width)
-                        let verticalMovement = abs(value.translation.height)
-                        
-                        if horizontalMovement > verticalMovement * 1.5 && horizontalMovement > 15 {
-                            withAnimation(.spring(response: 0.35, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                if showingDeleteButton {
-                                    if value.translation.width > 20 {
-                                        // Right swipe - hide DELETE button
-                                        offset = 0
-                                        showingDeleteButton = false
-                                    } else if value.translation.width < -20 {
-                                        // Left swipe - stay in DELETE button position
-                                        offset = -70
-                                        showingDeleteButton = true
-                                    } else {
-                                        // Small movement - return to normal
-                                        offset = 0
-                                        showingDeleteButton = false
-                                    }
-                                } else {
-                                    // Currently not showing DELETE button
-                                    if value.translation.width < -30 && canDelete {
-                                        // Left swipe - show DELETE button
-                                        offset = -70
-                                        showingDeleteButton = true
-                                    } else {
-                                        // Small movement - return to normal
-                                        offset = 0
-                                        showingDeleteButton = false
-                                    }
-                                }
-                            }
-                        } else {
-                            // Reset to normal position
-                            withAnimation(.spring(response: 0.25, dampingFraction: 0.9, blendDuration: 0.05)) {
-                                offset = 0
-                                showingDeleteButton = false
-                            }
-                        }
-                    }
-            )
         }
-        .clipped()
+        .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
+        .padding(.vertical, 12)
+        .padding(.horizontal, 20)
+        .background(Color.white)
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
     }
 }
 
