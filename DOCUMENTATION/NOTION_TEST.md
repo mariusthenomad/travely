@@ -1,29 +1,29 @@
-# Notion Format Test
+Notion Format Test
 
-## Test 1: Basic Formatting
+Test 1: Basic Formatting
 
 **Bold Text**: This should be bold  
 *Italic Text*: This should be italic  
 `Code Text`: This should be monospace  
 
-## Test 2: Lists
+Test 2: Lists
 
-### Bullet Points
+Bullet Points
 - First item
 - Second item
 - Third item
 
-### Numbered Lists
+Numbered Lists
 1. First numbered item
 2. Second numbered item
 3. Third numbered item
 
-### Checkboxes
+Checkboxes
 - [ ] Unchecked item
 - [x] Checked item
 - [ ] Another unchecked item
 
-## Test 3: Tables
+Test 3: Tables
 
 | Task | Status | Time |
 |------|--------|------|
@@ -31,7 +31,7 @@
 | Routes Tab | Pending | 3-4h |
 | Settings Tab | Pending | 4-5h |
 
-## Test 4: Code Blocks
+Test 4: Code Blocks
 
 ```swift
 struct FlatCard: View {
@@ -46,7 +46,7 @@ struct FlatCard: View {
 }
 ```
 
-## Test 5: Emojis and Symbols
+Test 5: Emojis and Symbols
 
 ✅ Completed  
 🔄 In Progress  
@@ -55,18 +55,20 @@ struct FlatCard: View {
 🎯 Goal  
 🚀 Future  
 
-## Test 6: Headers
+Test 6: Notion Headers (without #)
 
-### Level 3 Header
-#### Level 4 Header
-##### Level 5 Header
+Main Section
 
-## Test 7: Links
+Subsection
+
+Sub-subsection
+
+Test 7: Links
 
 [GitHub Repository](https://github.com/mariusthenomad/travely)  
 [Apple Developer](https://developer.apple.com)
 
-## Test 8: Callouts
+Test 8: Callouts
 
 > **Note**: This is a callout block that should stand out in Notion
 
@@ -74,13 +76,9 @@ struct FlatCard: View {
 
 > **Tip**: This is a helpful tip
 
-## Test 9: Dividers
+Test 9: Complex Structure
 
----
-
-## Test 10: Complex Structure
-
-### Main Section
+Main Section
 
 **Subsection 1**: Description of subsection 1
 
@@ -95,7 +93,7 @@ struct FlatCard: View {
 2. Second step
 3. Third step
 
-### Another Main Section
+Another Main Section
 
 | Feature | Status | Priority |
 |---------|--------|----------|
@@ -103,6 +101,17 @@ struct FlatCard: View {
 | UI Design | In Progress | High |
 | Backend | Pending | Medium |
 
----
+Test 10: Progress Tracking
+
+**Today's Tasks**:
+- [x] Create flat design system
+- [ ] Update Home tab
+- [ ] Test and polish
+
+**This Week**:
+- [x] Day 1: Authentication setup
+- [x] Day 2: Login implementation  
+- [ ] Day 3: Onboarding flow
+- [ ] Day 4: UI design updates
 
 **Test Complete**: If you can see all formatting correctly in Notion, the format is working! ✅
