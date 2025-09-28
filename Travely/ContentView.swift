@@ -449,7 +449,7 @@ struct AddLocationView: View {
                             }
                         }
                         
-                        Spacer(minLength: 60)
+                        Spacer()
                     }
                     
                     // Add Button
@@ -496,8 +496,8 @@ struct AddLocationView: View {
                         }
                     }
                     .padding(.horizontal, 24)
-                    .padding(.top, 24)
-                    .padding(.bottom, 40)
+                    .padding(.top, 60)
+                    .padding(.bottom, 60)
                 }
             }
             .navigationBarHidden(true)
