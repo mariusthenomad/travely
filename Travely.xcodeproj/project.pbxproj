@@ -37,6 +37,7 @@
 		A1234567890ABCDEF0N /* FlightBookingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0O /* FlightBookingView.swift */; };
 		A1234567890ABCDEF0P /* PlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0Q /* PlacesManager.swift */; };
 		A1234567890ABCDEF0T /* DestinationOverpass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0U /* DestinationOverpass.swift */; };
+		A1234567890ABCDEF0V /* FlatDesignComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF0W /* FlatDesignComponents.swift */; };
 		A1234567890ABCDEF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF1A /* Assets.xcassets */; };
 		A1234567890ABCDEF2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1234567890ABCDEF3 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -60,6 +61,7 @@
 		A1234567890ABCDEF0O /* FlightBookingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightBookingView.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF0Q /* PlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesManager.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF0U /* DestinationOverpass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationOverpass.swift; sourceTree = "<group>"; };
+		A1234567890ABCDEF0W /* FlatDesignComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlatDesignComponents.swift; sourceTree = "<group>"; };
 		A1234567890ABCDEF1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1234567890ABCDEF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1234567890ABCDEF4 /* Travely.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Travely.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 				A1234567890ABCDEF0O /* FlightBookingView.swift */,
 				A1234567890ABCDEF0Q /* PlacesManager.swift */,
 				A1234567890ABCDEF0U /* DestinationOverpass.swift */,
+				A1234567890ABCDEF0W /* FlatDesignComponents.swift */,
 				A1234567890ABCDEF1A /* Assets.xcassets */,
 				A1234567890ABCDEF5 /* Travely.entitlements */,
 				A1234567890ABCDEFA /* Preview Content */,
@@ -232,6 +235,7 @@
 				A1234567890ABCDEF0N /* FlightBookingView.swift in Sources */,
 				A1234567890ABCDEF0P /* PlacesManager.swift in Sources */,
 				A1234567890ABCDEF0T /* DestinationOverpass.swift in Sources */,
+				A1234567890ABCDEF0V /* FlatDesignComponents.swift in Sources */,
 				A1234567890ABCDEF /* TravelyApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

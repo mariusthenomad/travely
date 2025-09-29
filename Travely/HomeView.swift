@@ -32,33 +32,31 @@ struct HomeView: View {
                 .padding(.bottom, 16)
                 
                 ScrollView {
-                    VStack(spacing: 32) {
+                    VStack(spacing: FlatDesignSystem.paddingXL) {
                         // Welcome Section
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Welcome back!")
-                                .font(.custom("Inter", size: 28))
-                                .fontWeight(.bold)
-                                .foregroundColor(themeManager.textColor)
-                            
-                            Text("Ready for your next adventure?")
-                                .font(.custom("Inter", size: 16))
-                                .foregroundColor(themeManager.secondaryTextColor)
+                        FlatCard {
+                            VStack(alignment: .leading, spacing: FlatDesignSystem.paddingM) {
+                                Text("Welcome back!")
+                                    .font(.system(size: 28, weight: .bold))
+                                    .foregroundColor(FlatDesignSystem.text)
+                                
+                                Text("Ready for your next adventure?")
+                                    .font(.system(size: 16, weight: .regular))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                         
                         // Quick Actions Grid - Modern Design
-                        VStack(alignment: .leading, spacing: 16) {
-                            Text("Quick Actions")
-                                .font(.custom("Inter", size: 20))
-                                .fontWeight(.semibold)
-                                .foregroundColor(themeManager.textColor)
+                        VStack(alignment: .leading, spacing: FlatDesignSystem.paddingM) {
+                            FlatSectionHeader("Quick Actions")
                                 .padding(.horizontal, 20)
                             
                             LazyVGrid(columns: [
-                                GridItem(.flexible(), spacing: 12),
-                                GridItem(.flexible(), spacing: 12)
-                            ], spacing: 16) {
+                                GridItem(.flexible(), spacing: FlatDesignSystem.paddingM),
+                                GridItem(.flexible(), spacing: FlatDesignSystem.paddingM)
+                            ], spacing: FlatDesignSystem.paddingM) {
                                 NavigationLink(destination: TravelRouteView()) {
                                     ModernActionCard(
                                         title: "Routes",
@@ -99,7 +97,7 @@ struct HomeView: View {
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, FlatDesignSystem.paddingM)
                         }
                         
                     }
@@ -120,38 +118,36 @@ struct ModernActionCard: View {
     let gradient: [Color]
     
     var body: some View {
-        VStack(spacing: 16) {
-            ZStack {
-                LinearGradient(
-                    gradient: Gradient(colors: gradient),
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .frame(width: 50, height: 50)
-                .cornerRadius(25)
+        FlatCard {
+            VStack(spacing: FlatDesignSystem.paddingM) {
+                ZStack {
+                    LinearGradient(
+                        gradient: Gradient(colors: gradient),
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                    .frame(width: 50, height: 50)
+                    .cornerRadius(FlatDesignSystem.radiusL)
+                    
+                    Image(systemName: icon)
+                        .font(.system(size: 24, weight: .semibold))
+                        .foregroundColor(.white)
+                }
                 
-                Image(systemName: icon)
-                    .font(.system(size: 24, weight: .semibold))
-                    .foregroundColor(.white)
+                VStack(spacing: FlatDesignSystem.paddingS) {
+                    Text(title)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.text)
+                    
+                    Text(subtitle)
+                        .font(.system(size: 12, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                        .multilineTextAlignment(.center)
+                }
             }
-            
-            VStack(spacing: 6) {
-                Text(title)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(themeManager.textColor)
-                
-                Text(subtitle)
-                    .font(.custom("Inter", size: 12))
-                    .foregroundColor(themeManager.secondaryTextColor)
-                    .multilineTextAlignment(.center)
-            }
+            .frame(height: 120)
+            .frame(maxWidth: .infinity)
         }
-        .frame(height: 140)
-        .frame(maxWidth: .infinity)
-        .background(Color.white)
-        .cornerRadius(20)
-        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
     }
 }
 
@@ -160,54 +156,52 @@ struct ModernDestinationCard: View {
     let destination: Destination
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            AsyncImage(url: URL(string: destination.imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                ZStack {
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1),
-                            Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.3)
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    
-                    VStack(spacing: 4) {
-                        Image(systemName: "photo")
-                            .font(.system(size: 20))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+        FlatCard {
+            VStack(alignment: .leading, spacing: 0) {
+                AsyncImage(url: URL(string: destination.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ZStack {
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                FlatDesignSystem.primaryBlue.opacity(0.1),
+                                FlatDesignSystem.primaryBlue.opacity(0.3)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                         
-                        Text("Loading...")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                        VStack(spacing: 4) {
+                            Image(systemName: "photo")
+                                .font(.system(size: 20))
+                                .foregroundColor(FlatDesignSystem.primaryBlue.opacity(0.6))
+                            
+                            Text("Loading...")
+                                .font(.system(size: 10, weight: .regular))
+                                .foregroundColor(FlatDesignSystem.primaryBlue.opacity(0.6))
+                        }
                     }
                 }
-            }
-            .frame(width: 200, height: 140)
-            .clipped()
-            .cornerRadius(16, corners: [.topLeft, .topRight])
-            
-            VStack(alignment: .leading, spacing: 8) {
-                Text(destination.name)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(themeManager.textColor)
-                    .lineLimit(1)
+                .frame(width: 200, height: 140)
+                .clipped()
+                .cornerRadius(FlatDesignSystem.radiusL, corners: [.topLeft, .topRight])
                 
-                Text(destination.country)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(themeManager.secondaryTextColor)
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingS) {
+                    Text(destination.name)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.text)
+                        .lineLimit(1)
+                    
+                    Text(destination.country)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                }
+                .padding(FlatDesignSystem.paddingM)
             }
-            .padding(16)
+            .frame(width: 200)
         }
-        .frame(width: 200)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.08), radius: 12, x: 0, y: 6)
     }
 }
 
@@ -216,48 +210,44 @@ struct ModernActivityCard: View {
     let booking: RecentBooking
     
     var body: some View {
-        HStack(spacing: 16) {
-            AsyncImage(url: URL(string: booking.imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-            }
-            .frame(width: 60, height: 60)
-            .cornerRadius(12)
-            .clipped()
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(booking.title)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(themeManager.textColor)
-                    .lineLimit(1)
+        FlatCard {
+            HStack(spacing: 16) {
+                AsyncImage(url: URL(string: booking.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Rectangle()
+                        .fill(FlatDesignSystem.border)
+                }
+                .frame(width: 60, height: 60)
+                .cornerRadius(FlatDesignSystem.radiusM)
+                .clipped()
                 
-                Text(booking.date)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(themeManager.secondaryTextColor)
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .trailing, spacing: 4) {
-                Text(booking.status)
-                    .font(.custom("Inter", size: 14))
-                    .fontWeight(.medium)
-                    .foregroundColor(booking.statusColor)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 6)
-                    .background(booking.statusColor.opacity(0.1))
-                    .cornerRadius(12)
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingXS) {
+                    Text(booking.title)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.text)
+                        .lineLimit(1)
+                    
+                    Text(booking.date)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing, spacing: FlatDesignSystem.paddingXS) {
+                    Text(booking.status)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(booking.statusColor)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 6)
+                        .background(booking.statusColor.opacity(0.1))
+                        .cornerRadius(FlatDesignSystem.radiusM)
+                }
             }
         }
-        .padding(16)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4)
     }
 }
 
@@ -266,55 +256,52 @@ struct FeaturedDestinationCard: View {
     let destination: Destination
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            AsyncImage(url: URL(string: destination.imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                // Better placeholder with gradient
-                ZStack {
-                    LinearGradient(
-                        gradient: Gradient(colors: [
-                            Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.1),
-                            Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.3)
-                        ]),
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                    
-                    VStack(spacing: 4) {
-                        Image(systemName: "photo")
-                            .font(.system(size: 24))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+        FlatCard {
+            VStack(alignment: .leading, spacing: FlatDesignSystem.paddingM) {
+                AsyncImage(url: URL(string: destination.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    ZStack {
+                        LinearGradient(
+                            gradient: Gradient(colors: [
+                                FlatDesignSystem.primaryBlue.opacity(0.1),
+                                FlatDesignSystem.primaryBlue.opacity(0.3)
+                            ]),
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
                         
-                        Text("Loading...")
-                            .font(.custom("Inter", size: 10))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                        VStack(spacing: 4) {
+                            Image(systemName: "photo")
+                                .font(.system(size: 24))
+                                .foregroundColor(FlatDesignSystem.primaryBlue.opacity(0.6))
+                            
+                            Text("Loading...")
+                                .font(.system(size: 10, weight: .regular))
+                                .foregroundColor(FlatDesignSystem.primaryBlue.opacity(0.6))
+                        }
                     }
                 }
-            }
-            .frame(width: 200, height: 120)
-            .cornerRadius(12)
-            .clipped()
-            
-            VStack(alignment: .leading, spacing: 6) {
-                Text(destination.name)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(themeManager.textColor)
+                .frame(width: 200, height: 120)
+                .cornerRadius(FlatDesignSystem.radiusM)
+                .clipped()
                 
-                Text(destination.country)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(themeManager.secondaryTextColor)
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingS) {
+                    Text(destination.name)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.text)
+                    
+                    Text(destination.country)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                }
+                .padding(.horizontal, 12)
+                .padding(.bottom, 8)
             }
-            .padding(.horizontal, 12)
-            .padding(.bottom, 8)
+            .frame(width: 200)
         }
-        .frame(width: 200)
-        .background(Color.white)
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.1), radius: 8, x: 0, y: 4)
     }
 }
 
@@ -353,45 +340,44 @@ struct HotelRowView: View {
     let hotel: Hotel
     
     var body: some View {
-        HStack(spacing: 12) {
-            AsyncImage(url: URL(string: hotel.imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-            }
-            .frame(width: 80, height: 80)
-            .cornerRadius(12)
-            
-            VStack(alignment: .leading, spacing: 4) {
-                Text(hotel.name)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color(red: 0.11, green: 0.31, blue: 0.85))
+        FlatCard {
+            HStack(spacing: 12) {
+                AsyncImage(url: URL(string: hotel.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Rectangle()
+                        .fill(FlatDesignSystem.border)
+                }
+                .frame(width: 80, height: 80)
+                .cornerRadius(FlatDesignSystem.radiusM)
                 
-                Text(hotel.location)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    ForEach(0..<hotel.rating, id: \.self) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
-                            .font(.system(size: 12))
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingXS) {
+                    Text(hotel.name)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.primaryBlue)
+                    
+                    Text(hotel.location)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                    
+                    HStack {
+                        ForEach(0..<hotel.rating, id: \.self) { _ in
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                                .font(.system(size: 12))
+                        }
                     }
+                    
+                    Text("$\(hotel.pricePerNight)/night")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.primaryBlue)
                 }
                 
-                Text("$\(hotel.pricePerNight)/night")
-                    .font(.custom("Inter", size: 14))
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color(red: 0.11, green: 0.31, blue: 0.85))
+                Spacer()
             }
-            
-            Spacer()
         }
-        .padding(.vertical, 8)
     }
 }
 
@@ -400,7 +386,7 @@ struct DestinationDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: FlatDesignSystem.paddingL) {
                 AsyncImage(url: URL(string: destination.imageURL)) { image in
                     image
                         .resizable()
@@ -412,7 +398,7 @@ struct DestinationDetailView: View {
                 .frame(height: 250)
                 .cornerRadius(20)
                 
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingM) {
                     Text(destination.name)
                         .font(.custom("Inter", size: 28))
                         .fontWeight(.bold)
@@ -427,19 +413,13 @@ struct DestinationDetailView: View {
                         .foregroundColor(.gray)
                         .lineLimit(nil)
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, FlatDesignSystem.paddingM)
                 
                 Button(action: {}) {
                     Text("Book Now")
-                        .font(.custom("Inter", size: 18))
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(Color(red: 0.11, green: 0.31, blue: 0.85))
-                        .cornerRadius(15)
+                        .primaryFlatButton()
                 }
-                .padding(.horizontal, 20)
+                .padding(.horizontal, FlatDesignSystem.paddingM)
             }
         }
         .navigationTitle(destination.name)
@@ -460,42 +440,39 @@ struct RecentBookingCard: View {
     let booking: RecentBooking
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            AsyncImage(url: URL(string: booking.imageURL)) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-            } placeholder: {
-                Rectangle()
-                    .fill(Color.gray.opacity(0.3))
-            }
-            .frame(width: 160, height: 100)
-            .clipped()
-            .cornerRadius(12, corners: [.topLeft, .topRight])
-            
-            VStack(alignment: .leading, spacing: 6) {
-                Text(booking.title)
-                    .font(.custom("Inter", size: 16))
-                    .fontWeight(.semibold)
-                    .foregroundColor(themeManager.textColor)
-                    .lineLimit(1)
+        FlatCard {
+            VStack(alignment: .leading, spacing: FlatDesignSystem.paddingM) {
+                AsyncImage(url: URL(string: booking.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Rectangle()
+                        .fill(FlatDesignSystem.border)
+                }
+                .frame(width: 160, height: 100)
+                .clipped()
+                .cornerRadius(FlatDesignSystem.radiusM, corners: [.topLeft, .topRight])
                 
-                Text(booking.date)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(themeManager.secondaryTextColor)
-                
-                Text(booking.status)
-                    .font(.custom("Inter", size: 14))
-                    .fontWeight(.medium)
-                    .foregroundColor(booking.statusColor)
+                VStack(alignment: .leading, spacing: FlatDesignSystem.paddingS) {
+                    Text(booking.title)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(FlatDesignSystem.text)
+                        .lineLimit(1)
+                    
+                    Text(booking.date)
+                        .font(.system(size: 14, weight: .regular))
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                    
+                    Text(booking.status)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(booking.statusColor)
+                }
+                .padding(.horizontal, 12)
+                .padding(.bottom, 12)
             }
-            .padding(.horizontal, 12)
-            .padding(.bottom, 12)
+            .frame(width: 160)
         }
-        .frame(width: 160)
-        .background(Color.white) // White background
-        .cornerRadius(16)
-        .shadow(color: Color.black.opacity(0.05), radius: 8, x: 0, y: 4) // Light shadow
     }
 }
 

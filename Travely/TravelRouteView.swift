@@ -320,6 +320,10 @@ struct TravelRouteView: View {
     @State private var showingEditSheet = false
     @State private var stopToEdit: (index: Int, stop: RouteStop)? = nil
     @State private var showingNightsEditor = false
+    @State private var showingDatePicker = false
+    @State private var selectedStopForDate: RouteStop?
+    @State private var showingInsertMenu = false
+    @State private var selectedStopForInsert: RouteStop?
     
     // Computed property for total nights
     private var totalNights: Int {
@@ -328,13 +332,20 @@ struct TravelRouteView: View {
     
     // Computed property for progress (0.0 to 1.0)
     private var progressValue: Double {
-        let maxNights = 21 // Original planned nights
+        let maxNights = 21 // Updated to match 21/21 display
         return min(Double(totalNights) / Double(maxNights), 1.0)
     }
     
     // Computed property for progress color
     private var progressColor: Color {
-        return totalNights > 21 ? Color.red : Color(red: 1.0, green: 0.4, blue: 0.2) // Orange
+        return totalNights > 21 ? FlatDesignSystem.accentRed : FlatDesignSystem.accentGreen
+    }
+    
+    // Helper function to format date
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: date)
     }
     
     // Function to update dates when nights change
@@ -454,37 +465,37 @@ struct TravelRouteView: View {
                 VStack(spacing: 0) {
                     // Custom Header with Progress and Tabs
                     HStack {
-                        // Progress Indicator
+                        // Progress Indicator - Green like in screenshot
                         Button(action: {
-                            showingNightsEditor = true
+                            DispatchQueue.main.async {
+                                showingNightsEditor = true
+                            }
                         }) {
-                            HStack(spacing: 8) {
+                            HStack(spacing: FlatDesignSystem.paddingS) {
                                 ZStack {
                                     Circle()
-                                        .stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 4)
-                                        .frame(width: 40, height: 40)
+                                        .stroke(FlatDesignSystem.border, lineWidth: 4)
+                                        .frame(width: 50, height: 50)
                                     
                                     Circle()
-                                        .trim(from: 0, to: progressValue) // Dynamic progress
-                                        .stroke(progressColor, lineWidth: 4)
-                                        .frame(width: 40, height: 40)
+                                        .trim(from: 0, to: progressValue)
+                                        .stroke(FlatDesignSystem.accentGreen, lineWidth: 4)
+                                        .frame(width: 50, height: 50)
                                         .rotationEffect(.degrees(-90))
                                     
                                     Text("\(totalNights)")
-                                        .font(.custom("Inter", size: 14))
-                                        .font(.custom("Inter", size: 14).weight(.bold))
-                                        .foregroundColor(progressColor)
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(FlatDesignSystem.accentGreen)
                                 }
                                 
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text("\(totalNights)/21")
-                                        .font(.custom("Inter", size: 16))
-                                        .font(.custom("Inter", size: 14).weight(.bold))
-                                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
+                                        .font(.system(size: 18, weight: .bold))
+                                        .foregroundColor(FlatDesignSystem.text)
                                     
                                     Text("Nights planned")
-                                        .font(.custom("Inter", size: 12))
-                                        .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                                        .font(.system(size: 12, weight: .regular))
+                                        .foregroundColor(FlatDesignSystem.textSecondary)
                                 }
                                 
                                 Spacer()
@@ -494,28 +505,28 @@ struct TravelRouteView: View {
                         
                         Spacer()
                         
-                        // Tab Segments
+                        // Tab Segments - Green like in screenshot
                         HStack(spacing: 0) {
                             Button(action: { selectedTab = 0 }) {
                                 Text("Route")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(selectedTab == 0 ? .white : Color(red: 0.5, green: 0.5, blue: 0.5))
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(selectedTab == 0 ? .white : FlatDesignSystem.textSecondary)
                                     .frame(width: 80, height: 32)
-                                    .background(selectedTab == 0 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.clear)
+                                    .background(selectedTab == 0 ? FlatDesignSystem.accentGreen : Color.clear)
                                     .cornerRadius(16)
                             }
                             
                             Button(action: { selectedTab = 1 }) {
                                 Text("Bookings")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(selectedTab == 1 ? .white : Color(red: 0.5, green: 0.5, blue: 0.5))
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(selectedTab == 1 ? .white : FlatDesignSystem.textSecondary)
                                     .frame(width: 80, height: 32)
-                                    .background(selectedTab == 1 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.clear)
+                                    .background(selectedTab == 1 ? FlatDesignSystem.accentGreen : Color.clear)
                                     .cornerRadius(16)
                             }
                         }
                         .padding(4)
-                        .background(Color(red: 0.95, green: 0.95, blue: 0.95))
+                        .background(FlatDesignSystem.border.opacity(0.3))
                         .cornerRadius(20)
                     }
                     .padding(.horizontal, 20)
@@ -526,7 +537,7 @@ struct TravelRouteView: View {
                     if selectedTab == 0 {
                         ScrollView {
                             VStack(spacing: 0) {
-                                // Route stops
+                                // Route stops - Full width seamless cards
                                 ForEach(Array(currentRoute.stops.enumerated()), id: \.offset) { index, stop in
                                     RouteStopRowNew(
                                         stop: stop,
@@ -535,36 +546,59 @@ struct TravelRouteView: View {
                                         tickets: tickets,
                                         onTicketTap: { selectedStop in
                                             selectedStopForTicket = selectedStop
-                                            showingTicketSheet = true
+                                            DispatchQueue.main.async {
+                                                showingTicketSheet = true
+                                            }
                                         },
                                         onNightsChanged: {
                                             updateDates()
                                         },
                                         onDelete: { stopToDelete in
                                             self.stopToDelete = (index: index, stop: stopToDelete)
-                                            showingDeleteAlert = true
+                                            DispatchQueue.main.async {
+                                                showingDeleteAlert = true
+                                            }
                                         },
                                         onEdit: { stopToEdit in
                                             if let index = currentRoute.stops.firstIndex(where: { $0.id == stopToEdit.id }) {
                                                 self.stopToEdit = (index: index, stop: stopToEdit)
-                                                showingEditSheet = true
+                                                DispatchQueue.main.async {
+                                                    showingEditSheet = true
+                                                }
                                             }
                                         },
+                                        onSetDate: { selectedStop in
+                                            selectedStopForDate = selectedStop
+                                            showingDatePicker = true
+                                        },
+                                        onInsert: { selectedStop in
+                                            selectedStopForInsert = selectedStop
+                                            showingInsertMenu = true
+                                        },
                                         canDelete: index != 0 && index != currentRoute.stops.count - 1,
-                                        canEdit: true // Allow editing for all stops
+                                        canEdit: true, // Allow editing for all stops
+                                        isFirst: index == 0,
+                                        isLast: index == currentRoute.stops.count - 1
                                     )
                                     
-                                    // Spacing between cards
+                                    // Transport icon between stops (except after last stop)
                                     if index < currentRoute.stops.count - 1 {
-                                        Spacer()
-                                            .frame(height: 8)
+                                        TransportIconRow(
+                                            stop: stop,
+                                            onTicketTap: { selectedStop in
+                                                selectedStopForTicket = selectedStop
+                                                DispatchQueue.main.async {
+                                                    showingTicketSheet = true
+                                                }
+                                            }
+                                        )
                                     }
                                 }
                                 
                                 Spacer()
                                     .frame(height: 20)
                             }
-                            .padding(.horizontal, 20)
+                            // Remove horizontal padding to make cards full width
                         }
                         .background(Color.clear)
                     } else {
@@ -656,6 +690,106 @@ struct TravelRouteView: View {
                     showingNightsEditor = false
                 }
             )
+        }
+        .sheet(isPresented: $showingDatePicker) {
+            if let stop = selectedStopForDate {
+                DatePickerView(
+                    stop: stop,
+                    isPresented: $showingDatePicker,
+                    onDateChanged: { updatedStop, newDate in
+                        // Update the stop's date in the route
+                        if let index = currentRoute.stops.firstIndex(where: { $0.id == updatedStop.id }) {
+                            var updatedStops = currentRoute.stops
+                            updatedStops[index].dates = formatDate(newDate)
+                            currentRoute = TravelRoute(
+                                id: currentRoute.id,
+                                title: currentRoute.title,
+                                description: currentRoute.description,
+                                duration: currentRoute.duration,
+                                totalPrice: currentRoute.totalPrice,
+                                imageURL: currentRoute.imageURL,
+                                stops: updatedStops,
+                                priceBreakdown: currentRoute.priceBreakdown
+                            )
+                        }
+                    }
+                )
+                .onAppear {
+                    // Ensure the sheet content is properly loaded
+                }
+            } else {
+                // Fallback view to prevent sheet issues
+                VStack {
+                    Text("Loading...")
+                        .foregroundColor(FlatDesignSystem.text)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(FlatDesignSystem.background)
+            }
+        }
+        .sheet(isPresented: $showingInsertMenu) {
+            if let stop = selectedStopForInsert {
+                InsertMenuView(
+                    currentRoute: currentRoute,
+                    selectedStop: stop,
+                    isPresented: $showingInsertMenu,
+                    onInsertDestination: { selectedStop, destination in
+                        // Insert the destination after the selected stop
+                        if let index = currentRoute.stops.firstIndex(where: { $0.id == selectedStop.id }) {
+                            let newStop = RouteStop(
+                                id: UUID().hashValue, // Generate new ID
+                                destination: destination,
+                                country: "Unknown", // You might want to improve this
+                                countryEmoji: "🌍",
+                                duration: "1 Day",
+                                dates: "TBD",
+                                hasFlight: false,
+                                hasTrain: false,
+                                isStart: false,
+                                flightInfo: "",
+                                flightDuration: "",
+                                flightPrice: "",
+                                nights: 1
+                            )
+                            
+                            var updatedStops = currentRoute.stops
+                            updatedStops.insert(newStop, at: index + 1)
+                            
+                            // Add corresponding nights entry
+                            var updatedNights = nights
+                            updatedNights.insert(1, at: index + 1)
+                            
+                            currentRoute = TravelRoute(
+                                id: currentRoute.id,
+                                title: currentRoute.title,
+                                description: currentRoute.description,
+                                duration: currentRoute.duration,
+                                totalPrice: currentRoute.totalPrice,
+                                imageURL: currentRoute.imageURL,
+                                stops: updatedStops,
+                                priceBreakdown: currentRoute.priceBreakdown
+                            )
+                            
+                            // Update nights array
+                            nights = updatedNights
+                            
+                            // Update dates after insertion
+                            updateDates()
+                        }
+                    }
+                )
+                .onAppear {
+                    // Ensure the sheet content is properly loaded
+                }
+            } else {
+                // Fallback view to prevent sheet issues
+                VStack {
+                    Text("Loading...")
+                        .foregroundColor(FlatDesignSystem.text)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(FlatDesignSystem.background)
+            }
         }
     }
 }
@@ -1044,6 +1178,151 @@ struct EditStopView: View {
     }
 }
 
+// Extension for removing duplicates
+extension Array where Element: Equatable {
+    func removingDuplicates() -> [Element] {
+        var result = [Element]()
+        for value in self {
+            if !result.contains(value) {
+                result.append(value)
+            }
+        }
+        return result
+    }
+}
+
+struct InsertMenuView: View {
+    let currentRoute: TravelRoute
+    let selectedStop: RouteStop
+    @Binding var isPresented: Bool
+    let onInsertDestination: (RouteStop, String) -> Void
+    
+    // Get unique destinations from current route (excluding start/end points)
+    private var availableDestinations: [String] {
+        let destinations = currentRoute.stops
+            .filter { !$0.isStart && $0.destination != "Munich" } // Exclude start/end points
+            .map { $0.destination }
+            .removingDuplicates()
+        return destinations
+    }
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                // Header
+                HStack {
+                    Button("Cancel") {
+                        isPresented = false
+                    }
+                    .foregroundColor(FlatDesignSystem.textSecondary)
+                    .font(.system(size: 16, weight: .medium))
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 8) {
+                        Image(systemName: "location.fill")
+                            .foregroundColor(FlatDesignSystem.accentGreen)
+                            .font(.system(size: 16, weight: .medium))
+                        
+                        Text("Insert after \(selectedStop.destination)")
+                            .font(.system(size: 18, weight: .semibold))
+                            .foregroundColor(FlatDesignSystem.text)
+                            .lineLimit(1)
+                    }
+                    
+                    Spacer()
+                    
+                    // Empty space for balance
+                    Text("")
+                        .font(.system(size: 16, weight: .medium))
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(FlatDesignSystem.surface)
+                
+                // Search bar
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                        .font(.system(size: 16, weight: .medium))
+                    
+                    TextField("Enter name E.g. \"Rome\"...", text: .constant(""))
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(FlatDesignSystem.text)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
+                .background(FlatDesignSystem.surface)
+                .cornerRadius(12)
+                .padding(.horizontal, 16)
+                .padding(.top, 16)
+                
+                // Destinations list
+                VStack(alignment: .leading, spacing: 0) {
+                    HStack {
+                        Text("TOP \(availableDestinations.count)")
+                            .font(.system(size: 14, weight: .medium))
+                            .foregroundColor(FlatDesignSystem.textSecondary)
+                        
+                        Text("Popular destinations in our route")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(FlatDesignSystem.text)
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 24)
+                    .padding(.bottom, 16)
+                    
+                    LazyVStack(spacing: 0) {
+                        ForEach(Array(availableDestinations.enumerated()), id: \.offset) { index, destination in
+                            HStack {
+                                // Number badge
+                                ZStack {
+                                    Circle()
+                                        .fill(FlatDesignSystem.accentGreen.opacity(0.2))
+                                        .frame(width: 24, height: 24)
+                                    
+                                    Text("\(index + 1)")
+                                        .font(.system(size: 12, weight: .bold))
+                                        .foregroundColor(FlatDesignSystem.accentGreen)
+                                }
+                                
+                                // Destination name
+                                Text(destination)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.text)
+                                
+                                Spacer()
+                                
+                                // Plus button
+                                Button(action: {
+                                    onInsertDestination(selectedStop, destination)
+                                    isPresented = false
+                                }) {
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 16, weight: .bold))
+                                        .foregroundColor(FlatDesignSystem.text)
+                                }
+                            }
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 12)
+                            
+                            if index < availableDestinations.count - 1 {
+                                Rectangle()
+                                    .fill(FlatDesignSystem.border)
+                                    .frame(height: 0.5)
+                                    .padding(.leading, 48)
+                            }
+                        }
+                    }
+                }
+                .padding(.bottom, 20)
+            }
+            .background(FlatDesignSystem.background)
+            .fixedSize(horizontal: true, vertical: false) // Shrink to content width
+        }
+    }
+}
+
 struct NightsEditorView: View {
     @EnvironmentObject var themeManager: ThemeManager
     @Binding var nights: [Int]
@@ -1055,76 +1334,68 @@ struct NightsEditorView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background gradient
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.white,
-                        Color(red: 1.0, green: 0.95, blue: 0.9)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
+                // Background
+                FlatDesignSystem.background
+                    .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
                     // Header
                     HStack {
                         Text("Edit Nights")
-                            .font(.largeTitle)
-                                        .font(.custom("Inter", size: 16).weight(.bold))
-                            .foregroundColor(.primary)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(FlatDesignSystem.text)
                         
                         Spacer()
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    .padding(.bottom, 16)
+                    .padding(.horizontal, FlatDesignSystem.paddingL)
+                    .padding(.top, FlatDesignSystem.paddingM)
+                    .padding(.bottom, FlatDesignSystem.paddingM)
                     
                     // Total Nights Summary
-                    VStack(spacing: 12) {
+                    VStack(spacing: FlatDesignSystem.paddingS) {
                         HStack {
                             Text("Total Nights:")
-                                .font(.custom("Inter", size: 16))
-                                .foregroundColor(themeManager.secondaryTextColor)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
                             
                             Spacer()
                         }
                         
                         HStack {
                             Image(systemName: "moon.fill")
-                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                .foregroundColor(FlatDesignSystem.accentGreen)
                                 .font(.system(size: 16))
                             
-                            Text("\(tempNights.reduce(0, +))/21")
-                                .font(.custom("Inter", size: 18))
-                                .foregroundColor(themeManager.textColor)
+                            Text("\(tempNights.dropFirst().dropLast().reduce(0, +))/21")
+                                .font(.system(size: 18, weight: .bold))
+                                .foregroundColor(FlatDesignSystem.text)
                             
                             Spacer()
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color.gray.opacity(0.1))
+                        .padding(.horizontal, FlatDesignSystem.paddingL)
+                        .padding(.vertical, FlatDesignSystem.paddingM)
+                        .background(FlatDesignSystem.surface)
                         .cornerRadius(12)
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
+                    .padding(.horizontal, FlatDesignSystem.paddingL)
+                    .padding(.bottom, FlatDesignSystem.paddingM)
                     
                     // Nights Editor
                     ScrollView {
-                        VStack(spacing: 16) {
+                        VStack(spacing: 0) {
                             ForEach(Array(tempNights.enumerated()), id: \.offset) { index, night in
                                 if index > 0 && index < tempNights.count - 1 { // Skip start and end points
-                                    VStack(spacing: 8) {
+                                    VStack(spacing: FlatDesignSystem.paddingS) {
                                         HStack {
                                             Text("Stop \(index + 1)")
-                                                .font(.custom("Inter", size: 16))
-                                                .foregroundColor(themeManager.textColor)
+                                                .font(.system(size: 16, weight: .medium))
+                                                .foregroundColor(FlatDesignSystem.text)
                                             
                                             Spacer()
                                             
                                             Text("\(night) nights")
-                                                .font(.custom("Inter", size: 14))
-                                                .foregroundColor(themeManager.secondaryTextColor)
+                                                .font(.system(size: 14, weight: .medium))
+                                                .foregroundColor(FlatDesignSystem.textSecondary)
                                         }
                                         
                                         HStack {
@@ -1134,43 +1405,41 @@ struct NightsEditorView: View {
                                                 }
                                             }) {
                                                 Image(systemName: "minus.circle.fill")
-                                                    .font(.system(size: 24))
-                                                    .foregroundColor(tempNights[index] > 0 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(tempNights[index] > 0 ? FlatDesignSystem.accentGreen : FlatDesignSystem.textSecondary)
                                             }
                                             .disabled(tempNights[index] <= 0)
                                             
                                             Spacer()
                                             
                                             Text("\(tempNights[index])")
-                                                .font(.custom("Inter", size: 20))
-                                                .font(.custom("Inter", size: 14).weight(.bold))
-                                                .foregroundColor(themeManager.textColor)
-                                                .frame(minWidth: 40)
+                                                .font(.system(size: 18, weight: .bold))
+                                                .foregroundColor(FlatDesignSystem.text)
+                                                .frame(minWidth: 30)
                                             
                                             Spacer()
                                             
                                             Button(action: {
-                                                if tempNights.reduce(0, +) < 21 { // Max 21 nights total
+                                                if tempNights.dropFirst().dropLast().reduce(0, +) < 21 { // Max 21 nights total
                                                     tempNights[index] += 1
                                                 }
                                             }) {
                                                 Image(systemName: "plus.circle.fill")
-                                                    .font(.system(size: 24))
-                                                    .foregroundColor(tempNights.reduce(0, +) < 21 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(tempNights.dropFirst().dropLast().reduce(0, +) < 21 ? FlatDesignSystem.accentGreen : FlatDesignSystem.textSecondary)
                                             }
-                                            .disabled(tempNights.reduce(0, +) >= 21)
+                                            .disabled(tempNights.dropFirst().dropLast().reduce(0, +) >= 21)
                                         }
-                                        .padding(.horizontal, 20)
+                                        .padding(.horizontal, FlatDesignSystem.paddingL)
                                     }
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 16)
-                                    .background(Color.white)
+                                    .padding(.horizontal, FlatDesignSystem.paddingL)
+                                    .padding(.vertical, FlatDesignSystem.paddingM)
+                                    .background(FlatDesignSystem.surface)
                                     .cornerRadius(12)
-                                    .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                                 }
                             }
                         }
-                        .padding(.top, 8)
+                        .padding(.top, FlatDesignSystem.paddingS)
                         .padding(.bottom, 100)
                     }
                 }
@@ -1192,6 +1461,74 @@ struct NightsEditorView: View {
     }
 }
 
+struct DatePickerView: View {
+    let stop: RouteStop
+    @Binding var isPresented: Bool
+    let onDateChanged: (RouteStop, Date) -> Void
+    @State private var selectedDate = Date()
+    
+    var body: some View {
+        NavigationView {
+            VStack(spacing: 0) {
+                // Compact calendar container
+                VStack(spacing: 0) {
+                    // Header - Compact
+                    HStack {
+                        Button("Cancel") {
+                            isPresented = false
+                        }
+                        .foregroundColor(FlatDesignSystem.textSecondary)
+                        .font(.system(size: 16, weight: .medium))
+                        
+                        Spacer()
+                        
+                        Text("Start date for \(stop.destination)")
+                            .font(.system(size: 16, weight: .semibold))
+                            .foregroundColor(FlatDesignSystem.text)
+                            .lineLimit(1)
+                        
+                        Spacer()
+                        
+                        Button("Done") {
+                            // Update the stop's start date
+                            onDateChanged(stop, selectedDate)
+                            isPresented = false
+                        }
+                        .foregroundColor(FlatDesignSystem.accentGreen)
+                        .font(.system(size: 16, weight: .semibold))
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 12)
+                    .background(FlatDesignSystem.background)
+                    
+                    // Calendar with compact styling
+                    DatePicker(
+                        "Select Date",
+                        selection: $selectedDate,
+                        displayedComponents: [.date]
+                    )
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .accentColor(FlatDesignSystem.accentGreen)
+                    .colorScheme(.light)
+                    .scaleEffect(0.8) // Make calendar even smaller
+                    .padding(.horizontal, 8)
+                    .padding(.bottom, 8)
+                }
+                .background(FlatDesignSystem.surface)
+                .cornerRadius(12)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 20) // Position at bottom
+            }
+            .background(FlatDesignSystem.background)
+            .fixedSize(horizontal: true, vertical: false) // Shrink to content width
+        }
+        .onAppear {
+            // Set initial date based on stop's current date
+            selectedDate = Date() // You can parse the stop's current date here
+        }
+    }
+}
+
 struct RouteStopRowNew: View {
     @EnvironmentObject var themeManager: ThemeManager
     let stop: RouteStop
@@ -1202,100 +1539,242 @@ struct RouteStopRowNew: View {
     let onNightsChanged: () -> Void
     let onDelete: (RouteStop) -> Void
     let onEdit: (RouteStop) -> Void
+    let onSetDate: (RouteStop) -> Void
+    let onInsert: (RouteStop) -> Void
     let canDelete: Bool
     let canEdit: Bool
+    let isFirst: Bool
+    let isLast: Bool
     
-    // Swipe functionality removed - no state needed
+    // Swipe functionality
+    @State private var dragOffset: CGFloat = 0
+    @State private var isSwipeActive: Bool = false
     
     var body: some View {
-        // Simple card without swipe functionality
-        HStack(spacing: 16) {
-            // Stop number circle (green like in screenshot)
-            ZStack {
-                Circle()
-                    .fill(Color.green)
-                    .frame(width: 32, height: 32)
+        ZStack(alignment: .leading) {
+            // Swipe action buttons background - Full height to match card
+            HStack(spacing: 0) {
+                Spacer()
                 
-                Text("\(stopNumber)")
-                    .font(.custom("Inter", size: 16))
-                                        .font(.custom("Inter", size: 16).weight(.bold))
-                    .foregroundColor(.white)
-            }
-            
-            // Stop details
-            VStack(alignment: .leading, spacing: 4) {
-                // City name
-                Text(stop.destination)
-                    .font(.custom("Inter", size: 18))
-                    .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                
-                // Dates
-                Text(stop.dates)
-                    .font(.custom("Inter", size: 14))
-                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
-                
-                // Transport info
-                if !stop.isStart {
+                // Action buttons with consistent alignment
+                HStack(spacing: 0) {
+                    // Lock date button
                     Button(action: {
-                        onTicketTap(stop)
+                        // Lock date action
                     }) {
-                        HStack(spacing: 8) {
-                        // Transport icon (orange like in screenshot)
-                        Image(systemName: stop.hasTrain ? "tram.fill" : (stop.hasFlight ? "airplane.departure" : "plus"))
-                            .font(.system(size: 14))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
+                        VStack(spacing: 4) {
+                            Image(systemName: "lock.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
                             
-                            Text(stop.flightDuration)
-                                .font(.custom("Inter", size: 14))
-                                .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                            Text("Lock date")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
                         }
-                    }
-                    .buttonStyle(PlainButtonStyle())
-                }
-            }
-            
-            Spacer()
-            
-            // Nights counter
-            VStack(spacing: 4) {
-                HStack(spacing: 12) {
-                    Button(action: {
-                        if nights > 0 {
-                            nights -= 1
-                            onNightsChanged()
-                        }
-                    }) {
-                        Image(systemName: "minus")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                        .frame(width: 80, height: 80)
+                        .background(FlatDesignSystem.background)
                     }
                     
-                    Text("\(nights)")
-                        .font(.custom("Inter", size: 18))
-                        .foregroundColor(Color(red: 0.2, green: 0.2, blue: 0.2))
-                        .frame(minWidth: 20)
-                    
+                    // Set date button
                     Button(action: {
-                        nights += 1
-                        onNightsChanged()
+                        DispatchQueue.main.async {
+                            onSetDate(stop)
+                        }
                     }) {
-                        Image(systemName: "plus")
-                            .font(.system(size: 16))
-                            .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                        VStack(spacing: 4) {
+                            Image(systemName: "calendar")
+                                .font(.system(size: 20))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                            
+                            Text("Set date")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                        }
+                        .frame(width: 80, height: 80)
+                        .background(FlatDesignSystem.background)
+                    }
+                    
+                    // Insert button
+                    Button(action: {
+                        onInsert(stop)
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "plus.rectangle.on.rectangle")
+                                .font(.system(size: 20))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                            
+                            Text("Insert")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                        }
+                        .frame(width: 80, height: 80)
+                        .background(FlatDesignSystem.background)
+                    }
+                    
+                    // Delete button
+                    Button(action: {
+                        onDelete(stop)
+                    }) {
+                        VStack(spacing: 4) {
+                            Image(systemName: "trash.fill")
+                                .font(.system(size: 20))
+                                .foregroundColor(.white)
+                            
+                            Text("Delete")
+                                .font(.system(size: 12, weight: .medium))
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 80, height: 80)
+                        .background(FlatDesignSystem.accentRed)
                     }
                 }
-                
-                Text("nights")
-                    .font(.custom("Inter", size: 12))
-                    .foregroundColor(Color(red: 0.5, green: 0.5, blue: 0.5))
+                .frame(width: 320, height: 80) // Fixed width and height for consistent alignment
             }
+            
+            // Main card content
+            VStack(spacing: 0) {
+                HStack(spacing: FlatDesignSystem.paddingM) {
+                    // Stop number circle - Green like in screenshot
+                    ZStack {
+                        Circle()
+                            .fill(FlatDesignSystem.accentGreen)
+                            .frame(width: 40, height: 40)
+                        
+                        Text("\(stopNumber)")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    
+                    // Stop details
+                    VStack(alignment: .leading, spacing: 4) {
+                        // City name - Bold like in screenshot
+                        Text(stop.destination)
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(FlatDesignSystem.text)
+                        
+                        // Dates - Secondary text
+                        Text(stop.dates)
+                            .font(.system(size: 14, weight: .regular))
+                            .foregroundColor(FlatDesignSystem.textSecondary)
+                    }
+                    
+                    Spacer()
+                    
+                    // Nights counter - Right aligned like in screenshot
+                    VStack(spacing: 4) {
+                        HStack(spacing: 12) {
+                            Button(action: {
+                                if nights > 0 {
+                                    nights -= 1
+                                    onNightsChanged()
+                                }
+                            }) {
+                                Image(systemName: "minus")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
+                            }
+                            
+                            Text("\(nights)")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundColor(FlatDesignSystem.text)
+                                .frame(minWidth: 24)
+                            
+                            Button(action: {
+                                nights += 1
+                                onNightsChanged()
+                            }) {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
+                            }
+                        }
+                        
+                        Text("nights")
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundColor(FlatDesignSystem.textSecondary)
+                    }
+                }
+                .padding(.horizontal, FlatDesignSystem.paddingM)
+                .padding(.vertical, FlatDesignSystem.paddingL) // Increased vertical padding
+                .background(FlatDesignSystem.surface)
+            }
+            .offset(x: dragOffset)
+            .gesture(
+                DragGesture()
+                    .onChanged { value in
+                        // No animation during drag for immediate response
+                        let translation = value.translation.width
+                        if translation < 0 {
+                            dragOffset = max(translation, -320) // Limit swipe distance
+                        } else {
+                            dragOffset = min(translation, 0) // Don't allow right swipe
+                        }
+                    }
+                    .onEnded { value in
+                        // Smooth animation only when gesture ends
+                        withAnimation(.easeOut(duration: 0.25)) {
+                            if dragOffset < -160 {
+                                dragOffset = -320
+                                isSwipeActive = true
+                            } else {
+                                dragOffset = 0
+                                isSwipeActive = false
+                            }
+                        }
+                    }
+            )
         }
-        .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
-        .padding(.vertical, 12)
-        .padding(.horizontal, 20)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
+        .frame(maxWidth: .infinity)
+        .frame(height: 80) // Fixed height of 80 pixels
+        .background(FlatDesignSystem.surface)
+        .cornerRadius(isFirst ? FlatDesignSystem.radiusL : 0, corners: isFirst ? [.topLeft, .topRight] : [])
+        .cornerRadius(isLast ? FlatDesignSystem.radiusL : 0, corners: isLast ? [.bottomLeft, .bottomRight] : [])
+        .clipped()
+    }
+}
+
+struct TransportIconRow: View {
+    let stop: RouteStop
+    let onTicketTap: (RouteStop) -> Void
+    
+    // Timeline offset to align with the center of green circles
+    private let timelineXOffset: CGFloat = FlatDesignSystem.paddingM + 20 // 16 + 20 = 36 (center of 40px circle)
+    
+    var body: some View {
+        // Transport icon button without timeline line - TEMPORARILY HIDDEN
+        // HStack(spacing: 0) {
+        //     Spacer()
+        //         .frame(width: timelineXOffset - 12) // Position icon aligned with circles
+        //     
+        //     Button(action: {
+        //         onTicketTap(stop)
+        //     }) {
+        //         HStack(spacing: 8) {
+        //             // Transport icon - Pink/Orange like in screenshot
+        //             Image(systemName: stop.hasTrain ? "tram.fill" : (stop.hasFlight ? "airplane.departure" : "plus"))
+        //                 .font(.system(size: 14, weight: .medium))
+        //                 .foregroundColor(FlatDesignSystem.accentOrange)
+        //             
+        //             Text(stop.flightDuration)
+        //                 .font(.system(size: 14, weight: .regular))
+        //                 .foregroundColor(FlatDesignSystem.textSecondary)
+        //         }
+        //         .padding(.vertical, 6)
+        //         .padding(.horizontal, 12)
+        //         .background(FlatDesignSystem.background)
+        //         .cornerRadius(FlatDesignSystem.radiusM)
+        //     }
+        //     .buttonStyle(PlainButtonStyle())
+        //     
+        //     Spacer()
+        // }
+        // .frame(height: 20) // Smaller height since no timeline line
+        // .frame(maxWidth: .infinity)
+        // .background(FlatDesignSystem.surface)
+        
+        // Empty view to hide ticket icon temporarily
+        EmptyView()
+            .frame(height: 0)
     }
 }
 
@@ -1308,82 +1787,107 @@ struct RouteStopRow: View {
     let onTicketTap: (RouteStop) -> Void
     
     var body: some View {
-        HStack(spacing: 16) {
-            // Stop number circle
-            ZStack {
-                Circle()
-                    .fill(Color(red: 1.0, green: 0.4, blue: 0.2))
-                    .frame(width: 36, height: 36)
-                
-                Text("\(stopNumber)")
-                    .font(.custom("Inter", size: 16))
-                                        .font(.custom("Inter", size: 16).weight(.bold))
-                    .foregroundColor(.white)
-            }
-            
-            // Stop details
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    HStack(spacing: 6) {
-                        Text(stop.countryEmoji)
-                            .font(.system(size: 16))
-                        
-                        Text(stop.destination)
-                            .font(.custom("Inter", size: 16))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2)) // Orange color
-                    }
-                    
-                    Spacer()
-                    
-                    Text(stop.dates)
-                        .font(.custom("Inter", size: 12))
-                        .foregroundColor(themeManager.secondaryTextColor)
-                }
-                
-                HStack {
-                    Text(stop.country)
-                        .font(.custom("Inter", size: 12))
-                        .foregroundColor(themeManager.secondaryTextColor)
-                    
-                    Spacer()
-                    
-                    Text(stop.duration)
-                        .font(.custom("Inter", size: 14))
-                        .foregroundColor(.white)
-                }
-            }
-            
-            // Transport icon
-            if stop.hasFlight || stop.hasTrain || stop.isStart {
-                Button(action: {
-                    if !stop.isStart {
-                        onTicketTap(stop)
-                    }
-                }) {
+        FlatCard {
+            VStack(spacing: 0) {
+                HStack(spacing: FlatDesignSystem.paddingM) {
+                    // Stop number circle - Green like in screenshot
                     ZStack {
-                        Image(systemName: stop.isStart ? "play.circle.fill" : (stop.hasTrain ? "tram.fill" : "airplane.departure"))
-                            .font(.system(size: 18, weight: .semibold))
-                            .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                        Circle()
+                            .fill(FlatDesignSystem.accentGreen)
+                            .frame(width: 40, height: 40)
                         
-                        // Show ticket indicator if ticket exists
-                        if !stop.isStart && hasTicketForStop(stop) {
-                            Circle()
-                                .fill(Color.green)
-                                .frame(width: 8, height: 8)
-                                .offset(x: 8, y: -8)
+                        Text("\(stopNumber)")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    
+                    // Stop details
+                    VStack(alignment: .leading, spacing: 4) {
+                        HStack {
+                            HStack(spacing: FlatDesignSystem.paddingS) {
+                                Text(stop.countryEmoji)
+                                    .font(.system(size: 16))
+                                
+                                Text(stop.destination)
+                                    .font(.system(size: 18, weight: .bold))
+                                    .foregroundColor(FlatDesignSystem.text)
+                            }
+                            
+                            Spacer()
+                            
+                            Text(stop.dates)
+                                .font(.system(size: 14, weight: .regular))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                        }
+                        
+                        HStack {
+                            Text(stop.country)
+                                .font(.system(size: 14, weight: .regular))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
+                            
+                            Spacer()
+                            
+                            Text(stop.duration)
+                                .font(.system(size: 16, weight: .semibold))
+                                .foregroundColor(FlatDesignSystem.text)
                         }
                     }
+                    
+                    // Transport icon
+                    if stop.hasFlight || stop.hasTrain || stop.isStart {
+                        Button(action: {
+                            if !stop.isStart {
+                                onTicketTap(stop)
+                            }
+                        }) {
+                            ZStack {
+                                Image(systemName: stop.isStart ? "play.circle.fill" : (stop.hasTrain ? "tram.fill" : "airplane.departure"))
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(FlatDesignSystem.accentOrange)
+                                
+                                // Show ticket indicator if ticket exists
+                                if !stop.isStart && hasTicketForStop(stop) {
+                                    Circle()
+                                        .fill(FlatDesignSystem.accentGreen)
+                                        .frame(width: 8, height: 8)
+                                        .offset(x: 8, y: -8)
+                                }
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .disabled(stop.isStart)
+                    }
                 }
-                .buttonStyle(PlainButtonStyle())
-                .disabled(stop.isStart)
+                .padding(.vertical, FlatDesignSystem.paddingM)
+                
+                // Transport info - Below main content like in screenshot
+                if !stop.isStart {
+                    HStack {
+                        Spacer()
+                            .frame(width: 40 + FlatDesignSystem.paddingM) // Align with content above
+                        
+                        Button(action: {
+                            onTicketTap(stop)
+                        }) {
+                            HStack(spacing: 8) {
+                                // Transport icon - Pink/Orange like in screenshot
+                                Image(systemName: stop.hasTrain ? "tram.fill" : (stop.hasFlight ? "airplane.departure" : "plus"))
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.accentOrange)
+                                
+                                Text(stop.flightDuration)
+                                    .font(.system(size: 14, weight: .regular))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
+                            }
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        
+                        Spacer()
+                    }
+                    .padding(.bottom, FlatDesignSystem.paddingS)
+                }
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.vertical, 16)
-        .padding(.horizontal, 20)
-        .background(Color.white)
-        .cornerRadius(12)
-        .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
     }
     
     private func hasTicketForStop(_ stop: RouteStop) -> Bool {
@@ -2135,4 +2639,5 @@ struct StaysView: View {
             })
     }
 }
+
 }

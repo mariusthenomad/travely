@@ -74,6 +74,9 @@ struct ContentView: View {
                     showingAddLocation = false
                 }
             )
+            .onAppear {
+                // Ensure the sheet content is properly loaded
+            }
         }
     }
 }
@@ -201,38 +204,33 @@ struct AddLocationView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                // Background gradient
-                LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color.white,
-                        Color(red: 1.0, green: 0.95, blue: 0.9)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
+                // Background
+                FlatDesignSystem.background
+                    .ignoresSafeArea()
                 
                 VStack(spacing: 0) {
+                    Spacer()
+                    
                     // Header
                     HStack {
                         Text("Add Location")
-                            .font(.largeTitle)
-                            .foregroundColor(.primary)
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(FlatDesignSystem.text)
                         
                         Spacer()
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    .padding(.bottom, 16)
+                    .padding(.horizontal, FlatDesignSystem.paddingL)
+                    .padding(.top, FlatDesignSystem.paddingS)
+                    .padding(.bottom, FlatDesignSystem.paddingM)
                     
                     // Date and Nights Selection
-                    VStack(spacing: 16) {
+                    VStack(spacing: FlatDesignSystem.paddingS) {
                         // Date Picker
-                        VStack(spacing: 12) {
+                        VStack(spacing: FlatDesignSystem.paddingS) {
                             HStack {
                                 Text("Start Date:")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
                                 
                                 Spacer()
                             }
@@ -242,20 +240,19 @@ struct AddLocationView: View {
                             }) {
                                 HStack {
                                     Image(systemName: "calendar")
-                                        .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                        .foregroundColor(FlatDesignSystem.accentGreen)
                                         .font(.system(size: 16))
                                     
                                     Text(selectedDate, style: .date)
-                                        .font(.custom("Inter", size: 16))
-                                        .foregroundColor(themeManager.textColor)
+                                        .font(.system(size: 16, weight: .medium))
+                                        .foregroundColor(FlatDesignSystem.text)
                                     
                                     Spacer()
                                 }
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 12)
-                                .background(Color.white)
+                                .padding(.horizontal, FlatDesignSystem.paddingL)
+                                .padding(.vertical, FlatDesignSystem.paddingM)
+                                .background(FlatDesignSystem.surface)
                                 .cornerRadius(12)
-                                .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                             }
                             .overlay(
                                 DatePicker("", selection: $selectedDate, displayedComponents: .date)
@@ -265,17 +262,17 @@ struct AddLocationView: View {
                         }
                         
                         // Nights Selection
-                        VStack(spacing: 12) {
+                        VStack(spacing: FlatDesignSystem.paddingS) {
                             HStack {
                                 Text("Nights to stay:")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
                                 
                                 Spacer()
                                 
                                 Text("\(selectedNights) nights")
-                                    .font(.custom("Inter", size: 14))
-                                    .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.accentGreen)
                             }
                             
                             HStack {
@@ -286,15 +283,15 @@ struct AddLocationView: View {
                                 }) {
                                     Image(systemName: "minus.circle.fill")
                                         .font(.system(size: 24))
-                                        .foregroundColor(selectedNights > 1 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                        .foregroundColor(selectedNights > 1 ? FlatDesignSystem.accentGreen : FlatDesignSystem.textSecondary)
                                 }
                                 .disabled(selectedNights <= 1)
                                 
                                 Spacer()
                                 
                                 Text("\(selectedNights)")
-                                    .font(.custom("Inter", size: 20))
-                                    .foregroundColor(themeManager.textColor)
+                                    .font(.system(size: 20, weight: .bold))
+                                    .foregroundColor(FlatDesignSystem.text)
                                     .frame(minWidth: 40)
                                 
                                 Spacer()
@@ -306,71 +303,70 @@ struct AddLocationView: View {
                                 }) {
                                     Image(systemName: "plus.circle.fill")
                                         .font(.system(size: 24))
-                                        .foregroundColor(selectedNights < 14 ? Color(red: 1.0, green: 0.4, blue: 0.2) : Color.gray)
+                                        .foregroundColor(selectedNights < 14 ? FlatDesignSystem.accentGreen : FlatDesignSystem.textSecondary)
                                 }
                                 .disabled(selectedNights >= 14)
                             }
-                            .padding(.horizontal, 20)
+                            .padding(.horizontal, FlatDesignSystem.paddingL)
                         }
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 12)
-                        .background(Color.gray.opacity(0.1))
+                        .padding(.horizontal, FlatDesignSystem.paddingL)
+                        .padding(.vertical, FlatDesignSystem.paddingM)
+                        .background(FlatDesignSystem.surface)
                         .cornerRadius(12)
                         
                         // End Date Display
-                        VStack(spacing: 8) {
+                        VStack(spacing: FlatDesignSystem.paddingS) {
                             HStack {
                                 Text("End Date:")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
                                 
                                 Spacer()
                             }
                             
                             HStack {
                                 Image(systemName: "calendar")
-                                    .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                    .foregroundColor(FlatDesignSystem.accentGreen)
                                     .font(.system(size: 16))
                                 
                                 Text(endDateString)
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.textColor)
+                                    .font(.system(size: 16, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.text)
                                 
                                 Spacer()
                             }
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 12)
-                            .background(Color.white)
+                            .padding(.horizontal, FlatDesignSystem.paddingL)
+                            .padding(.vertical, FlatDesignSystem.paddingM)
+                            .background(FlatDesignSystem.surface)
                             .cornerRadius(12)
-                            .shadow(color: Color.black.opacity(0.05), radius: 2, x: 0, y: 1)
                         }
                     }
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 20)
+                    .padding(.horizontal, FlatDesignSystem.paddingL)
+                    .padding(.bottom, FlatDesignSystem.paddingS)
                     
                     // Search Bar - Centered
                     VStack(spacing: 0) {
                         // Search Bar
-                        HStack(spacing: 12) {
+                        HStack(spacing: FlatDesignSystem.paddingM) {
                             Image(systemName: "magnifyingglass")
-                                .foregroundColor(themeManager.secondaryTextColor)
+                                .foregroundColor(FlatDesignSystem.textSecondary)
                                 .font(.system(size: 18))
                             
                             TextField("Search", text: $searchText)
-                                .font(.custom("Inter", size: 16))
-                                .foregroundColor(themeManager.textColor)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.text)
                                 .onChange(of: searchText) { _ in
                                     performNominatimSearch()
                                 }
                         }
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 16)
-                        .background(Color.gray.opacity(0.1))
-                        .cornerRadius(16)
-                        .padding(.horizontal, 24)
+                        .padding(.horizontal, FlatDesignSystem.paddingL)
+                        .padding(.vertical, FlatDesignSystem.paddingL)
+                        .background(FlatDesignSystem.surface)
+                        .cornerRadius(12)
+                        .padding(.horizontal, FlatDesignSystem.paddingL)
                     }
-                    .padding(.bottom, 24)
-                    .background(themeManager.oledBackgroundColor)
+                    .padding(.bottom, FlatDesignSystem.paddingS)
+                    .background(FlatDesignSystem.background)
                     
                     // Main Content - API Results Only
                     if !searchText.isEmpty {
@@ -378,29 +374,29 @@ struct AddLocationView: View {
                             LazyVStack(spacing: 12) {
                                 // Nominatim API Results
                                 if nominatimManager.isLoading {
-                                    VStack(spacing: 16) {
+                                    VStack(spacing: FlatDesignSystem.paddingL) {
                                         ProgressView()
                                             .scaleEffect(1.2)
-                                            .tint(Color(red: 1.0, green: 0.4, blue: 0.2))
+                                            .tint(FlatDesignSystem.accentGreen)
                                         
                                         Text("Searching...")
-                                            .font(.custom("Inter", size: 16))
-                                            .foregroundColor(themeManager.secondaryTextColor)
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(FlatDesignSystem.textSecondary)
                                     }
                                     .padding(.top, 60)
                                 } else if nominatimManager.searchResults.isEmpty {
-                                    VStack(spacing: 20) {
+                                    VStack(spacing: FlatDesignSystem.paddingL) {
                                         Image(systemName: "magnifyingglass")
                                             .font(.system(size: 56))
-                                            .foregroundColor(themeManager.secondaryTextColor)
+                                            .foregroundColor(FlatDesignSystem.textSecondary)
                                         
                                         Text("No places found")
-                                            .font(.custom("Inter", size: 20))
-                                            .foregroundColor(themeManager.textColor)
+                                            .font(.system(size: 20, weight: .semibold))
+                                            .foregroundColor(FlatDesignSystem.text)
                                         
                                         Text("Try a different search term")
-                                            .font(.custom("Inter", size: 16))
-                                            .foregroundColor(themeManager.secondaryTextColor)
+                                            .font(.system(size: 16, weight: .medium))
+                                            .foregroundColor(FlatDesignSystem.textSecondary)
                                     }
                                     .padding(.top, 60)
                                 } else {
@@ -420,40 +416,35 @@ struct AddLocationView: View {
                         }
                     } else {
                         // Centered Search Icon between Search Field and Buttons
-                        Spacer()
-                        
-                        VStack(spacing: 32) {
+                        VStack(spacing: 12) {
                             Image(systemName: "magnifyingglass")
-                                .font(.system(size: 72))
-                                .foregroundColor(Color(red: 1.0, green: 0.4, blue: 0.2).opacity(0.6))
+                                .font(.system(size: 32))
+                                .foregroundColor(FlatDesignSystem.accentGreen.opacity(0.6))
                             
-                            VStack(spacing: 8) {
+                            VStack(spacing: 4) {
                                 Text("Search")
-                                    .font(.custom("Inter", size: 24))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(themeManager.textColor)
+                                    .font(.system(size: 18, weight: .semibold))
+                                    .foregroundColor(FlatDesignSystem.text)
                                 
                                 Text("Enter a place to search")
-                                    .font(.custom("Inter", size: 16))
-                                    .foregroundColor(themeManager.secondaryTextColor)
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundColor(FlatDesignSystem.textSecondary)
                                     .multilineTextAlignment(.center)
                             }
                             
                             // Error message display
                             if let errorMessage = nominatimManager.errorMessage {
                                 Text("Error: \(errorMessage)")
-                                    .font(.custom("Inter", size: 14))
+                                    .font(.system(size: 14, weight: .medium))
                                     .foregroundColor(.red)
                                     .multilineTextAlignment(.center)
                                     .padding(.horizontal, 40)
                             }
                         }
-                        
-                        Spacer()
                     }
                     
                     // Add Button
-                    VStack(spacing: 16) {
+                    VStack(spacing: FlatDesignSystem.paddingS) {
                         Button(action: {
                             // Add the selected location if any
                             if !searchText.isEmpty && !nominatimManager.searchResults.isEmpty {
@@ -461,19 +452,18 @@ struct AddLocationView: View {
                                 onSave(firstResult.display_name, selectedDate, selectedNights)
                             }
                         }) {
-                            HStack(spacing: 8) {
+                            HStack(spacing: FlatDesignSystem.paddingS) {
                                 Image(systemName: "plus")
                                     .font(.system(size: 20))
                                 
                                 Text("Add Location")
-                                    .font(.custom("Inter", size: 18))
-                                    .fontWeight(.semibold)
+                                    .font(.system(size: 18, weight: .semibold))
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .frame(height: 56)
-                            .background(Color(red: 1.0, green: 0.4, blue: 0.2))
-                            .cornerRadius(28)
+                            .background(FlatDesignSystem.accentGreen)
+                            .cornerRadius(12)
                         }
                         .disabled(searchText.isEmpty || nominatimManager.searchResults.isEmpty)
                         .opacity(searchText.isEmpty || nominatimManager.searchResults.isEmpty ? 0.5 : 1.0)
@@ -482,20 +472,19 @@ struct AddLocationView: View {
                             onCancel()
                         }) {
                             Text("Cancel")
-                                .font(.custom("Inter", size: 16))
-                                .fontWeight(.medium)
-                                .foregroundColor(Color(red: 0.4, green: 0.4, blue: 0.4))
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundColor(FlatDesignSystem.textSecondary)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 48)
-                                .background(Color.white)
-                                .cornerRadius(24)
+                                .background(FlatDesignSystem.surface)
+                                .cornerRadius(12)
                                 .overlay(
-                                    RoundedRectangle(cornerRadius: 24)
-                                        .stroke(Color(red: 0.9, green: 0.9, blue: 0.9), lineWidth: 1)
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .stroke(FlatDesignSystem.border, lineWidth: 1)
                                 )
                         }
                     }
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, FlatDesignSystem.paddingL)
                     .padding(.top, 60)
                     .padding(.bottom, 60)
                 }
