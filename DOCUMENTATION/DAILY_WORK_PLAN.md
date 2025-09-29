@@ -3,16 +3,16 @@
 ## 📅 9-Day Sprint Overview
 
 This plan breaks down all 29 tasks into manageable daily chunks:
-- **Weekdays (Mon-Fri)**: 3 tasks per day, 3-4 hours afternoon work
+- **Weekdays (Mon-Fri)**: 3 tasks per day, 3-4 hours work
 - **Weekends (Sat-Sun)**: 4-6 hours total, more relaxed pace
 - Perfect balance between progress and work-life balance
 
 ---
 
-## 🗓️ Day 1: Flat Design System Implementation (Monday)
+## 🗓️ Day 1: UI Design - Flat Design System (Monday)
 
 ### 🎯 **Daily Goal**: Implement comprehensive flat design system
-**Estimated Time**: 3-4 hours (Afternoon)
+**Estimated Time**: 3-4 hours
 **Actual Time**: 2 hours (Monday)
 **Previous Work**: 30 minutes (Sunday)
 
@@ -53,109 +53,10 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 
 ---
 
-## 🗓️ Day 2: Foundation & Authentication Setup (Tuesday)
+## 🗓️ Day 2: UI Design - Home Tab (Tuesday)
 
-### 🎯 **Daily Goal**: Establish authentication foundation
-**Estimated Time**: 3-4 hours (Afternoon)
-
-#### Task 1: Apple Login SDK Integration
-- [ ] **Apple Login: Apple Sign-In SDK Integration and Setup**
-  - Add Sign In with Apple capability to Xcode project
-  - Configure entitlements file
-  - Update Info.plist with Apple Sign-In configuration
-  - Set up AuthenticationServices framework
-
-#### Task 2: Google Login SDK Integration  
-- [ ] **Google Login: Google Sign-In SDK Integration and Setup**
-  - Verify GoogleService-Info.plist configuration
-  - Add GoogleSignIn framework to project
-  - Configure URL schemes and client IDs
-  - Set up Google Sign-In in AppDelegate
-
-#### Task 3: Email Authentication Foundation
-- [ ] **Email Login: UI Screens (Login, Register, Reset) Creation**
-  - Create EmailAuthView with login/register forms
-  - Design password reset flow UI
-  - Implement form validation and error handling
-  - Add navigation between auth screens
-
-**Daily Deliverables**:
-- ✅ Apple Sign-In SDK ready for implementation
-- ✅ Google Sign-In SDK configured
-- ✅ Email authentication UI screens complete
-
----
-
-## 🗓️ Day 3: Authentication Implementation (Wednesday)
-
-### 🎯 **Daily Goal**: Complete authentication functionality
-**Estimated Time**: 3-4 hours (Afternoon)
-
-#### Task 1: Apple Login Implementation
-- [ ] **Apple Login: UI and Functionality Implementation**
-  - Create AppleSignInButton component
-  - Implement ASAuthorizationController delegate methods
-  - Add error handling and user feedback
-  - Test Apple Sign-In flow
-
-#### Task 2: Google Login Implementation
-- [ ] **Google Login: UI and Functionality Implementation**
-  - Create GoogleSignInButton component
-  - Implement Google Sign-In flow
-  - Handle authentication results and errors
-  - Test Google Sign-In integration
-
-#### Task 3: Email Authentication Backend
-- [ ] **Email Login: Registration and Email Verification Implementation**
-  - Set up email registration API endpoints
-  - Implement email verification system
-  - Create password reset functionality
-  - Add email validation and security
-
-**Daily Deliverables**:
-- ✅ Apple Sign-In fully functional
-- ✅ Google Sign-In fully functional  
-- ✅ Email registration and verification working
-
----
-
-## 🗓️ Day 4: Onboarding Flow (Thursday)
-
-### 🎯 **Daily Goal**: Create user onboarding experience
-**Estimated Time**: 3-4 hours (Afternoon)
-
-#### Task 1: Welcome Screen
-- [ ] **Onboarding: Welcome Screen with App Branding Creation**
-  - Design welcome screen with Travely branding
-  - Add app logo and introduction text
-  - Create "Get Started" and "Demo" buttons
-  - Implement smooth animations
-
-#### Task 2: Authentication Selection
-- [ ] **Onboarding: Authentication Selection Screen (Apple, Google, Email)**
-  - Create auth selection screen with all login options
-  - Design clean button layout for each auth method
-  - Add "Continue as Guest" option
-  - Implement navigation to auth flows
-
-#### Task 3: Subscription Selection
-- [ ] **Onboarding: Free vs Paid Version Selection Screen**
-  - Design subscription plan cards (Free vs Pro)
-  - Add feature comparison and pricing
-  - Implement plan selection logic
-  - Create App Store purchase integration
-
-**Daily Deliverables**:
-- ✅ Complete onboarding flow with 3 screens
-- ✅ All authentication options available
-- ✅ Subscription selection functional
-
----
-
-## 🗓️ Day 5: UI Design Updates - Home Tab (Friday)
-
-### 🎯 **Daily Goal**: Start flat design implementation
-**Estimated Time**: 3-4 hours (Afternoon)
+### 🎯 **Daily Goal**: Start flat design implementation for Home Tab
+**Estimated Time**: 3-4 hours
 
 #### Task 1: Home Tab Redesign
 - [ ] **UI Design: Flatten Home Tab**
@@ -185,7 +86,139 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 
 ---
 
-## 🗓️ Day 6: UI Design Updates - Routes Tab Enhancement (Saturday)
+## 🗓️ Day 3: Foundation & Authentication Setup (Wednesday)
+
+### 🎯 **Daily Goal**: Establish authentication foundation
+**Estimated Time**: 3-4 hours
+
+#### Task 1: Apple Login SDK Integration
+- [ ] **Apple Login: Apple Sign-In SDK Integration and Setup**
+  - Add Sign In with Apple capability to Xcode project
+  - Configure entitlements file
+  - Update Info.plist with Apple Sign-In configuration
+  - Set up AuthenticationServices framework
+
+#### Task 2: Google Login SDK Integration  
+- [ ] **Google Login: Google Sign-In SDK Integration and Setup**
+  - Verify GoogleService-Info.plist configuration
+  - Add GoogleSignIn framework to project
+  - Configure URL schemes and client IDs
+  - Set up Google Sign-In in AppDelegate
+
+#### Task 3: Email Authentication Foundation
+- [ ] **Email Login: UI Screens (Login, Register, Reset) Creation**
+  - Create EmailAuthView with login/register forms
+  - Design password reset flow UI
+  - Implement form validation and error handling
+  - Add navigation between auth screens
+
+**Daily Deliverables**:
+- ✅ Apple Sign-In SDK ready for implementation
+- ✅ Google Sign-In SDK configured
+- ✅ Email authentication UI screens complete
+
+---
+
+## 🗓️ Day 4: Authentication Implementation (Thursday)
+
+### 🎯 **Daily Goal**: Complete authentication functionality
+**Estimated Time**: 3-4 hours
+
+#### Task 1: Apple Login Implementation
+- [ ] **Apple Login: UI and Functionality Implementation**
+  - Create AppleSignInButton component
+  - Implement ASAuthorizationController delegate methods
+  - Add error handling and user feedback
+  - Test Apple Sign-In flow
+
+#### Task 2: Google Login Implementation
+- [ ] **Google Login: UI and Functionality Implementation**
+  - Create GoogleSignInButton component
+  - Implement Google Sign-In flow
+  - Handle authentication results and errors
+  - Test Google Sign-In integration
+
+#### Task 3: Email Authentication Backend
+- [ ] **Email Login: Registration and Email Verification Implementation**
+  - Set up email registration API endpoints
+  - Implement email verification system
+  - Create password reset functionality
+  - Add email validation and security
+
+**Daily Deliverables**:
+- ✅ Apple Sign-In fully functional
+- ✅ Google Sign-In fully functional  
+- ✅ Email registration and verification working
+
+---
+
+## 🗓️ Day 5: Onboarding Flow (Friday)
+
+### 🎯 **Daily Goal**: Create user onboarding experience
+**Estimated Time**: 3-4 hours
+
+#### Task 1: Welcome Screen
+- [ ] **Onboarding: Welcome Screen with App Branding Creation**
+  - Design welcome screen with Travely branding
+  - Add app logo and introduction text
+  - Create "Get Started" and "Demo" buttons
+  - Implement smooth animations
+
+#### Task 2: Authentication Selection
+- [ ] **Onboarding: Authentication Selection Screen (Apple, Google, Email)**
+  - Create auth selection screen with all login options
+  - Design clean button layout for each auth method
+  - Add "Continue as Guest" option
+  - Implement navigation to auth flows
+
+#### Task 3: Subscription Selection
+- [ ] **Onboarding: Free vs Paid Version Selection Screen**
+  - Design subscription plan cards (Free vs Pro)
+  - Add feature comparison and pricing
+  - Implement plan selection logic
+  - Create App Store purchase integration
+
+**Daily Deliverables**:
+- ✅ Complete onboarding flow with 3 screens
+- ✅ All authentication options available
+- ✅ Subscription selection functional
+
+---
+
+## 🗓️ Day 6: UI Design Updates - Home Tab (Saturday)
+
+### 🎯 **Daily Goal**: Start flat design implementation
+**Estimated Time**: 4-5 hours (Weekend)
+
+#### Task 1: Home Tab Redesign
+- [ ] **UI Design: Flatten Home Tab**
+  - Replace existing cards with FlatCard components
+  - Update button styles to flat design
+  - Optimize spacing using design system
+  - Improve typography hierarchy
+
+#### Task 2: Home Tab Testing & Polish
+- [ ] **Home Tab: Test and refine flat design**
+  - Test all interactive elements
+  - Ensure proper contrast and accessibility
+  - Fine-tune spacing and alignment
+  - Verify smooth animations
+
+#### Task 3: Home Tab Enhancement
+- [ ] **Home Tab: Add advanced features**
+  - Implement quick action buttons
+  - Add recent bookings section
+  - Create featured destinations carousel
+  - Enhance user experience
+
+**Daily Deliverables**:
+- ✅ Home tab with modern flat design
+- ✅ Tested and polished home interface
+- ✅ Enhanced home tab functionality
+
+---
+
+## 🗓️ Day 7: UI Design Updates - Routes Tab Enhancement (Sunday)
 
 ### 🎯 **Daily Goal**: Continue flat design implementation
 **Estimated Time**: 4-5 hours (Weekend)
@@ -218,10 +251,10 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 
 ---
 
-## 🗓️ Day 7: UI Design Updates - Destination Tab (Sunday)
+## 🗓️ Day 8: UI Design Updates - Destination Tab (Monday)
 
 ### 🎯 **Daily Goal**: Continue UI modernization
-**Estimated Time**: 4-5 hours (Weekend)
+**Estimated Time**: 3-4 hours
 
 #### Task 1: Destination Tab Redesign
 - [ ] **UI Design: Flatten Destination Tab**
@@ -251,10 +284,10 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 
 ---
 
-## 🗓️ Day 8: UI Design Updates - Settings Tab (Monday)
+## 🗓️ Day 9: UI Design Updates - Settings Tab (Tuesday)
 
 ### 🎯 **Daily Goal**: Complete UI design implementation
-**Estimated Time**: 3-4 hours (Afternoon)
+**Estimated Time**: 3-4 hours
 
 #### Task 1: Settings Tab Redesign
 - [ ] **UI Design: Flatten Settings Tab**
@@ -284,10 +317,10 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 
 ---
 
-## 🗓️ Day 9: Final UI Polish & Testing (Tuesday)
+## 🗓️ Day 10: Final UI Polish & Testing (Wednesday)
 
 ### 🎯 **Daily Goal**: Complete UI design implementation
-**Estimated Time**: 3-4 hours (Afternoon)
+**Estimated Time**: 3-4 hours
 
 #### Task 1: Final UI Polish & Testing
 - [ ] **Complete UI Design: Final testing and polish**
@@ -320,15 +353,16 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 ## 📊 Progress Tracking
 
 ### Daily Completion Checklist
-- [x] **Day 1**: Flat design system implemented, Routes tab modernized
-- [ ] **Day 2**: Authentication SDK setup complete
-- [ ] **Day 3**: All login methods functional
-- [ ] **Day 4**: Onboarding flow complete
-- [ ] **Day 5**: Home tab UI complete with flat design
-- [ ] **Day 6**: Routes tab UI complete with enhanced swipe functionality
-- [ ] **Day 7**: Destination tab UI complete with improved search
-- [ ] **Day 8**: Settings tab UI complete with account management
-- [ ] **Day 9**: Final polish and testing complete
+- [x] **Day 1**: UI Design - Flat Design System implemented, Routes tab modernized
+- [ ] **Day 2**: UI Design - Home Tab complete with flat design
+- [ ] **Day 3**: Foundation & Authentication setup complete
+- [ ] **Day 4**: Authentication implementation complete
+- [ ] **Day 5**: Onboarding flow complete
+- [ ] **Day 6**: UI Design - Home Tab complete with flat design
+- [ ] **Day 7**: UI Design - Routes Tab Enhancement complete
+- [ ] **Day 8**: UI Design - Destination Tab complete with flat design
+- [ ] **Day 9**: UI Design - Settings Tab complete with account management
+- [ ] **Day 10**: Final UI Polish & Testing complete
 
 ### Weekly Milestones
 - ✅ **Week 1**: Complete flat design system implemented
@@ -343,7 +377,7 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 ## 🎯 Success Metrics
 
 ### Daily Goals
-- **3 major tasks completed per day (Weekdays: 3-4 hours afternoon)**
+- **3 major tasks completed per day (Weekdays: 3-4 hours)**
 - **Weekend: 4-6 hours total (more relaxed pace)**
 - **All deliverables tested and functional**
 - **Code committed to GitHub daily**
