@@ -1,9 +1,88 @@
 import SwiftUI
 
 struct TravelRouteView_Optimized: View {
-    @StateObject private var dataManager = SampleDataManager.shared
     @State private var showingAddLocation = false
     @State private var selectedStop: RouteStop?
+    
+    // Sample data directly in view for now
+    private let sampleRoute = TravelRoute(
+        id: 1,
+        title: "Asia Adventure",
+        description: "Experience the best of Taiwan and Southeast Asia with this amazing 21-day journey through Taichung, Taipei, Bali, and Bangkok.",
+        duration: "21 Days",
+        totalPrice: 3488,
+        imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&h=400&fit=crop&crop=center",
+        stops: [
+            RouteStop(
+                id: 1,
+                destination: "Munich",
+                country: "Germany",
+                countryEmoji: "🇩🇪",
+                duration: "0 Days",
+                dates: "Thu 07 Mar - Departure",
+                hasFlight: true,
+                hasTrain: false,
+                isStart: true,
+                flightInfo: "Munich → Taipei",
+                flightDuration: "11h 30m",
+                flightPrice: "€589",
+                nights: 0
+            ),
+            RouteStop(
+                id: 3,
+                destination: "Taichung",
+                country: "Taiwan",
+                countryEmoji: "🇹🇼",
+                duration: "4 Days",
+                dates: "Thu 07 Mar - Mon 11 Mar",
+                hasFlight: false,
+                hasTrain: true,
+                isStart: false,
+                flightInfo: "Taipei → Taichung",
+                flightDuration: "1h 15m",
+                flightPrice: "€25",
+                nights: 4
+            ),
+            RouteStop(
+                id: 4,
+                destination: "Taipei",
+                country: "Taiwan",
+                countryEmoji: "🇹🇼",
+                duration: "2 Days",
+                dates: "Mon 11 Mar - Wed 13 Mar",
+                hasFlight: true,
+                hasTrain: false,
+                isStart: false,
+                flightInfo: "Taichung → Taipei",
+                flightDuration: "1h 15m",
+                flightPrice: "€25",
+                nights: 2
+            ),
+            RouteStop(
+                id: 7,
+                destination: "Bangkok",
+                country: "Thailand",
+                countryEmoji: "🇹🇭",
+                duration: "5 Days",
+                dates: "Sun 24 Mar - Fri 29 Mar",
+                hasFlight: true,
+                hasTrain: false,
+                isStart: false,
+                flightInfo: "Kuala Lumpur → Bangkok",
+                flightDuration: "1h 45m",
+                flightPrice: "€298",
+                nights: 5
+            )
+        ],
+        priceBreakdown: [
+            PriceItem(id: 1, item: "Taichung Accommodation (4 nights)", price: 360),
+            PriceItem(id: 2, item: "Taipei Accommodation (2 nights)", price: 180),
+            PriceItem(id: 4, item: "Bangkok Accommodation (5 nights)", price: 400),
+            PriceItem(id: 5, item: "Munich → Taichung Flight", price: 589),
+            PriceItem(id: 6, item: "Taichung → Taipei Train", price: 89),
+            PriceItem(id: 8, item: "Bali → Bangkok Flight", price: 298)
+        ]
+    )
     
     var body: some View {
         NavigationView {
@@ -15,10 +94,10 @@ struct TravelRouteView_Optimized: View {
                 ScrollView {
                     LazyVStack(spacing: 16) {
                         // Route Header
-                        RouteHeaderView(route: dataManager.featuredRoute)
+                        RouteHeaderView(route: sampleRoute)
                         
                         // Route Stops
-                        ForEach(dataManager.featuredRoute.stops) { stop in
+                        ForEach(sampleRoute.stops) { stop in
                             RouteStopCard(stop: stop)
                                 .onTapGesture {
                                     selectedStop = stop

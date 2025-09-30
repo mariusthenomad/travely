@@ -224,5 +224,19 @@ struct EditRouteStopView: View {
 }
 
 #Preview {
-    RouteStopCard(stop: SampleDataManager.shared.featuredRoute.stops[2])
+    RouteStopCard(stop: RouteStop(
+        id: 1,
+        destination: "Sample City",
+        country: "Sample Country",
+        countryEmoji: "🏳️",
+        duration: "3 Days",
+        dates: "Jan 1-4, 2024",
+        hasFlight: true,
+        hasTrain: false,
+        isStart: false,
+        flightInfo: "Sample Flight",
+        flightDuration: "2h 30m",
+        flightPrice: "€200",
+        nights: 3
+    ))
 }

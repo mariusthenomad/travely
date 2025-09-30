@@ -1,16 +1,60 @@
 import SwiftUI
 
+// MARK: - Destination Model
+struct Destination: Identifiable {
+    let id: Int
+    let name: String
+    let country: String
+    let countryEmoji: String
+    let imageURL: String
+    let description: String
+    let rating: Double
+    let priceRange: String
+}
+
 struct DestinationSelectionView_Optimized: View {
-    @StateObject private var dataManager = SampleDataManager.shared
-    @StateObject private var lazyLoader = LazyDataLoader()
     @State private var searchText = ""
     @State private var selectedCategory = "All"
     @State private var showingFilters = false
     
     let categories = ["All", "Europe", "Asia", "Americas", "Africa", "Oceania"]
     
+    // Sample destinations directly in view
+    private let sampleDestinations = [
+        Destination(
+            id: 1,
+            name: "Tokyo",
+            country: "Japan",
+            countryEmoji: "🇯🇵",
+            imageURL: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop",
+            description: "Modern metropolis blending traditional culture with cutting-edge technology",
+            rating: 4.7,
+            priceRange: "€€€"
+        ),
+        Destination(
+            id: 2,
+            name: "Paris",
+            country: "France",
+            countryEmoji: "🇫🇷",
+            imageURL: "https://images.unsplash.com/photo-1502602898536-47ad22581b52?w=400&h=300&fit=crop",
+            description: "City of Light with world-class art, cuisine, and romantic atmosphere",
+            rating: 4.6,
+            priceRange: "€€€"
+        ),
+        Destination(
+            id: 3,
+            name: "Bali",
+            country: "Indonesia",
+            countryEmoji: "🇮🇩",
+            imageURL: "https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop",
+            description: "Tropical paradise with stunning beaches, temples, and vibrant culture",
+            rating: 4.8,
+            priceRange: "€€"
+        )
+    ]
+    
     var filteredDestinations: [Destination] {
-        let destinations = dataManager.popularDestinations
+        let destinations = sampleDestinations
         
         let categoryFiltered = selectedCategory == "All" ? destinations : destinations.filter { destination in
             getRegionForCountry(destination.country) == selectedCategory
@@ -119,10 +163,20 @@ struct DestinationCard: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Image
-            AsyncImageView(url: destination.imageURL, placeholder: "photo")
-                .frame(height: 120)
-                .clipped()
-                .cornerRadius(12)
+            AsyncImage(url: URL(string: destination.imageURL)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } placeholder: {
+                Image(systemName: "photo")
+                    .font(.largeTitle)
+                    .foregroundColor(.secondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .background(Color(.systemGray6))
+            }
+            .frame(height: 120)
+            .clipped()
+            .cornerRadius(12)
             
             // Content
             VStack(alignment: .leading, spacing: 4) {

@@ -100,5 +100,14 @@ struct PriceBreakdownView: View {
 }
 
 #Preview {
-    RouteHeaderView(route: SampleDataManager.shared.featuredRoute)
+    RouteHeaderView(route: TravelRoute(
+        id: 1,
+        title: "Sample Route",
+        description: "Sample description",
+        duration: "7 Days",
+        totalPrice: 1500,
+        imageURL: "",
+        stops: [],
+        priceBreakdown: []
+    ))
 }
