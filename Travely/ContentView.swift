@@ -16,26 +16,19 @@ struct ContentView: View {
                     }
                     .tag(0)
                 
-                TravelRouteView_Optimized()
+                TravelRouteView()
                     .tabItem {
                         Image(systemName: "map.fill")
                         Text("Routes")
                     }
                     .tag(1)
                 
-                TicketsTabView()
-                    .tabItem {
-                        Image(systemName: "ticket.fill")
-                        Text("Tickets")
-                    }
-                    .tag(2)
-                
-                DestinationSelectionView_Optimized()
+                DestinationSelectionView()
                     .tabItem {
                         Image(systemName: "globe.americas.fill")
                         Text("Destinations")
                     }
-                    .tag(3)
+                    .tag(2)
                 
                 ProfileSettingsView()
                     .tabItem {

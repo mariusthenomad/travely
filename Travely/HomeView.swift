@@ -2,7 +2,6 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var themeManager: ThemeManager
-    @StateObject private var dataManager = SampleDataManager.shared
     
     var body: some View {
         NavigationView {
