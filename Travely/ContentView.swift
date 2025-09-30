@@ -16,26 +16,33 @@ struct ContentView: View {
                     }
                     .tag(0)
                 
-                TravelRouteView()
+                TravelRouteView_Optimized()
                     .tabItem {
                         Image(systemName: "map.fill")
                         Text("Routes")
                     }
                     .tag(1)
                 
-                DestinationSelectionView()
+                TicketsTabView()
+                    .tabItem {
+                        Image(systemName: "ticket.fill")
+                        Text("Tickets")
+                    }
+                    .tag(2)
+                
+                DestinationSelectionView_Optimized()
                     .tabItem {
                         Image(systemName: "globe.americas.fill")
                         Text("Destinations")
                     }
-                    .tag(2)
+                    .tag(3)
                 
                 ProfileSettingsView()
                     .tabItem {
                         Image(systemName: "person.circle.fill")
                         Text("Profile")
                     }
-                    .tag(3)
+                    .tag(4)
             }
             .accentColor(themeManager.primaryColor)
             .background(themeManager.oledBackgroundColor)

@@ -2415,15 +2415,15 @@ let featuredRoute = TravelRoute(
             destination: "Taichung",
             country: "Taiwan",
             countryEmoji: "🇹🇼",
-            duration: "5 Days",
-            dates: "Thu 07 Mar - Tue 12 Mar",
+            duration: "4 Days",
+            dates: "Thu 07 Mar - Mon 11 Mar",
             hasFlight: false,
             hasTrain: true,
             isStart: false,
             flightInfo: "Taipei → Taichung",
             flightDuration: "1h 15m",
             flightPrice: "€25",
-            nights: 5
+            nights: 4
         ),
         RouteStop(
             id: 4,
@@ -2431,7 +2431,7 @@ let featuredRoute = TravelRoute(
             country: "Taiwan",
             countryEmoji: "🇹🇼",
             duration: "2 Days",
-            dates: "Tue 12 Mar - Thu 14 Mar",
+            dates: "Mon 11 Mar - Wed 13 Mar",
             hasFlight: true,
             hasTrain: false,
             isStart: false,
@@ -2475,15 +2475,15 @@ let featuredRoute = TravelRoute(
             destination: "Bangkok",
             country: "Thailand",
             countryEmoji: "🇹🇭",
-            duration: "4 Days",
-            dates: "Sun 24 Mar - Thu 28 Mar",
+            duration: "5 Days",
+            dates: "Sun 24 Mar - Fri 29 Mar",
             hasFlight: true,
             hasTrain: false,
             isStart: false,
             flightInfo: "Kuala Lumpur → Bangkok",
             flightDuration: "1h 45m",
             flightPrice: "€298",
-            nights: 4
+            nights: 5
         ),
         RouteStop(
             id: 8,
@@ -2502,10 +2502,10 @@ let featuredRoute = TravelRoute(
         )
     ],
     priceBreakdown: [
-        PriceItem(id: 1, item: "Taichung Accommodation (5 nights)", price: 450),
+        PriceItem(id: 1, item: "Taichung Accommodation (4 nights)", price: 360),
         PriceItem(id: 2, item: "Taipei Accommodation (2 nights)", price: 180),
         PriceItem(id: 3, item: "Bali Accommodation (10 nights)", price: 650),
-        PriceItem(id: 4, item: "Bangkok Accommodation (4 nights)", price: 320),
+        PriceItem(id: 4, item: "Bangkok Accommodation (5 nights)", price: 400),
         PriceItem(id: 5, item: "Munich → Taichung Flight", price: 589),
         PriceItem(id: 6, item: "Taichung → Taipei Train", price: 89),
         PriceItem(id: 7, item: "Taipei → Bali Flight", price: 445),
@@ -2548,13 +2548,13 @@ let sampleStays = [
         pricePerNight: 65,
         amenities: ["Wi-Fi", "Beach", "Pool", "Spa", "Restaurant"]
     ),
-    Stay(
+        Stay(
         id: 4,
         name: "Bangkok City Hotel",
         location: "Bangkok, Thailand",
         countryEmoji: "🇹🇭",
-        dates: "Sun 24 Mar - Thu 28 Mar",
-        nights: 4,
+        dates: "Sun 24 Mar - Fri 29 Mar",
+        nights: 5,
         pricePerNight: 80,
         amenities: ["Wi-Fi", "Pool", "Restaurant", "Bar"]
     )
