@@ -35,7 +35,7 @@ struct ContentView: View {
                         Image(systemName: "person.circle.fill")
                         Text("Profile")
                     }
-                    .tag(4)
+                    .tag(3)
             }
             .accentColor(themeManager.primaryColor)
             .background(themeManager.oledBackgroundColor)
