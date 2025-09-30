@@ -1,0 +1,22 @@
+# Email Configuration Setup
+# =========================
+
+# 1. Replace these values in simple-server.js:
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-app-password
+
+# 2. Gmail App Password Setup:
+# - Go to Google Account settings
+# - Security > 2-Step Verification (must be enabled)
+# - App passwords > Generate app password
+# - Use the generated 16-character password
+
+# 3. Update simple-server.js lines 27-28:
+# user: process.env.EMAIL_USER || 'your-email@gmail.com'
+# pass: process.env.EMAIL_PASS || 'your-app-password'
+
+# 4. Install dependencies:
+# npm install
+
+# 5. Start server:
+# npm start

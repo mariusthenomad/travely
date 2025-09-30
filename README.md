@@ -26,6 +26,7 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 - OpenStreetMap integration (Länder/Städte Suche)
 - Basic UI structure
 - Route planning with swipe gestures
+- **🌐 Landing Page & Waitlist System** - LIVE at https://mrb-create.com
 
 ### 🚧 Active Development (29 Sub-Tasks)
 - **Backend**: Complete API development (5 tasks)
@@ -85,20 +86,20 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 
 ## 🗺 Development Roadmap
 
-### 📅 10-Day Sprint Plan (UI Design Focus)
+### 📅 9-Day Sprint Plan (UI Design Focus)
 | Day | Focus Area | Tasks | Time |
 |-----|------------|-------|------|
-| **Sunday, Sep 28** | Flat Design System | FlatDesignComponents.swift, Design System, Component Library | 30min |
-| **Monday, Sep 29** | UI Design - Flat Design System | Routes Tab Redesign, Swipe Enhancement, Menu Optimization | 2h |
-| **Tuesday, Sep 30** | UI Design - Home Tab | Home Tab Redesign, FlatCard Implementation, Polish | 3-4h |
-| **Wednesday, Oct 1** | Foundation & Authentication Setup | Apple SDK, Google SDK, Email UI | 3-4h |
-| **Thursday, Oct 2** | Authentication Implementation | Apple Login, Google Login, Email Backend | 3-4h |
-| **Friday, Oct 3** | Onboarding Flow | Welcome Screen, Auth Selection, Subscription | 3-4h |
-| **Saturday, Oct 4** | UI Design - Home Tab | Home Tab Redesign, FlatCard Implementation, Polish | 4-5h |
-| **Sunday, Oct 5** | UI Design - Routes Tab Enhancement | Routes Redesign, Swipe Enhancement, Polish | 4-5h |
-| **Monday, Oct 6** | UI Design - Destination Tab | Destination Redesign, Search Enhancement, Polish | 3-4h |
-| **Tuesday, Oct 7** | UI Design - Settings Tab | Settings Redesign, Account Management, Final Polish | 3-4h |
-| **Wednesday, Oct 8** | Final UI Polish & Testing | Complete UI Design, Performance Optimization, Testing | 3-4h |
+| **Sunday, Sep 29** | Landing Page Development | Professional landing page, waitlist system, live website | 1h |
+| **Monday, Sep 30** | UI Design - Flat Design System | Routes Tab Redesign, Swipe Enhancement, Menu Optimization | 2h |
+| **Tuesday, Oct 1** | UI Design - Home Tab | Home Tab Redesign, FlatCard Implementation, Polish | 3-4h |
+| **Wednesday, Oct 2** | Foundation & Authentication Setup | Apple SDK, Google SDK, Email UI | 3-4h |
+| **Thursday, Oct 3** | Authentication Implementation | Apple Login, Google Login, Email Backend | 3-4h |
+| **Friday, Oct 4** | Onboarding Flow | Welcome Screen, Auth Selection, Subscription | 3-4h |
+| **Saturday, Oct 5** | UI Design - Home Tab | Home Tab Redesign, FlatCard Implementation, Polish | 4-5h |
+| **Sunday, Oct 6** | UI Design - Routes Tab Enhancement | Routes Redesign, Swipe Enhancement, Polish | 4-5h |
+| **Monday, Oct 7** | UI Design - Destination Tab | Destination Redesign, Search Enhancement, Polish | 3-4h |
+| **Tuesday, Oct 8** | UI Design - Settings Tab | Settings Redesign, Account Management, Final Polish | 3-4h |
+| **Wednesday, Oct 9** | Final UI Polish & Testing | Complete UI Design, Performance Optimization, Testing | 3-4h |
 
 ### ✅ Completed Features
 | Feature | Status | Description |
@@ -108,6 +109,7 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 | Route Planning | ✅ Done | Swipe gestures, floating button |
 | Project Documentation | ✅ Done | Complete task breakdown and daily work plan |
 | Flat Design System | ✅ Done | FlatDesignComponents.swift with complete design system |
+| **Landing Page & Waitlist** | ✅ **LIVE** | Professional website at https://mrb-create.com |
 
 ### 🚀 Next Phase (After 7-Day Sprint)
 | Feature | Status | Description |

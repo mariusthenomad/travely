@@ -569,11 +569,15 @@ struct TravelRouteView: View {
                                         },
                                         onSetDate: { selectedStop in
                                             selectedStopForDate = selectedStop
-                                            showingDatePicker = true
+                                            DispatchQueue.main.async {
+                                                showingDatePicker = true
+                                            }
                                         },
                                         onInsert: { selectedStop in
                                             selectedStopForInsert = selectedStop
-                                            showingInsertMenu = true
+                                            DispatchQueue.main.async {
+                                                showingInsertMenu = true
+                                            }
                                         },
                                         canDelete: index != 0 && index != currentRoute.stops.count - 1,
                                         canEdit: true, // Allow editing for all stops
@@ -719,12 +723,7 @@ struct TravelRouteView: View {
                 }
             } else {
                 // Fallback view to prevent sheet issues
-                VStack {
-                    Text("Loading...")
-                        .foregroundColor(FlatDesignSystem.text)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(FlatDesignSystem.background)
+                EmptyView()
             }
         }
         .sheet(isPresented: $showingInsertMenu) {
@@ -783,12 +782,7 @@ struct TravelRouteView: View {
                 }
             } else {
                 // Fallback view to prevent sheet issues
-                VStack {
-                    Text("Loading...")
-                        .foregroundColor(FlatDesignSystem.text)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(FlatDesignSystem.background)
+                EmptyView()
             }
         }
     }
@@ -1315,9 +1309,10 @@ struct InsertMenuView: View {
                         }
                     }
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 12) // Reduced padding for compactness
             }
             .background(FlatDesignSystem.background)
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.6) // Half screen width
             .fixedSize(horizontal: true, vertical: false) // Shrink to content width
         }
     }
@@ -1516,10 +1511,11 @@ struct DatePickerView: View {
                 }
                 .background(FlatDesignSystem.surface)
                 .cornerRadius(12)
-                .padding(.horizontal, 16)
-                .padding(.bottom, 20) // Position at bottom
+                .padding(.horizontal, 8)
+                .padding(.bottom, 12) // Reduced padding for compactness
             }
             .background(FlatDesignSystem.background)
+            .frame(maxWidth: UIScreen.main.bounds.width * 0.6) // Half screen width
             .fixedSize(horizontal: true, vertical: false) // Shrink to content width
         }
         .onAppear {
