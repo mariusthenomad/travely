@@ -1708,7 +1708,7 @@ struct RouteStopRowNew: View {
                     }
                     .onEnded { value in
                         // Smooth animation only when gesture ends
-                        withAnimation(.easeOut(duration: 0.25)) {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.8, blendDuration: 0.1)) {
                             if dragOffset < -160 {
                                 dragOffset = -320
                                 isSwipeActive = true
