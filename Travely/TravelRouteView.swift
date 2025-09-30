@@ -313,7 +313,7 @@ struct TravelRouteView: View {
     @State private var selectedStopForTicket: RouteStop? = nil
     @State private var tickets: [Ticket] = []
     @State private var selectedTab = 0 // 0 = Route, 1 = Bookings
-    @State private var nights = [0, 0, 5, 2, 5, 5, 4, 0] // Nights for each stop
+    @State private var nights = [0, 0, 4, 2, 5, 5, 5, 0] // Nights for each stop
     @State private var currentRoute: TravelRoute = featuredRoute // Make route mutable
     @State private var showingDeleteAlert = false
     @State private var stopToDelete: (index: Int, stop: RouteStop)? = nil
