@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imprint - Travely</title>
+    <meta name="description" content="Imprint and contact information for Travely">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23FF6633;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23FF9500;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='45' fill='url(%23grad)'/%3E%3Cpath d='M30 35 L70 35 L65 50 L70 65 L30 65 L35 50 Z' fill='white' opacity='0.9'/%3E%3Cpath d='M40 45 L60 45 L58 50 L60 55 L40 55 L42 50 Z' fill='%23FF6633' opacity='0.8'/%3E%3C/svg%3E">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Travely App Colors */
+            --primary-orange: #FF6633;
+            --accent-orange: #FF9500;
+            --primary-blue: #007AFF;
+            --accent-green: #34C759;
+            
+            /* Light Mode Colors */
+            --background: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #8e8e93;
+            --border: #e5e5ea;
+            --surface: #ffffff;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dark Mode */
+        [data-theme="dark"] {
+            --background: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #8e8e93;
+            --border: #1c1c1e;
+            --surface: #1c1c1e;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+
+        /* Header */
+        .header {
+            padding: 1.5rem 0 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-orange);
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 400;
+            transition: color 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .back-link:hover {
+            color: var(--primary-orange);
+            opacity: 1;
+        }
+
+        /* Main Content */
+        .main {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .imprint-content {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            line-height: 1.7;
+        }
+
+        .imprint-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        .imprint-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .imprint-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .imprint-section h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--primary-orange);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .imprint-section p {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .imprint-section ul {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-primary);
+        }
+
+        .imprint-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            background: var(--background);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-top: 1rem;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .contact-info p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-info strong {
+            color: var(--primary-orange);
+            font-weight: 600;
+        }
+
+        .imprint-section a {
+            color: var(--primary-orange);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        .imprint-section a:hover {
+            border-bottom: 1px solid var(--primary-orange);
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #e5e5ea;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle-switch:hover {
+            background: #d1d1d6;
+        }
+
+        .toggle-switch::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .toggle-switch {
+            background: var(--primary-orange);
+        }
+
+        [data-theme="dark"] .toggle-switch:hover {
+            background: #e55a2b;
+        }
+
+        [data-theme="dark"] .toggle-switch::before {
+            transform: translateX(22px);
+            background: #ffffff;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .theme-toggle {
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            .toggle-switch {
+                width: 44px;
+                height: 24px;
+            }
+            
+            .toggle-switch::before {
+                width: 20px;
+                height: 20px;
+            }
+            
+            [data-theme="dark"] .toggle-switch::before {
+                transform: translateX(20px);
+            }
+            
+            .header {
+                padding: 1.25rem 0 0.75rem;
+            }
+            
+            .logo {
+                font-size: 1.6rem;
+            }
+            
+            .back-link {
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
+            }
+            
+            .main {
+                padding: 2rem 1rem;
+            }
+            
+            .imprint-content {
+                padding: 2.5rem 2rem;
+                border-radius: 16px;
+            }
+            
+            .imprint-title {
+                font-size: 2.2rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            .imprint-section {
+                margin-bottom: 2.5rem;
+                padding-bottom: 1.5rem;
+            }
+            
+            .imprint-section h2 {
+                font-size: 1.4rem;
+                margin-bottom: 1.25rem;
+            }
+            
+            .contact-info {
+                padding: 1.5rem;
+                border-radius: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .theme-toggle {
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .toggle-switch {
+                width: 40px;
+                height: 22px;
+            }
+            
+            .toggle-switch::before {
+                width: 18px;
+                height: 18px;
+            }
+            
+            [data-theme="dark"] .toggle-switch::before {
+                transform: translateX(18px);
+            }
+            
+            .header {
+                padding: 1rem 0 0.5rem;
+            }
+            
+            .logo {
+                font-size: 1.4rem;
+            }
+            
+            .back-link {
+                font-size: 0.75rem;
+                margin-top: 0.5rem;
+            }
+            
+            .main {
+                padding: 1.5rem 0.75rem;
+            }
+            
+            .imprint-content {
+                padding: 1.5rem 1rem;
+            }
+            
+            .imprint-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="theme-toggle">
+        <div class="toggle-switch" id="themeToggle"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="index.html" class="logo">Travely</a>
+        <a href="index.html" class="back-link">← Back to Home</a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="imprint-content">
+            <h1 class="imprint-title">Imprint</h1>
+            
+            <div class="imprint-section">
+                <h2>Information according to § 5 TMG (German Telemedia Act)</h2>
+                <div class="contact-info">
+                    <p><strong>Company:</strong> mrb-create</p>
+                    <p><strong>Responsible for content:</strong> Marius Roland Bartl</p>
+                    <p><strong>Address:</strong> Aachner Straße 11, 80804 München, Germany</p>
+                    <p><strong>Email:</strong> info@mrb-create.com</p>
+                </div>
+            </div>
+
+            <div class="imprint-section">
+                <h2>Liability for Content</h2>
+                <p>As a service provider, we are responsible for our own content on these pages according to § 7 para. 1 TMG (German Telemedia Act). However, according to §§ 8 to 10 TMG, we as a service provider are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.</p>
+                <p>Obligations to remove or block the use of information according to general laws remain unaffected. However, liability in this respect is only possible from the point in time at which a concrete infringement of the law becomes known. If we become aware of any such infringements, we will remove the relevant content immediately.</p>
+            </div>
+
+            <div class="imprint-section">
+                <h2>Liability for Links</h2>
+                <p>Our offer contains links to external websites of third parties, on whose contents we have no influence. Therefore, we cannot assume any liability for these external contents. The respective provider or operator of the pages is always responsible for the contents of the linked pages. The linked pages were checked for possible legal violations at the time of linking. Illegal contents were not recognizable at the time of linking.</p>
+                <p>However, a permanent control of the contents of the linked pages is not reasonable without concrete evidence of a violation of the law. If we become aware of any infringements, we will remove such links immediately.</p>
+            </div>
+
+            <div class="imprint-section">
+                <h2>Copyright</h2>
+                <p>The content and works created by the site operators on these pages are subject to German copyright law. The reproduction, editing, distribution and any kind of exploitation outside the limits of copyright require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use.</p>
+                <p>Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. In particular, third-party content is identified as such. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. If we become aware of any infringements, we will remove such content immediately.</p>
+            </div>
+
+            <div class="imprint-section">
+                <h2>Data Protection</h2>
+                <p>The use of our website is usually possible without providing personal information. As far as personal data (such as name, address or e-mail addresses) is collected on our pages, this is always done, as far as possible, on a voluntary basis. This data will not be passed on to third parties without your express consent.</p>
+                <p>We point out that data transmission over the Internet (e.g. when communicating by e-mail) may have security gaps. A complete protection of data against access by third parties is not possible.</p>
+                <p>The use of contact data published within the framework of the imprint obligation by third parties for sending unsolicited advertising and information materials is hereby expressly prohibited. The operators of the pages expressly reserve the right to take legal action in the event of the unsolicited sending of advertising information, such as spam e-mails.</p>
+            </div>
+
+            <div class="imprint-section">
+                <h2>Dispute Resolution</h2>
+                <p>The European Commission provides a platform for online dispute resolution (OS): <a href="https://ec.europa.eu/consumers/odr/" target="_blank" style="color: var(--primary-orange);">https://ec.europa.eu/consumers/odr/</a></p>
+                <p>You can find our e-mail address in the imprint above.</p>
+                <p>We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Travely. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', function() {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>
