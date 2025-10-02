@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="modernGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6633;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Hintergrundkreis mit subtiler Schattierung -->
+  <circle cx="60" cy="60" r="55" fill="url(#modernGrad)"/>
+  
+  <!-- Kompass-Nadel (Hauptrichtung) - Cleaner -->
+  <path d="M60 25 L55 40 L60 35 L65 40 Z" fill="white" opacity="0.95"/>
+  
+  <!-- Kompass-Nadel (Gegenrichtung) - Subtiler -->
+  <path d="M60 95 L55 80 L60 85 L65 80 Z" fill="white" opacity="0.4"/>
+  
+  <!-- Horizontale Nadeln -->
+  <path d="M95 60 L80 55 L85 60 L80 65 Z" fill="white" opacity="0.4"/>
+  <path d="M25 60 L40 55 L35 60 L40 65 Z" fill="white" opacity="0.4"/>
+  
+  <!-- Zentrale Rose - Moderner -->
+  <circle cx="60" cy="60" r="12" fill="white" opacity="0.95"/>
+  <circle cx="60" cy="60" r="6" fill="#007AFF"/>
+  
+  <!-- Subtile Pfad-Linien -->
+  <path d="M20 50 Q30 40 40 50 T60 50 T80 50 T100 50" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="1.5" 
+        opacity="0.3"
+        stroke-dasharray="2,4"/>
+</svg>

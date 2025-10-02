@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <!-- Gradient für den Hauptbereich -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6633;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9500;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Gradient für den Kompass -->
+    <linearGradient id="compassGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#007AFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#34C759;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Hintergrundkreis -->
+  <circle cx="100" cy="100" r="90" fill="url(#mainGradient)" stroke="none"/>
+  
+  <!-- Kompass-Ring -->
+  <circle cx="100" cy="100" r="70" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+  
+  <!-- Kompass-Nadel (Nord) -->
+  <path d="M100 40 L95 55 L100 50 L105 55 Z" fill="white" opacity="0.9"/>
+  
+  <!-- Kompass-Nadel (Süd) -->
+  <path d="M100 160 L95 145 L100 150 L105 145 Z" fill="white" opacity="0.7"/>
+  
+  <!-- Kompass-Nadel (Ost) -->
+  <path d="M160 100 L145 95 L150 100 L145 105 Z" fill="white" opacity="0.7"/>
+  
+  <!-- Kompass-Nadel (West) -->
+  <path d="M40 100 L55 95 L50 100 L55 105 Z" fill="white" opacity="0.7"/>
+  
+  <!-- Zentrale Kompass-Rose -->
+  <circle cx="100" cy="100" r="15" fill="white" opacity="0.9"/>
+  <circle cx="100" cy="100" r="8" fill="url(#compassGradient)"/>
+  
+  <!-- Pfad-Linien (Route) -->
+  <path d="M30 80 Q50 60 70 80 T110 80 T150 80 T170 80" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="2" 
+        opacity="0.6"
+        stroke-dasharray="5,5"/>
+  
+  <!-- Zusätzliche Pfad-Linie -->
+  <path d="M30 120 Q50 140 70 120 T110 120 T150 120 T170 120" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="2" 
+        opacity="0.4"
+        stroke-dasharray="3,7"/>
+</svg>

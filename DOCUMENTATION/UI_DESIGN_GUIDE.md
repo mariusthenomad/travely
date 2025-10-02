@@ -1,4 +1,4 @@
-# UI Design Guide - Travely
+# UI Design Guide - PathFinder
 
 ## Design Principles
 
@@ -248,4 +248,4 @@ struct FlatListRow: View {
 
 ---
 
-*UI Design Guide - Travely iOS App*
+*UI Design Guide - PathFinder iOS App*

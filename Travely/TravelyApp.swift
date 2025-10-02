@@ -410,7 +410,7 @@ struct AuthenticationView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Welcome to Travely")
+                Text("Welcome to PathFinder")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.primary)
@@ -641,7 +641,7 @@ struct AuthenticationView: View {
 }
 
 @main
-struct TravelyApp: App {
+struct PathFinderApp: App {
     @StateObject private var themeManager = ThemeManager()
     @StateObject private var supabaseManager = SupabaseManager.shared
     

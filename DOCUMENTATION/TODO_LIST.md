@@ -1,7 +1,7 @@
-# Travely - To-Do List & Project Planning
+# PathFinder - To-Do List & Project Planning
 
 ## Overview
-This documentation contains all current to-dos for the further development of the Travely iOS App - divided into detailed sub-tasks for efficient collaboration.
+This documentation contains all current to-dos for the further development of the PathFinder iOS App - divided into detailed sub-tasks for efficient collaboration.
 
 ---
 
@@ -186,13 +186,13 @@ This documentation contains all current to-dos for the further development of th
 ## 🏗️ Projekt Struktur
 
 ```
-Travely/
+PathFinder/
 ├── DOCUMENTATION/           # 📚 Projekt-Dokumentation
 │   ├── TODO_LIST.md        # 📋 Diese To-Do Liste
 │   ├── BACKEND_PLAN.md     # 🔧 Backend Planung
 │   ├── UI_DESIGN_GUIDE.md  # 🎨 Design Guidelines
 │   └── AUTH_FLOW.md        # 🔐 Authentifizierung Konzept
-├── Travely/                # 📱 iOS App Source Code
+├── PathFinder/                # 📱 iOS App Source Code
 └── ...                     # 📁 Weitere Projekt-Dateien
 ```
 
@@ -226,4 +226,4 @@ Travely/
 ---
 
 *Letzte Aktualisierung: $(date)*
-*Projekt: Travely iOS App*
+*Projekt: PathFinder iOS App*

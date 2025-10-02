@@ -1,7 +1,7 @@
-# Sub-Task Details & Arbeitsanweisungen - Travely
+# Sub-Task Details & Arbeitsanweisungen - PathFinder
 
 ## 📋 Übersicht
-Detaillierte Arbeitsanweisungen für alle Sub-Tasks zur effizienten Umsetzung der Travely iOS App Features.
+Detaillierte Arbeitsanweisungen für alle Sub-Tasks zur effizienten Umsetzung der PathFinder iOS App Features.
 
 ---
 
@@ -430,4 +430,4 @@ struct RouteRowView: View {
 
 ---
 
-*Sub-Task Details & Arbeitsanweisungen - Travely iOS App*
+*Sub-Task Details & Arbeitsanweisungen - PathFinder iOS App*

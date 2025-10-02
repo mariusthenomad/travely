@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 100" width="320" height="100">
+  <defs>
+    <linearGradient id="modernTextGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6633;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Modernes Logo-Icon -->
+  <rect x="10" y="10" width="80" height="80" rx="20" fill="url(#modernTextGrad)"/>
+  
+  <!-- Cleaner Kompass -->
+  <path d="M50 25 L42 35 L50 30 L58 35 Z" fill="white"/>
+  <path d="M50 75 L42 65 L50 70 L58 65 Z" fill="white" opacity="0.3"/>
+  <path d="M75 50 L65 42 L70 50 L65 58 Z" fill="white" opacity="0.3"/>
+  <path d="M25 50 L35 42 L30 50 L35 58 Z" fill="white" opacity="0.3"/>
+  
+  <!-- Zentrum -->
+  <circle cx="50" cy="50" r="6" fill="white"/>
+  
+  <!-- Moderner Text: PathFinder -->
+  <text x="110" y="45" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="32" font-weight="600" fill="#1a1a1a" letter-spacing="-0.5px">PathFinder</text>
+  
+  <!-- Subtitle -->
+  <text x="110" y="70" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="14" font-weight="400" fill="#666666" letter-spacing="0.5px">THE TRAVEL PLANNER</text>
+</svg>

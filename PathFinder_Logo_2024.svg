@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="grad2024" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6633;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Moderne abgerundete Form -->
+  <rect x="5" y="5" width="90" height="90" rx="25" fill="url(#grad2024)"/>
+  
+  <!-- Minimalistischer Pfeil -->
+  <path d="M50 20 L42 32 L50 28 L58 32 Z" fill="white"/>
+  
+  <!-- Gegenpfeil (sehr subtil) -->
+  <path d="M50 80 L42 68 L50 72 L58 68 Z" fill="white" opacity="0.2"/>
+  
+  <!-- Einfacher Punkt -->
+  <circle cx="50" cy="50" r="4" fill="white"/>
+</svg>

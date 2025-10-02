@@ -1,12 +1,12 @@
-# 🚀 Travely - iOS Travel App
+# 🚀 PathFinder - The Travel Planner
 
 [![SwiftUI](https://img.shields.io/badge/SwiftUI-iOS_15+-orange)]()
 [![Supabase](https://img.shields.io/badge/Backend-Supabase-blue)]()
 [![OpenStreetMap](https://img.shields.io/badge/Maps-OpenStreetMap-green)]()
 [![Status](https://img.shields.io/badge/Status-In_Development-yellow)]()
 
-A modern iOS Travel App with **Supabase Backend**, **Email Authentication**, **OpenStreetMap Integration**, and planned **Google/Apple Sign-In** integration.  
-Built with SwiftUI and designed to deliver a clean, modern travel experience with real-time location search.
+A modern iOS Travel Planner with **Supabase Backend**, **Email Authentication**, **OpenStreetMap Integration**, and planned **Google/Apple Sign-In** integration.  
+Built with SwiftUI and designed to deliver a clean, modern travel experience with intelligent route planning and real-time location search.
 
 ## 📚 Project Documentation
 
@@ -26,7 +26,7 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 - OpenStreetMap integration (Länder/Städte Suche)
 - Basic UI structure
 - Route planning with swipe gestures
-- **🌐 Landing Page & Waitlist System** - LIVE at https://mrb-create.com
+- **🌐 Landing Page & Waitlist System** - LIVE at https://pathfinder.app
 
 ### 🚧 Active Development (29 Sub-Tasks)
 - **Backend**: Complete API development (5 tasks)
@@ -110,7 +110,7 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 | Route Planning | ✅ Done | Swipe gestures, floating button |
 | Project Documentation | ✅ Done | Complete task breakdown and daily work plan |
 | Flat Design System | ✅ Done | FlatDesignComponents.swift with complete design system |
-| **Landing Page & Waitlist** | ✅ **LIVE** | Professional website at https://mrb-create.com |
+| **Landing Page & Waitlist** | ✅ **LIVE** | Professional website at https://pathfinder.app |
 | **Mobile Dark Mode** | ✅ **FIXED** | Complete mobile dark mode support with proper CSS variables |
 | **Cookie Banner** | ✅ **ADDED** | DSGVO-compliant cookie consent with accept/decline options |
 | **Imprint Page** | ✅ **CREATED** | Professional imprint page with German legal requirements |
@@ -171,18 +171,18 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/travely.git
-   cd travely
+   git clone https://github.com/yourusername/pathfinder.git
+   cd pathfinder
    ```
 
 2. **Configure Supabase**
    - Create a new Supabase project
-   - Update `TravelyApp.swift` with your Supabase URL and API key
+   - Update `PathFinderApp.swift` with your Supabase URL and API key
    - Set up authentication providers in Supabase dashboard
 
 3. **Open in Xcode**
    ```bash
-   open Travely.xcodeproj
+   open PathFinder.xcodeproj
    ```
 
 4. **Build and Run**
@@ -193,7 +193,7 @@ This project now includes comprehensive documentation in the `/DOCUMENTATION` fo
 
 #### Supabase Setup
 ```swift
-// TravelyApp.swift
+// PathFinderApp.swift
 private let supabaseURL = "YOUR_SUPABASE_URL"
 private let supabaseKey = "YOUR_SUPABASE_ANON_KEY"
 ```
@@ -208,7 +208,7 @@ private let supabaseKey = "YOUR_SUPABASE_ANON_KEY"
 ## 📱 App Structure
 
 ```
-Travely/
+PathFinder/
 ├── 🏠 HomeView.swift - Welcome screen and navigation hub
 ├── 🗺 TravelRouteView.swift - Route planning with swipe gestures
 ├── 🌍 DestinationSelectionView.swift - OSM-powered location search
@@ -217,7 +217,7 @@ Travely/
 ├── 👤 ProfileSettingsView.swift - User profile and settings
 ├── 🎨 ThemeManager.swift - Dark/light mode management
 ├── 🔧 Extensions.swift - Utility extensions
-└── 📱 TravelyApp.swift - Main app entry point
+└── 📱 PathFinderApp.swift - Main app entry point
 ```
 
 ### Key Components
@@ -323,9 +323,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 🐛 Issues: [GitHub Issues](https://github.com/mariusthenomad/travely/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/mariusthenomad/travely/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/mariusthenomad/pathfinder/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/mariusthenomad/pathfinder/discussions)
 
 ---
 
-**Made with ❤️ using SwiftUI, SupaBase, and OpenStreetMap**
+**Made with ❤️ using SwiftUI, Supabase, and OpenStreetMap**

@@ -1,4 +1,4 @@
-# Tech Stack & Costs - Travely
+# Tech Stack & Costs - PathFinder
 
 ## 💻 Development Tools
 
@@ -199,4 +199,4 @@ npm install express typescript prisma
 
 ---
 
-*Tech Stack & Kosten - Travely iOS App*
+*Tech Stack & Kosten - PathFinder iOS App*

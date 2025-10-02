@@ -1,4 +1,4 @@
-# Authentication & Login System - Travely
+# Authentication & Login System - PathFinder
 
 ## 🔐 Overview
 Implementation of a comprehensive authentication system with multiple login options for optimal user experience.
@@ -114,7 +114,7 @@ struct WelcomeView: View {
                 .frame(height: 120)
             
             VStack(spacing: 16) {
-                Text("Willkommen bei Travely")
+                Text("Willkommen bei PathFinder")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                 
@@ -178,7 +178,7 @@ struct SubscriptionSelectionView: View {
             VStack(spacing: 16) {
                 // Free Plan Card
                 SubscriptionCard(
-                    title: "Travely Free",
+                    title: "PathFinder Free",
                     price: "Kostenlos",
                     features: [
                         "5 Routen speichern",
@@ -191,7 +191,7 @@ struct SubscriptionSelectionView: View {
                 
                 // Premium Plan Card
                 SubscriptionCard(
-                    title: "Travely Pro",
+                    title: "PathFinder Pro",
                     price: "9,99€ / Monat",
                     features: [
                         "Unbegrenzte Routen",
@@ -376,4 +376,4 @@ struct SubscriptionSettingsView: View {
 
 ---
 
-*Authentifizierung & Login-System - Travely iOS App*
+*Authentifizierung & Login-System - PathFinder iOS App*

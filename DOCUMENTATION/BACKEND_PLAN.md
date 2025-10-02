@@ -1,4 +1,4 @@
-# Backend Development Plan - Travely
+# Backend Development Plan - PathFinder
 
 ## Current Status
 - ✅ **Search functionalities implemented**: Country and city search already working
@@ -171,4 +171,4 @@ GET /api/subscription/features
 
 ---
 
-*Backend Entwicklungsplan - Travely iOS App*
+*Backend Entwicklungsplan - PathFinder iOS App*
