@@ -47,8 +47,8 @@ This plan breaks down all 29 tasks into manageable daily chunks:
 ## 🗓️ Day 1: Logo Creation (Thursday, Oct 3)
 
 ### 🎯 **Daily Goal**: Create PathFinder logo and branding
-**Estimated Time**: 30 minutes
-**Actual Time**: 30 minutes
+**Estimated Time**: 0.5 hours
+**Actual Time**: 0.5 hours
 
 #### Task 1: Logo Design & Creation
 - [x] **Logo Creation: PathFinder logo design and variants**
