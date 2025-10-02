@@ -2,7 +2,7 @@
 
 ## ✅ Status: FUNKTIONIERT
 
-Die OpenStreetMap Overpass API ist erfolgreich in die Travely App integriert und getestet.
+Die OpenStreetMap Overpass API ist erfolgreich in die PathFinder App integriert und getestet.
 
 ## 🔗 API-Verbindung
 
@@ -208,7 +208,7 @@ Bei Problemen mit der Overpass API:
 
 ## 🎉 Fazit
 
-Die OpenStreetMap Overpass API Integration ist **erfolgreich implementiert** und **funktionsfähig**. Die API liefert echte POI-Daten aus München und kann für die gesamte Travely App genutzt werden.
+Die OpenStreetMap Overpass API Integration ist **erfolgreich implementiert** und **funktionsfähig**. Die API liefert echte POI-Daten aus München und kann für die gesamte PathFinder App genutzt werden.
 
 **Status**: ✅ **Bereit für Produktion**
 

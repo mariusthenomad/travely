@@ -1,4 +1,4 @@
-# Travely Waitlist - Einfache Version
+# PathFinder Waitlist - Einfache Version
 
 Eine super einfache Version, die alle Email-Adressen direkt in einer `E-Mails.txt` Datei speichert.
 

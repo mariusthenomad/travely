@@ -1,4 +1,4 @@
-Travely - Weekly Work Plan
+PathFinder - Weekly Work Plan
 
 📅 This Week (Starting Sunday, Sep 28)
 

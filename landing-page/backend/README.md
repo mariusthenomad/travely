@@ -1,6 +1,6 @@
-# Travely Waitlist Backend
+# PathFinder Waitlist Backend
 
-A simple Node.js backend to collect email addresses for the Travely app waitlist.
+A simple Node.js backend to collect email addresses for the PathFinder app waitlist.
 
 ## Features
 

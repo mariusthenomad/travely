@@ -6,7 +6,7 @@ Das Profilbild wird nicht angezeigt, weil es nicht korrekt in Xcode eingebunden 
 ## ✅ Die Lösung - Schritt für Schritt:
 
 ### 1. Xcode öffnen
-- **Travely.xcodeproj** doppelklicken
+- **PathFinder.xcodeproj** doppelklicken
 - Warte bis Xcode vollständig geladen ist
 
 ### 2. Assets.xcassets öffnen
@@ -45,7 +45,7 @@ Das Profilbild wird nicht angezeigt, weil es nicht korrekt in Xcode eingebunden 
 ### Falls Xcode das Bild nicht findet:
 1. **Bild in Assets.xcassets** hineinziehen
 2. **"Copy items if needed"** ankreuzen
-3. **"Add to target: Travely"** ankreuzen
+3. **"Add to target: PathFinder"** ankreuzen
 
 ## 🎉 Erfolg!
 Wenn alles funktioniert, siehst du dein Profilbild statt dem "M"!

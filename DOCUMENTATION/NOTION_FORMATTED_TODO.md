@@ -1,4 +1,4 @@
-Travely - Project Overview
+PathFinder - Project Overview
 
 📋 Current Status
 

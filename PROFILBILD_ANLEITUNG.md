@@ -11,15 +11,15 @@
 ### 2. **Bild in Xcode hinzufügen**
 
 #### Option A: Über Xcode (Empfohlen)
-1. Öffne das **Travely.xcodeproj** Projekt in Xcode
-2. Klicke mit der rechten Maustaste auf den **Travely** Ordner
-3. Wähle **"Add Files to Travely"**
+1. Öffne das **PathFinder.xcodeproj** Projekt in Xcode
+2. Klicke mit der rechten Maustaste auf den **PathFinder** Ordner
+3. Wähle **"Add Files to PathFinder"**
 4. Navigiere zu deinem Profilbild
-5. Stelle sicher, dass **"Add to target: Travely"** ausgewählt ist
+5. Stelle sicher, dass **"Add to target: PathFinder"** ausgewählt ist
 6. Klicke **"Add"**
 
 #### Option B: Über Finder
-1. Kopiere dein Profilbild in den Ordner: `/Users/marius/Documents/Corsor/Travely/Travely/`
+1. Kopiere dein Profilbild in den Ordner: `/Users/marius/Documents/Corsor/PathFinder/PathFinder/`
 2. Benenne es um zu: `profile.jpg` oder `profile.png`
 
 ### 3. **Bild im Assets.xcassets hinzufügen (Optional)**
@@ -42,7 +42,7 @@
 
 ## 📁 **Ordnerstruktur:**
 ```
-Travely/
+PathFinder/
 ├── ProfileImages/          # Hier kannst du dein Bild ablegen
 │   └── README.md
 ├── Assets.xcassets/        # Oder hier als Asset

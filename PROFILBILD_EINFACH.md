@@ -6,11 +6,11 @@
 - **Name**: `profile.jpg` oder `profile.png`
 
 ## Schritt 2: In Xcode hinzufügen
-1. **Xcode öffnen** → Travely.xcodeproj
-2. **Rechtsklick** auf "Travely" Ordner (nicht Travely.xcodeproj!)
-3. **"Add Files to Travely"** wählen
+1. **Xcode öffnen** → PathFinder.xcodeproj
+2. **Rechtsklick** auf "PathFinder" Ordner (nicht PathFinder.xcodeproj!)
+3. **"Add Files to PathFinder"** wählen
 4. **Dein Bild auswählen** (profile.jpg)
-5. **WICHTIG**: ✅ "Add to target: Travely" ankreuzen
+5. **WICHTIG**: ✅ "Add to target: PathFinder" ankreuzen
 6. **"Add"** klicken
 
 ## Schritt 3: Testen

@@ -1,10 +1,10 @@
-# Google Login Setup für Travely App
+# Google Login Setup für PathFinder App
 
 ## Schritt 1: Google Cloud Console konfigurieren
 
 ### 1.1 Neues Projekt erstellen
 1. Gehe zu [Google Cloud Console](https://console.cloud.google.com/)
-2. Erstelle ein neues Projekt: "Travely" oder wähle ein bestehendes
+2. Erstelle ein neues Projekt: "PathFinder" oder wähle ein bestehendes
 
 ### 1.2 Google Sign-In API aktivieren
 1. Gehe zu **APIs & Services → Library**
@@ -15,7 +15,7 @@
 1. Gehe zu **APIs & Services → Credentials**
 2. Klicke **"+ CREATE CREDENTIALS" → "OAuth 2.0 Client ID"**
 3. Wähle **"Web application"** als Application type
-4. **Name**: "Travely Web Client"
+4. **Name**: "PathFinder Web Client"
 5. **Authorized redirect URIs**: 
    ```
    https://mlnrhqbnphspbqcpzwez.supabase.co/auth/v1/callback
@@ -26,7 +26,7 @@
 ### 1.4 iOS Client ID erstellen
 1. Klicke erneut **"+ CREATE CREDENTIALS" → "OAuth 2.0 Client ID"**
 2. Wähle **"iOS"** als Application type
-3. **Name**: "Travely iOS"
+3. **Name**: "PathFinder iOS"
 4. **Bundle ID**: `com.mariusthenomad.travely`
 5. Klicke **"Create"**
 6. **Kopiere die Client ID** (du brauchst sie für die GoogleService-Info.plist)
@@ -35,7 +35,7 @@
 
 ### 2.1 Google Provider aktivieren
 1. Gehe zu deinem [Supabase Dashboard](https://supabase.com/dashboard)
-2. Wähle dein Travely Projekt
+2. Wähle dein PathFinder Projekt
 3. Gehe zu **Authentication → Providers**
 4. Aktiviere **Google**
 5. **Client ID**: (aus Schritt 1.3 - Web Client ID)
@@ -45,7 +45,7 @@
 ## Schritt 3: iOS App konfigurieren
 
 ### 3.1 GoogleService-Info.plist aktualisieren
-1. Öffne `Travely/GoogleService-Info.plist`
+1. Öffne `PathFinder/GoogleService-Info.plist`
 2. Ersetze `YOUR_GOOGLE_CLIENT_ID_HERE` mit deiner iOS Client ID (aus Schritt 1.4)
 3. Ersetze `YOUR_CLIENT_ID` in `REVERSED_CLIENT_ID` mit deiner iOS Client ID
 
@@ -60,17 +60,17 @@
 ### 3.3 Google Sign-In SDK hinzufügen
 1. **File → Add Package Dependencies**
 2. **URL**: `https://github.com/google/GoogleSignIn-iOS`
-3. **Add to Target**: Travely
+3. **Add to Target**: PathFinder
 
 ### 3.4 AppDelegate konfigurieren
-Füge in deiner `TravelyApp.swift` die Google Sign-In Konfiguration hinzu:
+Füge in deiner `PathFinderApp.swift` die Google Sign-In Konfiguration hinzu:
 
 ```swift
 import SwiftUI
 import GoogleSignIn
 
 @main
-struct TravelyApp: App {
+struct PathFinderApp: App {
     @StateObject private var themeManager = ThemeManager()
     @StateObject private var supabaseManager = SupabaseManager.shared
     
@@ -130,7 +130,7 @@ struct TravelyApp: App {
 
 ## Fertig! 🎉
 
-Deine Travely App hat jetzt:
+Deine PathFinder App hat jetzt:
 - ✅ Google Login Integration
 - ✅ Supabase Authentication
 - ✅ Funktionsfähiges Login/Logout

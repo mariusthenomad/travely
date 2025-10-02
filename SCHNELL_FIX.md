@@ -6,10 +6,10 @@ Dein Profilbild wird nicht angezeigt, weil es nicht in Xcode eingebunden ist.
 ## ✅ SOFORT-LÖSUNG (2 Minuten):
 
 ### **Option 1: Testbild verwenden (Sofort sichtbar)**
-1. **Öffne Xcode** → `Travely.xcodeproj`
-2. **Rechtsklick** auf "Travely" Ordner → **"Add Files to Travely"**
+1. **Öffne Xcode** → `PathFinder.xcodeproj`
+2. **Rechtsklick** auf "PathFinder" Ordner → **"Add Files to PathFinder"**
 3. **Wähle** `profile.jpg` (ist bereits da!)
-4. **Wichtig**: ✅ "Add to target: Travely" auswählen
+4. **Wichtig**: ✅ "Add to target: PathFinder" auswählen
 5. **"Add"** klicken
 6. **App starten** → Profilbild ist da! 🎉
 
@@ -20,7 +20,7 @@ Dein Profilbild wird nicht angezeigt, weil es nicht in Xcode eingebunden ist.
 
 ## 🎯 **Das Wichtigste:**
 - **Das Bild MUSS in Xcode eingebunden sein**
-- **"Add to target: Travely" MUSS ausgewählt sein**
+- **"Add to target: PathFinder" MUSS ausgewählt sein**
 - **Dateiname: `profile.jpg` oder `profile.png`**
 
 ## 📱 **Ergebnis:**

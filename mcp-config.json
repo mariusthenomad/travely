@@ -1,0 +1,11 @@
+{
+  "supabase": {
+    "url": "https://mlnrhqbnphspbqcpzwez.supabase.co",
+    "anonKey": "YOUR_ANON_KEY_HERE",
+    "serviceRoleKey": "YOUR_SERVICE_ROLE_KEY_HERE"
+  },
+  "database": {
+    "connectionString": "postgresql://postgres.mlnrhqbnphspbqcpzwez:Data%28mar19%2598ius%29data@aws-1-eu-central-1.pooler.supabase.com:6543/postgres"
+  }
+}
+

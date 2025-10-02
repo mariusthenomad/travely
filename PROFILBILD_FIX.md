@@ -10,11 +10,11 @@ Das Profilbild wird nicht angezeigt, weil es nicht korrekt in das Xcode-Projekt 
 2. **Stelle sicher**, dass es quadratisch ist (300x300 bis 500x500 Pixel)
 
 ### **Schritt 2: Bild in Xcode hinzufügen (WICHTIG!)**
-1. **Öffne Xcode** und lade das `Travely.xcodeproj` Projekt
-2. **Klicke mit der rechten Maustaste** auf den **Travely** Ordner (links im Navigator)
-3. **Wähle "Add Files to Travely"**
+1. **Öffne Xcode** und lade das `PathFinder.xcodeproj` Projekt
+2. **Klicke mit der rechten Maustaste** auf den **PathFinder** Ordner (links im Navigator)
+3. **Wähle "Add Files to PathFinder"**
 4. **Navigiere zu deinem Profilbild** und wähle es aus
-5. **WICHTIG**: Stelle sicher, dass **"Add to target: Travely"** ✅ ausgewählt ist
+5. **WICHTIG**: Stelle sicher, dass **"Add to target: PathFinder"** ✅ ausgewählt ist
 6. **Klicke "Add"**
 
 ### **Schritt 3: Testen**
@@ -26,8 +26,8 @@ Das Profilbild wird nicht angezeigt, weil es nicht korrekt in das Xcode-Projekt 
 Ich habe bereits ein Testbild (`profile.jpg`) für dich erstellt. Du kannst es durch dein eigenes ersetzen.
 
 ## 🔍 **Troubleshooting:**
-- **Falls das Bild nicht angezeigt wird**: Überprüfe, ob es im Xcode-Projekt unter "Travely" Ordner sichtbar ist
-- **Falls es immer noch nicht funktioniert**: Stelle sicher, dass das Bild im "Travely" Target eingebunden ist
+- **Falls das Bild nicht angezeigt wird**: Überprüfe, ob es im Xcode-Projekt unter "PathFinder" Ordner sichtbar ist
+- **Falls es immer noch nicht funktioniert**: Stelle sicher, dass das Bild im "PathFinder" Target eingebunden ist
 - **Falls du Fehler siehst**: Überprüfe, ob der Dateiname exakt `profile.jpg` oder `profile.png` ist
 
 ## 📱 **Was du sehen solltest:**

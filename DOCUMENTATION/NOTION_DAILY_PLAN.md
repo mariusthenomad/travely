@@ -1,4 +1,4 @@
-Travely - Daily Work Plan
+PathFinder - Daily Work Plan
 
 📅 Week Overview
 

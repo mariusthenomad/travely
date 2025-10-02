@@ -13,11 +13,11 @@
 ### **Methode 1: SVG Import (Empfohlen)**
 1. **Xcode öffnen**
    ```bash
-   open Travely.xcodeproj
+   open PathFinder.xcodeproj
    ```
 
 2. **Assets.xcassets öffnen**
-   - Im Project Navigator: `Travely` → `Assets.xcassets`
+   - Im Project Navigator: `PathFinder` → `Assets.xcassets`
    - `AppIcon` auswählen
 
 3. **SVG importieren**

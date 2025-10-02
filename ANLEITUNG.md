@@ -1,4 +1,4 @@
-# 🚀 Travely - iOS Travel App
+# 🚀 PathFinder - iOS Travel App
 
 A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integration.
 
@@ -29,8 +29,8 @@ A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integra
 2. Choose "Open a project or file" or press `Cmd + O`
 
 ### Step 2: Open Project
-1. Navigate to the folder: `/Users/marius/Documents/Corsor/Travely`
-2. Select the file `Travely.xcodeproj`
+1. Navigate to the folder: `/Users/marius/Documents/Corsor/PathFinder`
+2. Select the file `PathFinder.xcodeproj`
 3. Click "Open"
 
 ### Step 3: Select Simulator
@@ -45,7 +45,7 @@ A modern iOS Travel App with **Supabase Backend** and **Google Sign-In** integra
 2. Xcode will compile and start the app in the simulator
 
 ## 🎯 Test the App
-The Travely app will open in the simulator and you can:
+The PathFinder app will open in the simulator and you can:
 
 ### 🔐 **Test Authentication:**
 - **Email/Password Login** - Create an account or sign in
@@ -90,10 +90,10 @@ The Travely app will open in the simulator and you can:
 
 ## 📁 Project Structure
 ```
-Travely/
-├── Travely.xcodeproj                    # Xcode project file
-├── Travely/                             # Main folder
-│   ├── TravelyApp.swift                 # App entry point + Authentication
+PathFinder/
+├── PathFinder.xcodeproj                    # Xcode project file
+├── PathFinder/                             # Main folder
+│   ├── PathFinderApp.swift                 # App entry point + Authentication
 │   ├── ContentView.swift                # Tab navigation
 │   ├── HomeView.swift                   # Home screen
 │   ├── FlightSearchView.swift           # Flight search
@@ -152,6 +152,6 @@ Travely/
 
 ---
 
-**Have fun testing the Travely app!** 🚀✈️🏨
+**Have fun testing the PathFinder app!** 🚀✈️🏨
 
 *Built with ❤️ using SwiftUI + Supabase*

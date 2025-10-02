@@ -1,4 +1,4 @@
-# App Icon Anleitung für Travely
+# App Icon Anleitung für PathFinder
 
 ## 🎨 App Icon Design
 

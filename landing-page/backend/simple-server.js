@@ -37,11 +37,11 @@ const getWelcomeEmailTemplate = (email) => {
     return {
         from: EMAIL_CONFIG.auth.user,
         to: email,
-        subject: '🎉 Welcome to Travely Waitlist!',
+        subject: '🎉 Welcome to PathFinder Waitlist!',
         html: `
             <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #ffffff;">
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <h1 style="color: #FF6633; font-size: 28px; margin: 0;">Travely</h1>
+                    <h1 style="color: #FF6633; font-size: 28px; margin: 0;">PathFinder</h1>
                     <p style="color: #666; font-size: 16px; margin: 10px 0 0 0;">One travel app to replace them all</p>
                 </div>
                 
@@ -53,7 +53,7 @@ const getWelcomeEmailTemplate = (email) => {
                 <div style="margin-bottom: 30px;">
                     <h3 style="color: #333; font-size: 20px; margin: 0 0 15px 0;">What's next?</h3>
                     <p style="color: #666; font-size: 16px; line-height: 1.6; margin: 0 0 15px 0;">
-                        We're working hard to bring you the ultimate travel experience. You'll be among the first to know when Travely launches!
+                        We're working hard to bring you the ultimate travel experience. You'll be among the first to know when PathFinder launches!
                     </p>
                     <ul style="color: #666; font-size: 16px; line-height: 1.6; margin: 0; padding-left: 20px;">
                         <li>Plan your perfect trip with AI assistance</li>
@@ -71,7 +71,7 @@ const getWelcomeEmailTemplate = (email) => {
                 
                 <div style="border-top: 1px solid #eee; padding-top: 20px; text-align: center;">
                     <p style="color: #999; font-size: 12px; margin: 0;">
-                        © 2025 Travely. All rights reserved.<br>
+                        © 2025 PathFinder. All rights reserved.<br>
                         You received this email because you joined our waitlist.
                     </p>
                 </div>
@@ -98,7 +98,7 @@ async function sendWelcomeEmail(email) {
         if (EMAIL_CONFIG.auth.pass === 'your-app-password') {
             console.log(`📧 [TEST MODE] Would send welcome email to: ${email}`);
             console.log(`📧 [TEST MODE] Email template preview:`);
-            console.log(`📧 Subject: 🎉 Welcome to Travely Waitlist!`);
+            console.log(`📧 Subject: 🎉 Welcome to PathFinder Waitlist!`);
             console.log(`📧 To: ${email}`);
             console.log(`📧 From: ${EMAIL_CONFIG.auth.user}`);
             console.log(`📧 [TEST MODE] To enable real emails, set up Gmail App Password`);
@@ -203,7 +203,7 @@ app.get('/api/health', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Travely Waitlist Server running on port ${PORT}`);
+    console.log(`🚀 PathFinder Waitlist Server running on port ${PORT}`);
     console.log(`📧 Emails will be saved to: ${EMAILS_FILE}`);
     console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
 });

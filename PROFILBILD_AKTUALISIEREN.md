@@ -10,7 +10,7 @@
 ### 🚀 So aktualisierst du das Profilbild in Xcode:
 
 #### Option 1: Xcode öffnen und prüfen
-1. **Xcode öffnen** → Travely.xcodeproj
+1. **Xcode öffnen** → PathFinder.xcodeproj
 2. **Assets.xcassets** öffnen (links im Navigator)
 3. **"profile"** Image Set anklicken
 4. **Rechts**: Sollte dein Profilbild zeigen

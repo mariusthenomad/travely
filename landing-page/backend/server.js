@@ -132,7 +132,7 @@ app.get('/', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Travely Waitlist Backend running on port ${PORT}`);
+    console.log(`🚀 PathFinder Waitlist Backend running on port ${PORT}`);
     console.log(`📧 Emails will be saved to: ${EMAILS_FILE}`);
     console.log(`🌐 Health check: http://localhost:${PORT}/api/health`);
 });

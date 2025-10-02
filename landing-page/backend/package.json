@@ -1,7 +1,7 @@
 {
   "name": "travely-waitlist-backend",
   "version": "1.0.0",
-  "description": "Backend for Travely waitlist",
+  "description": "Backend for PathFinder waitlist",
   "main": "server.js",
   "scripts": {
     "start": "node simple-server.js",
@@ -23,6 +23,6 @@
     "waitlist",
     "email"
   ],
-  "author": "Travely Team",
+  "author": "PathFinder Team",
   "license": "MIT"
 }
