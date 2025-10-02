@@ -65,7 +65,7 @@
 		A1234567890ABCDEF1A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1234567890ABCDEF3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1234567890ABCDEF4 /* PathFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PathFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1234567890ABCDEF5 /* PathFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PathFinder.entitlements; sourceTree = "<group>"; };
+		A1234567890ABCDEF5 /* PathFinder/PathFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PathFinder/PathFinder.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,7 @@
 				A1234567890ABCDEF0U /* DestinationOverpass.swift */,
 				A1234567890ABCDEF0W /* FlatDesignComponents.swift */,
 				A1234567890ABCDEF1A /* Assets.xcassets */,
-				A1234567890ABCDEF5 /* PathFinder.entitlements */,
+				A1234567890ABCDEF5 /* PathFinder/PathFinder.entitlements */,
 				A1234567890ABCDEFA /* Preview Content */,
 			);
 			path = PathFinder;
@@ -367,7 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder/PathFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PathFinder/Preview Content\"";
@@ -396,7 +396,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PathFinder/PathFinder/PathFinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PathFinder/Preview Content\"";
