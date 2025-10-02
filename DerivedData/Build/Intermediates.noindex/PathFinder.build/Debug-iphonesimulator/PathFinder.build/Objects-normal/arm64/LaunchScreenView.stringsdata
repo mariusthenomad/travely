@@ -1,0 +1,24 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/LaunchScreenView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "TRAVELY",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 59
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your Journey Starts Here",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 70
+        }
+      }
+    ]
+  },
+  "version": 1
+}

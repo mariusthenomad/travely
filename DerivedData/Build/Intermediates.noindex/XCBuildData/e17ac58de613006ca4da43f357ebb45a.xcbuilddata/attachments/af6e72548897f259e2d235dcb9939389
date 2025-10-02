@@ -1,0 +1,4 @@
+module GoogleUtilities_Environment {
+umbrella "/Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/Environment/Public"
+export *
+}

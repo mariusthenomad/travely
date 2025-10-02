@@ -1,0 +1,4 @@
+module AppAuth {
+umbrella "/Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/AppAuth-iOS/Sources/AppAuth"
+export *
+}

@@ -1,0 +1,23 @@
+{
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/DestinationSelectionView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/DestinationSelectionView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/DestinationSelectionView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/DestinationSelectionView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/DestinationSelectionView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/DestinationSelectionView.swiftdeps"
+  },
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/HotelDetailView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HotelDetailView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HotelDetailView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HotelDetailView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HotelDetailView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HotelDetailView.swiftdeps"
+  },
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/ProfileSettingsView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ProfileSettingsView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ProfileSettingsView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ProfileSettingsView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ProfileSettingsView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ProfileSettingsView.swiftdeps"
+  }
+}

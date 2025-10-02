@@ -1,0 +1,23 @@
+{
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/ContentView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ContentView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/ContentView.swiftdeps"
+  },
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/FlightSearchView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/FlightSearchView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/FlightSearchView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/FlightSearchView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/FlightSearchView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/FlightSearchView.swiftdeps"
+  },
+  "/Users/marius/Documents/Corsor/PathFinder/PathFinder/HomeView.swift" : {
+    "const-values" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HomeView.swiftconstvalues",
+    "dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HomeView.d",
+    "diagnostics" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HomeView.dia",
+    "object" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HomeView.o",
+    "swift-dependencies" : "/Users/marius/Documents/Corsor/PathFinder/DerivedData/Build/Intermediates.noindex/PathFinder.build/Debug-iphonesimulator/PathFinder.build/Objects-normal/arm64/HomeView.swiftdeps"
+  }
+}

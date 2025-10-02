@@ -1,0 +1,48 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/DestinationOverpass.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "POI Suche",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 336
+        }
+      },
+      {
+        "comment": "",
+        "key": "Suche nach Orten...",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 354
+        }
+      },
+      {
+        "comment": "",
+        "key": "Suche läuft...",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 415
+        }
+      },
+      {
+        "comment": "",
+        "key": "Keine Ergebnisse gefunden",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 428
+        }
+      },
+      {
+        "comment": "",
+        "key": "Versuche einen anderen Suchbegriff",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 432
+        }
+      }
+    ]
+  },
+  "version": 1
+}

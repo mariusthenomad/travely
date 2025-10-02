@@ -1,0 +1,168 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Home",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 15
+        }
+      },
+      {
+        "comment": "",
+        "key": "Routes",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 22
+        }
+      },
+      {
+        "comment": "",
+        "key": "Destinations",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 29
+        }
+      },
+      {
+        "comment": "",
+        "key": "Profile",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 36
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Location",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 216
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 44,
+          "startingLine": 258
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start Date:",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 231
+        }
+      },
+      {
+        "comment": "",
+        "key": "Nights to stay:",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 267
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld nights",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 273
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 292
+        }
+      },
+      {
+        "comment": "",
+        "key": "End Date:",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 320
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search",
+        "location": {
+          "startingColumn": 39,
+          "startingLine": 355
+        }
+      },
+      {
+        "comment": "",
+        "key": "Searching...",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 382
+        }
+      },
+      {
+        "comment": "",
+        "key": "No places found",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 393
+        }
+      },
+      {
+        "comment": "",
+        "key": "Try a different search term",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 397
+        }
+      },
+      {
+        "comment": "",
+        "key": "Error: %@",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 437
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 425
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter a place to search",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 429
+        }
+      },
+      {
+        "comment": "",
+        "key": "Add Location",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 459
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 474
+        }
+      }
+    ]
+  },
+  "version": 1
+}

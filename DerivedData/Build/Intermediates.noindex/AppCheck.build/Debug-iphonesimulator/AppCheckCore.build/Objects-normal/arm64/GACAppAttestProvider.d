@@ -1,0 +1,26 @@
+dependencies: \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/GACAppAttestProvider.m \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppAttestProvider.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/Foundation.framework/Modules/module.modulemap \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/usr/include/DarwinFoundation1.modulemap \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppCheckProvider.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppCheckAvailability.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/DCAppAttestService+GACAppAttestService.h \
+  /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk/System/Library/Frameworks/DeviceCheck.framework/Modules/module.modulemap \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/GACAppAttestService.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/promises/Sources/FBLPromises/include/module.modulemap \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/API/GACAppAttestAPIService.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/API/GACAppAttestAttestationResponse.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/GACAppAttestProviderState.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/Storage/GACAppAttestArtifactStorage.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/Storage/GACAppAttestKeyIDStorage.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/APIService/GACAppCheckAPIService.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/Backoff/GACAppCheckBackoffWrapper.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/GACAppCheckLogger+Internal.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppCheckErrors.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppCheckLogger.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Public/AppCheckCore/GACAppCheckToken.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/Utils/GACAppCheckCryptoUtils.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/AppAttestProvider/Errors/GACAppAttestRejectionError.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/Errors/GACAppCheckErrorUtil.h \
+  /Users/marius/Documents/Corsor/PathFinder/DerivedData/SourcePackages/checkouts/app-check/AppCheckCore/Sources/Core/Errors/GACAppCheckHTTPError.h

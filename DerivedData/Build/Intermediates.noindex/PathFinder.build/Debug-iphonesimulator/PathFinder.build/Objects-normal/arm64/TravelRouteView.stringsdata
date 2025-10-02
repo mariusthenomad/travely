@@ -1,0 +1,744 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/TravelRouteView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Ticket",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 253
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 255
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ticket Details",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 103
+        }
+      },
+      {
+        "comment": "",
+        "key": "%@",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 108
+        }
+      },
+      {
+        "comment": "",
+        "key": "Ticket Number",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 118
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., 1234567890",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 122
+        }
+      },
+      {
+        "comment": "",
+        "key": "Booking Reference",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 128
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., ABC123",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 132
+        }
+      },
+      {
+        "comment": "",
+        "key": "Seat Number",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 138
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., 12A",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "Gate",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 149
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., A12",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 153
+        }
+      },
+      {
+        "comment": "",
+        "key": "Terminal",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 158
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., T1",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 162
+        }
+      },
+      {
+        "comment": "",
+        "key": "Departure Time",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 170
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., 14:30",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 174
+        }
+      },
+      {
+        "comment": "",
+        "key": "Arrival Time",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 179
+        }
+      },
+      {
+        "comment": "",
+        "key": "e.g., 18:45",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 183
+        }
+      },
+      {
+        "comment": "",
+        "key": "Notes",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "Additional notes...",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 194
+        }
+      },
+      {
+        "comment": "",
+        "key": "Update Ticket",
+        "location": {
+          "startingColumn": 66,
+          "startingLine": 208
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save Ticket",
+        "location": {
+          "startingColumn": 84,
+          "startingLine": 208
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Ticket",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 220
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 235
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete Location",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 655
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 486
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld/21",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 492
+        }
+      },
+      {
+        "comment": "",
+        "key": "Nights planned",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 496
+        }
+      },
+      {
+        "comment": "",
+        "key": "Route",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 511
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bookings",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 520
+        }
+      },
+      {
+        "comment": "",
+        "key": "Bookings",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 611
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your bookings will appear here",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 616
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 656
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 662
+        }
+      },
+      {
+        "comment": "",
+        "key": "Are you sure you want to delete %@? This action cannot be undone.",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 667
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 1164
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1167
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Location",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 907
+        }
+      },
+      {
+        "comment": "",
+        "key": "Current Location:",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 921
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search destinations...",
+        "location": {
+          "startingColumn": 43,
+          "startingLine": 955
+        }
+      },
+      {
+        "comment": "",
+        "key": "Countries",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1008
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading...",
+        "location": {
+          "startingColumn": 66,
+          "startingLine": 1042
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld Cities",
+        "location": {
+          "startingColumn": 58,
+          "startingLine": 1058
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cities",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1084
+        }
+      },
+      {
+        "comment": "",
+        "key": "Loading...",
+        "location": {
+          "startingColumn": 66,
+          "startingLine": 1118
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1230
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 28,
+          "startingLine": 1208
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insert after %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1221
+        }
+      },
+      {
+        "comment": "",
+        "key": "Enter name E.g. \"Rome\"...",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 1243
+        }
+      },
+      {
+        "comment": "",
+        "key": "TOP %lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1257
+        }
+      },
+      {
+        "comment": "",
+        "key": "Popular destinations in our route",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1261
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 1278
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 1444
+        }
+      },
+      {
+        "comment": "",
+        "key": "Save",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1447
+        }
+      },
+      {
+        "comment": "",
+        "key": "Edit Nights",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1339
+        }
+      },
+      {
+        "comment": "",
+        "key": "Total Nights:",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1352
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld/21",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1364
+        }
+      },
+      {
+        "comment": "",
+        "key": "Stop %lld",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 1385
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld nights",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 1391
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 1410
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Date",
+        "location": {
+          "startingColumn": 25,
+          "startingLine": 1501
+        }
+      },
+      {
+        "comment": "",
+        "key": "Start date for %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1480
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 1472
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 32,
+          "startingLine": 1487
+        }
+      },
+      {
+        "comment": "",
+        "key": "Lock date",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1566
+        }
+      },
+      {
+        "comment": "",
+        "key": "Set date",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1585
+        }
+      },
+      {
+        "comment": "",
+        "key": "Insert",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1602
+        }
+      },
+      {
+        "comment": "",
+        "key": "Delete",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1619
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1639
+        }
+      },
+      {
+        "comment": "",
+        "key": "nights",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1688
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 1673
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 1795
+        }
+      },
+      {
+        "comment": "",
+        "key": "€%lld",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 1914
+        }
+      },
+      {
+        "comment": "",
+        "key": "Booking details",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 1907
+        }
+      },
+      {
+        "comment": "",
+        "key": "€%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1950
+        }
+      },
+      {
+        "comment": "",
+        "key": "per night",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 1955
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld nights",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 1968
+        }
+      },
+      {
+        "comment": "",
+        "key": "€%lld",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 2027
+        }
+      },
+      {
+        "comment": "",
+        "key": "per person",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 2032
+        }
+      },
+      {
+        "comment": "",
+        "key": "Customize",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 2053
+        }
+      },
+      {
+        "comment": "",
+        "key": "Book Route",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 2063
+        }
+      },
+      {
+        "comment": "",
+        "key": "€%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 2195
+        }
+      },
+      {
+        "comment": "",
+        "key": "Route Details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2291
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 2293
+        }
+      },
+      {
+        "comment": "",
+        "key": "Price Breakdown",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2249
+        }
+      },
+      {
+        "comment": "",
+        "key": "€%lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 2263
+        }
+      },
+      {
+        "comment": "",
+        "key": "Book This Route",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2278
+        }
+      },
+      {
+        "comment": "",
+        "key": "Duration: %@",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2350
+        }
+      },
+      {
+        "comment": "",
+        "key": "Stays",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2631
+        }
+      },
+      {
+        "comment": "",
+        "key": "Done",
+        "location": {
+          "startingColumn": 50,
+          "startingLine": 2633
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your Stays",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2607
+        }
+      },
+      {
+        "comment": "",
+        "key": "Accommodation for your Asia Adventure",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 2612
+        }
+      }
+    ]
+  },
+  "version": 1
+}

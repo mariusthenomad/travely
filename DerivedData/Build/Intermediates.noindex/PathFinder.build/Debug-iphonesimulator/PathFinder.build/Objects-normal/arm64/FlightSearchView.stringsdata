@@ -1,0 +1,152 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/FlightSearchView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Flights",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 195
+        }
+      },
+      {
+        "comment": "",
+        "key": "One Way",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 23
+        }
+      },
+      {
+        "comment": "",
+        "key": "Round Trip",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 34
+        }
+      },
+      {
+        "comment": "",
+        "key": "From",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 50
+        }
+      },
+      {
+        "comment": "",
+        "key": "Origin",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 54
+        }
+      },
+      {
+        "comment": "",
+        "key": "To",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "Destination",
+        "location": {
+          "startingColumn": 47,
+          "startingLine": 77
+        }
+      },
+      {
+        "comment": "",
+        "key": "Departure",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 89
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 93
+        }
+      },
+      {
+        "comment": "",
+        "key": "Return",
+        "location": {
+          "startingColumn": 46,
+          "startingLine": 100
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 104
+        }
+      },
+      {
+        "comment": "",
+        "key": "Passengers",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 115
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 127
+        }
+      },
+      {
+        "comment": "",
+        "key": "Searching...",
+        "location": {
+          "startingColumn": 52,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Search Flights",
+        "location": {
+          "startingColumn": 69,
+          "startingLine": 156
+        }
+      },
+      {
+        "comment": "",
+        "key": "Available Flights",
+        "location": {
+          "startingColumn": 34,
+          "startingLine": 178
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%lld",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 254
+        }
+      },
+      {
+        "comment": "",
+        "key": "Select Flight",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 312
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,136 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/PathFinderApp.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Authentication Error",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 574
+        }
+      },
+      {
+        "comment": "",
+        "key": "Welcome to PathFinder",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 413
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sign in to start your journey",
+        "location": {
+          "startingColumn": 22,
+          "startingLine": 418
+        }
+      },
+      {
+        "comment": "",
+        "key": "Email",
+        "location": {
+          "startingColumn": 31,
+          "startingLine": 424
+        }
+      },
+      {
+        "comment": "",
+        "key": "Password",
+        "location": {
+          "startingColumn": 33,
+          "startingLine": 430
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirm Password",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 439
+        }
+      },
+      {
+        "comment": "",
+        "key": "Continue with Google",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 461
+        }
+      },
+      {
+        "comment": "",
+        "key": "or",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 479
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sign Up",
+        "location": {
+          "startingColumn": 41,
+          "startingLine": 498
+        }
+      },
+      {
+        "comment": "",
+        "key": "Sign In",
+        "location": {
+          "startingColumn": 53,
+          "startingLine": 498
+        }
+      },
+      {
+        "comment": "",
+        "key": "Already have an account? Sign In",
+        "location": {
+          "startingColumn": 37,
+          "startingLine": 516
+        }
+      },
+      {
+        "comment": "",
+        "key": "Don't have an account? Sign Up",
+        "location": {
+          "startingColumn": 74,
+          "startingLine": 516
+        }
+      },
+      {
+        "comment": "",
+        "key": "Skip Login (Test Mode)",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 523
+        }
+      },
+      {
+        "comment": "",
+        "key": "Test Supabase Connection",
+        "location": {
+          "startingColumn": 26,
+          "startingLine": 540
+        }
+      },
+      {
+        "comment": "",
+        "key": "Test Countries Database",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 562
+        }
+      },
+      {
+        "comment": "",
+        "key": "OK",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 575
+        }
+      }
+    ]
+  },
+  "version": 1
+}

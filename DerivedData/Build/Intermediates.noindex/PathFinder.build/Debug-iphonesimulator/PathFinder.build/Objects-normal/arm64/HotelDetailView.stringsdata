@@ -1,0 +1,136 @@
+{
+  "source": "/Users/marius/Documents/Corsor/PathFinder/PathFinder/HotelDetailView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Booking Confirmation",
+        "location": {
+          "startingColumn": 16,
+          "startingLine": 206
+        }
+      },
+      {
+        "comment": "",
+        "key": "$%lld per night",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 73
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld.0",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 66
+        }
+      },
+      {
+        "comment": "",
+        "key": "Amenities",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 81
+        }
+      },
+      {
+        "comment": "",
+        "key": "Booking Details",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 111
+        }
+      },
+      {
+        "comment": "",
+        "key": "Check-in",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 119
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 123
+        }
+      },
+      {
+        "comment": "",
+        "key": "Check-out",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 131
+        }
+      },
+      {
+        "comment": "",
+        "key": "",
+        "location": {
+          "startingColumn": 48,
+          "startingLine": 135
+        }
+      },
+      {
+        "comment": "",
+        "key": "Guests",
+        "location": {
+          "startingColumn": 38,
+          "startingLine": 142
+        }
+      },
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 42,
+          "startingLine": 155
+        }
+      },
+      {
+        "comment": "",
+        "key": "Reviews",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 176
+        }
+      },
+      {
+        "comment": "",
+        "key": "Book Now",
+        "location": {
+          "startingColumn": 30,
+          "startingLine": 190
+        }
+      },
+      {
+        "comment": "",
+        "key": "Confirm",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 207
+        }
+      },
+      {
+        "comment": "",
+        "key": "Cancel",
+        "location": {
+          "startingColumn": 20,
+          "startingLine": 210
+        }
+      },
+      {
+        "comment": "",
+        "key": "Your booking for %@ has been confirmed!",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 212
+        }
+      }
+    ]
+  },
+  "version": 1
+}
