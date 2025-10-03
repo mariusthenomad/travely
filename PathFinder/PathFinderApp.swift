@@ -5,6 +5,7 @@ import PostgREST
 import Realtime
 import Storage
 import Functions
+import AuthenticationServices
 
 // MARK: - SupabaseCountry Model
 struct SupabaseCountry: Codable, Identifiable {
@@ -395,7 +396,7 @@ enum AuthError: LocalizedError {
     }
 }
 
-// MARK: - AuthenticationView
+// MARK: - Premium AuthenticationView
 struct AuthenticationView: View {
     @EnvironmentObject var supabaseManager: SupabaseManager
     @State private var email = ""
@@ -408,169 +409,312 @@ struct AuthenticationView: View {
     @EnvironmentObject var themeManager: ThemeManager
     
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                Text("Welcome to PathFinder")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.primary)
-                
-                Text("Sign in to start your journey")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                
-                VStack(spacing: 15) {
-                    // Email Field
-                    TextField("Email", text: $email)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
+        ZStack {
+            // Premium Dark Background
+            UltraLightDesignSystem.background
+                .ignoresSafeArea()
+            
+            // Background Gradient Overlay
+            LinearGradient(
+                colors: [
+                    UltraLightDesignSystem.primaryOrange.opacity(0.1),
+                    Color.clear,
+                    UltraLightDesignSystem.primaryGreen.opacity(0.1)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: UltraLightDesignSystem.spaceXL) {
+                    Spacer(minLength: 60)
                     
-                    // Password Field
-                    SecureField("Password", text: $password)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .textContentType(.none)
-                        .autocorrectionDisabled()
-                        .disableAutocorrection(true)
-                        .autocapitalization(.none)
-                    
-                    // Confirm Password Field (only for sign up)
-                    if isSignUp {
-                        SecureField("Confirm Password", text: $confirmPassword)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .textContentType(.none)
-                            .autocorrectionDisabled()
-                            .disableAutocorrection(true)
-                            .autocapitalization(.none)
-                    }
-                }
-                .padding(.horizontal)
-                
-                // Google Sign In Button
-                Button(action: handleGoogleSignIn) {
-                    HStack {
-                        if supabaseManager.isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .scaleEffect(0.8)
-                        } else {
-                            Image(systemName: "globe")
-                                .font(.title2)
+                    // Premium Logo Section
+                    VStack(spacing: UltraLightDesignSystem.spaceL) {
+                        // App Icon
+                        ZStack {
+                            Circle()
+                                .fill(
+                                    LinearGradient(
+                                        colors: [UltraLightDesignSystem.primaryOrange, UltraLightDesignSystem.primaryGreen],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .frame(width: 100, height: 100)
+                                .shadow(
+                                    color: UltraLightDesignSystem.glowOrange,
+                                    radius: 20,
+                                    x: 0,
+                                    y: 0
+                                )
+                            
+                            Image(systemName: "airplane")
+                                .font(.system(size: 40, weight: .medium))
+                                .foregroundColor(.white)
                         }
                         
-                        Text("Continue with Google")
-                            .font(.headline)
-                            .foregroundColor(.white)
+                        // Welcome Text
+                        VStack(spacing: UltraLightDesignSystem.spaceS) {
+                            Text("Welcome to")
+                                .font(.system(size: 24, weight: .light, design: .rounded))
+                                .foregroundColor(UltraLightDesignSystem.textSecondary)
+                            
+                            Text("PathFinder")
+                                .font(.system(size: 36, weight: .bold, design: .rounded))
+                                .foregroundColor(UltraLightDesignSystem.text)
+                            
+                            Text("Your premium travel companion")
+                                .font(.system(size: 16, weight: .medium, design: .rounded))
+                                .foregroundColor(UltraLightDesignSystem.textTertiary)
+                        }
                     }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(Color.red)
-                    .cornerRadius(12)
-                }
-                .disabled(supabaseManager.isLoading)
-                .padding(.horizontal)
-                
-                // Divider
-                HStack {
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.gray.opacity(0.3))
                     
-                    Text("or")
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal, 10)
+                    // Premium Login Form
+                    UltraLightWindow(
+                        title: isSignUp ? "Create Account" : "Sign In",
+                        subtitle: isSignUp ? "Join the adventure" : "Welcome back, explorer",
+                        style: .premium
+                    ) {
+                        VStack(spacing: UltraLightDesignSystem.spaceL) {
+                            // Premium Email Field
+                            VStack(alignment: .leading, spacing: UltraLightDesignSystem.spaceS) {
+                                Text("Email")
+                                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                    .foregroundColor(UltraLightDesignSystem.textSecondary)
+                                
+                                TextField("Enter your email", text: $email)
+                                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                                    .foregroundColor(UltraLightDesignSystem.text)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
+                                    .disableAutocorrection(true)
+                                    .padding(UltraLightDesignSystem.spaceM)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                            .fill(UltraLightDesignSystem.surface)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                                    .stroke(
+                                                        email.isEmpty ? UltraLightDesignSystem.textMuted.opacity(0.3) : UltraLightDesignSystem.primaryOrange.opacity(0.5),
+                                                        lineWidth: 1
+                                                    )
+                                            )
+                                    )
+                            }
+                            
+                            // Premium Password Field
+                            VStack(alignment: .leading, spacing: UltraLightDesignSystem.spaceS) {
+                                Text("Password")
+                                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                    .foregroundColor(UltraLightDesignSystem.textSecondary)
+                                
+                                SecureField("Enter your password", text: $password)
+                                    .font(.system(size: 16, weight: .medium, design: .rounded))
+                                    .foregroundColor(UltraLightDesignSystem.text)
+                                    .padding(UltraLightDesignSystem.spaceM)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                            .fill(UltraLightDesignSystem.surface)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                                    .stroke(
+                                                        password.isEmpty ? UltraLightDesignSystem.textMuted.opacity(0.3) : UltraLightDesignSystem.primaryGreen.opacity(0.5),
+                                                        lineWidth: 1
+                                                    )
+                                            )
+                                    )
+                            }
+                            
+                            // Premium Confirm Password Field (only for sign up)
+                            if isSignUp {
+                                VStack(alignment: .leading, spacing: UltraLightDesignSystem.spaceS) {
+                                    Text("Confirm Password")
+                                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                        .foregroundColor(UltraLightDesignSystem.textSecondary)
+                                    
+                                    SecureField("Confirm your password", text: $confirmPassword)
+                                        .font(.system(size: 16, weight: .medium, design: .rounded))
+                                        .foregroundColor(UltraLightDesignSystem.text)
+                                        .padding(UltraLightDesignSystem.spaceM)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                                .fill(UltraLightDesignSystem.surface)
+                                                .overlay(
+                                                    RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                                        .stroke(
+                                                            confirmPassword.isEmpty ? UltraLightDesignSystem.textMuted.opacity(0.3) : UltraLightDesignSystem.accentGold.opacity(0.5),
+                                                            lineWidth: 1
+                                                        )
+                                                )
+                                        )
+                                }
+                            }
+                            
+                            // Premium Error Message
+                            if showError {
+                                HStack {
+                                    Image(systemName: "exclamationmark.triangle.fill")
+                                        .foregroundColor(UltraLightDesignSystem.primaryOrange)
+                                    Text(errorMessage)
+                                        .font(.system(size: 14, weight: .medium, design: .rounded))
+                                        .foregroundColor(UltraLightDesignSystem.primaryOrange)
+                                }
+                                .padding(UltraLightDesignSystem.spaceM)
+                                .background(
+                                    RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                        .fill(UltraLightDesignSystem.primaryOrange.opacity(0.1))
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                                .stroke(UltraLightDesignSystem.primaryOrange.opacity(0.3), lineWidth: 1)
+                                        )
+                                )
+                            }
+                            
+                            // Premium Action Button
+                            Button(action: handleEmailAuthentication) {
+                                HStack {
+                                    if supabaseManager.isLoading {
+                                        ProgressView()
+                                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                            .scaleEffect(0.8)
+                                    } else {
+                                        Image(systemName: isSignUp ? "person.badge.plus" : "arrow.right")
+                                            .font(.system(size: 16, weight: .semibold))
+                                    }
+                                    
+                                    Text(isSignUp ? "Create Account" : "Sign In")
+                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                }
+                                .foregroundColor(.white)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 56)
+                                .background(
+                                    RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                        .fill(
+                                            isFormValid ? 
+                                            LinearGradient(
+                                                colors: [UltraLightDesignSystem.primaryOrange, UltraLightDesignSystem.primaryGreen],
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            ) :
+                                            LinearGradient(
+                                                colors: [UltraLightDesignSystem.textMuted, UltraLightDesignSystem.textMuted],
+                                                startPoint: .leading,
+                                                endPoint: .trailing
+                                            )
+                                        )
+                                        .shadow(
+                                            color: isFormValid ? UltraLightDesignSystem.glowOrange : .clear,
+                                            radius: 10,
+                                            x: 0,
+                                            y: 4
+                                        )
+                                )
+                            }
+                            .disabled(!isFormValid || supabaseManager.isLoading)
+                            .animation(.easeInOut(duration: 0.2), value: isFormValid)
+                        }
+                    }
                     
-                    Rectangle()
-                        .frame(height: 1)
-                        .foregroundColor(.gray.opacity(0.3))
-                }
-                .padding(.horizontal)
-                
-                // Email/Password Action Button
-                Button(action: handleEmailAuthentication) {
-                    HStack {
-                        if supabaseManager.isLoading {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                .scaleEffect(0.8)
+                    // Premium Social Login Section
+                    VStack(spacing: UltraLightDesignSystem.spaceL) {
+                        // Divider
+                        HStack {
+                            Rectangle()
+                                .fill(UltraLightDesignSystem.textMuted.opacity(0.3))
+                                .frame(height: 1)
+                            Text("or continue with")
+                                .font(.system(size: 14, weight: .medium, design: .rounded))
+                                .foregroundColor(UltraLightDesignSystem.textTertiary)
+                            Rectangle()
+                                .fill(UltraLightDesignSystem.textMuted.opacity(0.3))
+                                .frame(height: 1)
                         }
                         
-                        Text(isSignUp ? "Sign Up" : "Sign In")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                    }
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 50)
-                    .background(isFormValid ? Color.blue : Color.gray)
-                    .cornerRadius(12)
-                }
-                .disabled(!isFormValid || supabaseManager.isLoading)
-                .padding(.horizontal)
-                
-                // Toggle Sign Up/Sign In
-                Button(action: { 
-                    isSignUp.toggle()
-                    errorMessage = ""
-                    showError = false
-                }) {
-                    Text(isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up")
-                        .foregroundColor(.blue)
-                }
-                .padding(.top, 10)
-                
-                // Skip Button for testing
-                Button(action: handleSkipLogin) {
-                    Text("Skip Login (Test Mode)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                .padding(.top, 20)
-                
-                // Test Supabase Connection Button
-                Button(action: {
-                    Task {
-                        do {
-                            try await supabaseManager.testSupabaseConnection()
-                            try await supabaseManager.testSupabaseStorage()
-                        } catch {
-                            print("Test failed: \(error)")
+                        // Social Login Buttons
+                        VStack(spacing: UltraLightDesignSystem.spaceM) {
+                            // Apple Sign In Button
+                            SignInWithAppleButton(
+                                onRequest: { request in
+                                    request.requestedScopes = [.fullName, .email]
+                                },
+                                onCompletion: { result in
+                                    handleAppleSignIn(result: result)
+                                }
+                            )
+                            .signInWithAppleButtonStyle(.white)
+                            .frame(height: 56)
+                            .cornerRadius(UltraLightDesignSystem.radiusM)
+                            
+                            // Google Sign In Button
+                            Button(action: handleGoogleSignIn) {
+                                HStack(spacing: UltraLightDesignSystem.spaceM) {
+                                    Image(systemName: "globe")
+                                        .font(.system(size: 18, weight: .medium))
+                                        .foregroundColor(.white)
+                                    Text("Continue with Google")
+                                        .font(.system(size: 16, weight: .semibold, design: .rounded))
+                                        .foregroundColor(.white)
+                                }
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 56)
+                                .background(
+                                    RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusM)
+                                        .fill(Color.red)
+                                        .shadow(
+                                            color: Color.red.opacity(0.3),
+                                            radius: 8,
+                                            x: 0,
+                                            y: 4
+                                        )
+                                )
+                            }
                         }
                     }
-                }) {
-                    Text("Test Supabase Connection")
-                        .font(.subheadline)
-                        .foregroundColor(.blue)
-                }
-                .padding(.top, 10)
-                
-                // Test Countries Database Button
-                Button(action: {
-                    Task {
-                        do {
-                            try await supabaseManager.testCountriesDatabase()
-                        } catch {
-                            print("Countries test failed: \(error)")
+                    
+                    // Premium Toggle and Skip Section
+                    VStack(spacing: UltraLightDesignSystem.spaceL) {
+                        // Toggle Sign Up/Sign In
+                        Button(action: { 
+                            isSignUp.toggle()
+                            errorMessage = ""
+                            showError = false
+                        }) {
+                            Text(isSignUp ? "Already have an account? Sign In" : "Don't have an account? Sign Up")
+                                .font(.system(size: 15, weight: .medium, design: .rounded))
+                                .foregroundColor(UltraLightDesignSystem.primaryOrange)
+                        }
+                        
+                        // Premium Skip Button
+                        Button(action: handleSkipLogin) {
+                            HStack(spacing: UltraLightDesignSystem.spaceS) {
+                                Image(systemName: "arrow.right.circle")
+                                    .font(.system(size: 16, weight: .medium))
+                                Text("Skip Login")
+                                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            }
+                            .foregroundColor(UltraLightDesignSystem.textTertiary)
+                            .padding(.horizontal, UltraLightDesignSystem.spaceL)
+                            .padding(.vertical, UltraLightDesignSystem.spaceM)
+                            .background(
+                                RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusL)
+                                    .fill(UltraLightDesignSystem.surface)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: UltraLightDesignSystem.radiusL)
+                                            .stroke(UltraLightDesignSystem.textMuted.opacity(0.3), lineWidth: 1)
+                                    )
+                            )
                         }
                     }
-                }) {
-                    HStack {
-                        if supabaseManager.isLoadingCountries {
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                                .scaleEffect(0.7)
-                        }
-                        Text("Test Countries Database")
-                            .font(.subheadline)
-                            .foregroundColor(.blue)
-                    }
+                    
+                    Spacer(minLength: 40)
                 }
-                .padding(.top, 5)
-                
-                Spacer()
+                .padding(.horizontal, UltraLightDesignSystem.spaceL)
             }
-            .padding()
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
         .alert("Authentication Error", isPresented: $showError) {
             Button("OK") { showError = false }
         } message: {
@@ -604,6 +748,35 @@ struct AuthenticationView: View {
                     showError = true
                 }
             }
+        }
+    }
+    
+    private func handleAppleSignIn(result: Result<ASAuthorization, Error>) {
+        errorMessage = ""
+        showError = false
+        
+        switch result {
+        case .success(let authorization):
+            if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+                Task {
+                    do {
+                        // For now, we'll just set authenticated to true for Apple Sign-In
+                        // In a real implementation, you would handle the Apple ID token with Supabase
+                        await MainActor.run {
+                            supabaseManager.isAuthenticated = true
+                            supabaseManager.currentUser = nil // Set to nil for Apple Sign-In
+                        }
+                    } catch {
+                        await MainActor.run {
+                            errorMessage = error.localizedDescription
+                            showError = true
+                        }
+                    }
+                }
+            }
+        case .failure(let error):
+            errorMessage = error.localizedDescription
+            showError = true
         }
     }
     
