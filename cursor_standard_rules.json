@@ -1,0 +1,105 @@
+{
+    "name": "Cursor Standard Ruleset",
+    "description": "Rules are divided into tasks and subtasks for clarity. Cursor must follow all tasks step by step.",
+    "tasks": [
+      {
+        "task": "Honesty & Directness",
+        "subtasks": [
+          "Always provide the most truthful answer possible.",
+          "If something does not work, explicitly state why instead of pretending it works.",
+          "Do not skip or hide error messages.",
+          "Mark unresolved issues clearly as 'UNRESOLVED'."
+        ]
+      },
+      {
+        "task": "Problem Description",
+        "subtasks": [
+          "Explain problems in plain, simple language.",
+          "If extra dependencies, setups, or environment configs are required, list them.",
+          "Give clear step-by-step instructions for fixing or reproducing issues."
+        ]
+      },
+      {
+        "task": "Mandatory Testing",
+        "subtasks": [
+          "For each generated solution, run at least 3 independent tests.",
+          "Each test must show: Input, Expected Output, Actual Output.",
+          "Do not finalize or confirm success until all tests pass.",
+          "For Swift/iOS development: Test UI components, data models, and business logic separately.",
+          "For Python development: Test functions, classes, and modules independently."
+        ]
+      },
+      {
+        "task": "Output Format",
+        "subtasks": [
+          "First output the generated code.",
+          "Then show the test code and the test results.",
+          "At the end, add a section called 'Result Evaluation' in English:",
+          "- State if all tests were successful (Yes/No).",
+          "- If No: describe which failed and why.",
+          "- If Yes: confirm solution works as intended."
+        ]
+      },
+      {
+        "task": "Swift Self-Test",
+        "subtasks": [
+          "Create a file named 'cursor_swift_test.swift'.",
+          "Inside, define a simple function add(a: Int, b: Int) -> Int that returns a + b.",
+          "Add 3 tests: add(a: 2, b: 3) → 5, add(a: -1, b: 1) → 0, add(a: 0, b: 0) → 0.",
+          "Print the results of all tests using print() statements.",
+          "At the end of the file, write a 'Result Evaluation' in English confirming whether the tests passed."
+        ]
+      },
+      {
+        "task": "Python Self-Test",
+        "subtasks": [
+          "Create a file named 'cursor_test.py'.",
+          "Inside, define a simple function add(a, b) that returns a + b.",
+          "Add 3 tests: add(2,3) → 5, add(-1,1) → 0, add(0,0) → 0.",
+          "Print the results of all tests.",
+          "At the end of the file, write a 'Result Evaluation' in English confirming whether the tests passed."
+        ]
+      },
+      {
+        "task": "Language Requirements",
+        "subtasks": [
+          "All code comments must be in English.",
+          "All variable names, function names, and class names must be in English.",
+          "All user-facing text and error messages must be in English.",
+          "All documentation and explanations must be in English."
+        ]
+      },
+      {
+        "task": "New Chat Initialization",
+        "subtasks": [
+          "Always apply this standard ruleset at the beginning of every new chat session.",
+          "Confirm that all rules are active and being followed.",
+          "Check for existing Supabase database connections and configurations.",
+          "Verify that all project-specific settings are loaded correctly."
+        ]
+      },
+      {
+        "task": "Supabase Database Consistency",
+        "subtasks": [
+          "Always use the same Supabase database connections across all chat sessions.",
+          "Maintain consistent database schema and table structures.",
+          "Use the same authentication methods and API keys.",
+          "Keep database migrations and setup scripts synchronized.",
+          "Verify database connectivity at the start of each session if needed."
+        ]
+      },
+      {
+        "task": "Authentication System Consistency",
+        "subtasks": [
+          "Always use the same user creation and login functions across all chat sessions.",
+          "Maintain consistent authentication flow (email/password, Google Sign-In, etc.).",
+          "Use the same SupabaseAuthManager and authentication methods.",
+          "Keep user session management and token handling consistent.",
+          "Preserve the same login/logout UI components and flows.",
+          "Maintain consistent user profile and account management functions.",
+          "Use the same password validation and security requirements.",
+          "Keep the same error handling for authentication failures."
+        ]
+      }
+    ]
+  }
